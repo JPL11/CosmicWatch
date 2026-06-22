@@ -85,3 +85,21 @@ Populated fields (coverage): `altitude` 100%, `accuracy` 100%, `height` 100%, `w
 - `credo.science` (8,999) is DEGENERATE: lat/lon all 0,0, energy all 0, particle_type constant 'cosmic_ray' — field-present but value-empty; not usable as geo or labels. Correct the handoff.
 - `phone-camera` (3,095, 2026, ≈Los Angeles single site) has 1,569 real images (51%) — recent and clean but tiny/single-location; toy CV scale.
 - All five sources are schema-disjoint AND temporally disjoint (legacy/credo.science 2017–18; cosmicwatch/phone-camera/credo-science 2025–26) — zero possibility of synchronized cross-source coincidence; any cross-source learning is inherently heterogeneous/federated.
+
+## 7. Is the data enough for a GNN?
+
+Short answer: **no — and not because of volume.** Of the ~3.4M docs, only **582,068** are usable CosmicWatch events (the other 2,773,823 raw 'AxLab' docs have boot-relative timestamps and a single detector, so they are not time-correlatable). Those usable events are great for the edge/SNN track but cannot form a graph, because a GNN needs *network structure* the index does not contain.
+
+A GNN needs nodes (distinct detectors), edges (spatial/temporal relations), and events that overlap across nodes. Here is what the data provides:
+
+| GNN requirement | Needed | In this index | Status |
+|---|---|---|:--:|
+| Multiple distinct detectors (nodes) | ≥ several | **1** (`cosmicwatch-001`; raw partition also 1: 'AxLab') | ❌ |
+| Coordinates per detector (edges) | lat/lon each | **0** CosmicWatch rows with lat/lon | ❌ |
+| Absolute, synchronized timestamps | GPS/NTP wall-clock | parsed set yes; raw 83% boot-relative | ⚠️ |
+| Events overlapping in time across nodes | many windows | **0** multi-source overlap days | ❌ |
+| Labels / accepted pseudo-labels | some | only intra-unit `coincident` weak label | ⚠️ |
+
+**Why more of the same data will not help:** the bottleneck is *breadth, not depth*. Every usable event comes from one device at one (unrecorded) location, so 10× or 1000× more CosmicWatch events still yields **zero** graph edges. The GNN does not need a bigger single-node stream — it needs a *different kind* of data: several synchronized, geo-located detectors with overlapping events.
+
+**What unlocks the GNN (the Tier B / Decision-Gate ask):** ≥ a handful of real distinct detectors, reliable absolute cross-node timestamps, lat/lon per detector, enough temporally overlapping events to populate coincidence windows, and labels or accepted pseudo-labels. Until then the GNN stays simulation-only; the edge/SNN track and the `legacy` CV/geo track are what the current data supports.

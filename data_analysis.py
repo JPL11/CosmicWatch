@@ -346,6 +346,34 @@ def build_report(profile):
     for f in profile["findings"]:
         a(f"- {f}")
     a("")
+
+    # ---- Section 7: GNN readiness ----
+    dd = profile["cosmicwatch_deep_dive"]
+    usable = dd["rows_with_timestamp"]
+    raw = dd["schema_partition"]["raw_without_wallclock_timestamp"]
+    a("## 7. Is the data enough for a GNN?\n")
+    a(f"Short answer: **no — and not because of volume.** Of the ~3.4M docs, only **{usable:,}** are "
+      f"usable CosmicWatch events (the other {raw:,} raw 'AxLab' docs have boot-relative timestamps and a "
+      "single detector, so they are not time-correlatable). Those usable events are great for the edge/SNN "
+      "track but cannot form a graph, because a GNN needs *network structure* the index does not contain.\n")
+    a("A GNN needs nodes (distinct detectors), edges (spatial/temporal relations), and events that overlap "
+      "across nodes. Here is what the data provides:\n")
+    a("| GNN requirement | Needed | In this index | Status |")
+    a("|---|---|---|:--:|")
+    a(f"| Multiple distinct detectors (nodes) | ≥ several | **1** (`cosmicwatch-001`; raw partition also 1: 'AxLab') | ❌ |")
+    a(f"| Coordinates per detector (edges) | lat/lon each | **0** CosmicWatch rows with lat/lon | ❌ |")
+    a(f"| Absolute, synchronized timestamps | GPS/NTP wall-clock | parsed set yes; raw 83% boot-relative | ⚠️ |")
+    a(f"| Events overlapping in time across nodes | many windows | **0** multi-source overlap days | ❌ |")
+    a(f"| Labels / accepted pseudo-labels | some | only intra-unit `coincident` weak label | ⚠️ |")
+    a("")
+    a("**Why more of the same data will not help:** the bottleneck is *breadth, not depth*. Every usable "
+      "event comes from one device at one (unrecorded) location, so 10× or 1000× more CosmicWatch events "
+      "still yields **zero** graph edges. The GNN does not need a bigger single-node stream — it needs a "
+      "*different kind* of data: several synchronized, geo-located detectors with overlapping events.\n")
+    a("**What unlocks the GNN (the Tier B / Decision-Gate ask):** ≥ a handful of real distinct detectors, "
+      "reliable absolute cross-node timestamps, lat/lon per detector, enough temporally overlapping events "
+      "to populate coincidence windows, and labels or accepted pseudo-labels. Until then the GNN stays "
+      "simulation-only; the edge/SNN track and the `legacy` CV/geo track are what the current data supports.\n")
     return "\n".join(L)
 
 
