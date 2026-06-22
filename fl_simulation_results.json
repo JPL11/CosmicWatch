@@ -1,0 +1,346 @@
+{
+  "framing": {
+    "real": "per-event features and the coincident weak label are real ES data",
+    "simulated": "the split into clients is synthetic; real FL needs multiple physical detectors/sites/phones",
+    "label_note": "coincident is a hardware-derived weak label, not independent hand truth"
+  },
+  "data": {
+    "rows": 237716,
+    "coincident": 29130,
+    "noncoincident": 208586,
+    "coincident_rate": 0.1225,
+    "time_range_utc": {
+      "start": "2026-01-23T00:00:00Z",
+      "end": "2026-01-24T23:59:58Z"
+    },
+    "event_rate_hz": 1.3757,
+    "median_interarrival_ms": 1000.0
+  },
+  "config": {
+    "clients": 8,
+    "rounds": 15,
+    "local_epochs": 1,
+    "feature_names": [
+      "adc_value",
+      "sipm_mv",
+      "log1p_interarrival_ms",
+      "temperature_c_clean",
+      "pressure_pa_clean"
+    ]
+  },
+  "centralized": {
+    "description": "one model on pooled data (ships raw data)",
+    "test": {
+      "threshold": 0.6064274549484253,
+      "accuracy": 0.7173,
+      "precision": 0.2721,
+      "recall": 0.8067,
+      "f1": 0.4069,
+      "true_positive": 4611,
+      "false_positive": 12336,
+      "true_negative": 29492,
+      "false_negative": 1105,
+      "auc": 0.7971
+    }
+  },
+  "iid": {
+    "client_profiles": [
+      {
+        "client": 0,
+        "rows": 23772,
+        "positive_rate": 0.1199
+      },
+      {
+        "client": 1,
+        "rows": 23772,
+        "positive_rate": 0.12
+      },
+      {
+        "client": 2,
+        "rows": 23772,
+        "positive_rate": 0.1242
+      },
+      {
+        "client": 3,
+        "rows": 23772,
+        "positive_rate": 0.1226
+      },
+      {
+        "client": 4,
+        "rows": 23771,
+        "positive_rate": 0.1248
+      },
+      {
+        "client": 5,
+        "rows": 23771,
+        "positive_rate": 0.1209
+      },
+      {
+        "client": 6,
+        "rows": 23771,
+        "positive_rate": 0.127
+      },
+      {
+        "client": 7,
+        "rows": 23771,
+        "positive_rate": 0.1255
+      }
+    ],
+    "federated": {
+      "test": {
+        "threshold": 0.6094465661048889,
+        "accuracy": 0.7162,
+        "precision": 0.2715,
+        "recall": 0.8088,
+        "f1": 0.4066,
+        "true_positive": 4623,
+        "false_positive": 12402,
+        "true_negative": 29426,
+        "false_negative": 1093,
+        "auc": 0.7965
+      },
+      "history": [
+        {
+          "round": 1,
+          "f1": 0.3334,
+          "auc": 0.7423
+        },
+        {
+          "round": 2,
+          "f1": 0.3959,
+          "auc": 0.777
+        },
+        {
+          "round": 3,
+          "f1": 0.4044,
+          "auc": 0.7846
+        },
+        {
+          "round": 4,
+          "f1": 0.4059,
+          "auc": 0.7859
+        },
+        {
+          "round": 5,
+          "f1": 0.4058,
+          "auc": 0.7864
+        },
+        {
+          "round": 6,
+          "f1": 0.4058,
+          "auc": 0.7867
+        },
+        {
+          "round": 7,
+          "f1": 0.4053,
+          "auc": 0.7871
+        },
+        {
+          "round": 8,
+          "f1": 0.4056,
+          "auc": 0.7881
+        },
+        {
+          "round": 9,
+          "f1": 0.4064,
+          "auc": 0.7901
+        },
+        {
+          "round": 10,
+          "f1": 0.4064,
+          "auc": 0.7924
+        },
+        {
+          "round": 11,
+          "f1": 0.4061,
+          "auc": 0.7949
+        },
+        {
+          "round": 12,
+          "f1": 0.4065,
+          "auc": 0.7956
+        },
+        {
+          "round": 13,
+          "f1": 0.4067,
+          "auc": 0.7961
+        },
+        {
+          "round": 14,
+          "f1": 0.4058,
+          "auc": 0.7963
+        },
+        {
+          "round": 15,
+          "f1": 0.4066,
+          "auc": 0.7965
+        }
+      ]
+    },
+    "local_only": {
+      "mean_f1": 0.4072,
+      "min_f1": 0.406,
+      "max_f1": 0.4078
+    }
+  },
+  "non_iid": {
+    "client_profiles": [
+      {
+        "client": 0,
+        "rows": 23772,
+        "positive_rate": 0.0126
+      },
+      {
+        "client": 1,
+        "rows": 23772,
+        "positive_rate": 0.0164
+      },
+      {
+        "client": 2,
+        "rows": 23772,
+        "positive_rate": 0.0205
+      },
+      {
+        "client": 3,
+        "rows": 23772,
+        "positive_rate": 0.028
+      },
+      {
+        "client": 4,
+        "rows": 23771,
+        "positive_rate": 0.0932
+      },
+      {
+        "client": 5,
+        "rows": 23771,
+        "positive_rate": 0.2535
+      },
+      {
+        "client": 6,
+        "rows": 23771,
+        "positive_rate": 0.2962
+      },
+      {
+        "client": 7,
+        "rows": 23771,
+        "positive_rate": 0.2645
+      }
+    ],
+    "federated": {
+      "test": {
+        "threshold": 0.5041199505329133,
+        "accuracy": 0.7246,
+        "precision": 0.2699,
+        "recall": 0.757,
+        "f1": 0.3979,
+        "true_positive": 4327,
+        "false_positive": 11704,
+        "true_negative": 30124,
+        "false_negative": 1389,
+        "auc": 0.7745
+      },
+      "history": [
+        {
+          "round": 1,
+          "f1": 0.2516,
+          "auc": 0.6363
+        },
+        {
+          "round": 2,
+          "f1": 0.2799,
+          "auc": 0.6718
+        },
+        {
+          "round": 3,
+          "f1": 0.3118,
+          "auc": 0.6962
+        },
+        {
+          "round": 4,
+          "f1": 0.339,
+          "auc": 0.724
+        },
+        {
+          "round": 5,
+          "f1": 0.3664,
+          "auc": 0.7433
+        },
+        {
+          "round": 6,
+          "f1": 0.3791,
+          "auc": 0.754
+        },
+        {
+          "round": 7,
+          "f1": 0.381,
+          "auc": 0.755
+        },
+        {
+          "round": 8,
+          "f1": 0.3851,
+          "auc": 0.7608
+        },
+        {
+          "round": 9,
+          "f1": 0.3846,
+          "auc": 0.7634
+        },
+        {
+          "round": 10,
+          "f1": 0.3888,
+          "auc": 0.7689
+        },
+        {
+          "round": 11,
+          "f1": 0.3852,
+          "auc": 0.7671
+        },
+        {
+          "round": 12,
+          "f1": 0.3946,
+          "auc": 0.7711
+        },
+        {
+          "round": 13,
+          "f1": 0.3946,
+          "auc": 0.7722
+        },
+        {
+          "round": 14,
+          "f1": 0.3972,
+          "auc": 0.7747
+        },
+        {
+          "round": 15,
+          "f1": 0.3979,
+          "auc": 0.7745
+        }
+      ]
+    },
+    "local_only": {
+      "mean_f1": 0.2694,
+      "min_f1": 0.2042,
+      "max_f1": 0.4075
+    }
+  },
+  "communication": {
+    "model_parameters": 57,
+    "bytes_per_update_float32": 228,
+    "federated_upload_bytes": 27360,
+    "federated_total_bytes_with_broadcast": 54720,
+    "centralized_raw_feature_bytes": 3803440,
+    "federated_vs_centralized_ratio": 0.014387,
+    "interpretation": "Federated training moves a fixed, tiny model footprint regardless of data size, while centralizing ships raw events that grow with the dataset. The federation also never moves raw data, which is the privacy argument. Accuracy parity vs centralized is the second axis; communication savings is the first."
+  },
+  "caveats": [
+    "SIMULATION ONLY: clients are synthetic partitions of one physical detector",
+    "high accuracy is not a real multi-node detector result",
+    "the defensible headline is communication/privacy, not a record F1",
+    "real federation requires CREDO multi-node / multi-site data (see SNN_GNN_FL_design.md)"
+  ],
+  "plots": [
+    "plots_fl/fl_convergence.png",
+    "plots_fl/fl_communication.png"
+  ],
+  "runtime_seconds": 333.37
+}

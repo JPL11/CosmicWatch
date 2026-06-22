@@ -5,3 +5,12 @@ __pycache__/
 .DS_Store
 plots/
 edge_ai_experiment.json
+
+# Internal strategy / meeting docs — keep local, do not commit
+HANDOFF.md
+MEETING_BRIEF.md
+MEETING_PREP.md
+LITERATURE_NOTES.md
+
+# PDFs: source slides/briefs and the generated one-pager
+*.pdf
