@@ -1,0 +1,1123 @@
+{
+  "index": "credo-detections",
+  "total_docs": 3437063,
+  "sources": {
+    "cosmicwatch-v3x": {
+      "doc_count": 3355891,
+      "coverage": {
+        "adc_value": {
+          "count": 3355891,
+          "coverage": 1.0
+        },
+        "sipm_mv": {
+          "count": 3355891,
+          "coverage": 1.0
+        },
+        "temperature_c": {
+          "count": 3355891,
+          "coverage": 1.0
+        },
+        "pressure_pa": {
+          "count": 3355891,
+          "coverage": 1.0
+        },
+        "deadtime_s": {
+          "count": 3355891,
+          "coverage": 1.0
+        },
+        "accel_x_g": {
+          "count": 581815,
+          "coverage": 0.1734
+        },
+        "accel_y_g": {
+          "count": 581815,
+          "coverage": 0.1734
+        },
+        "accel_z_g": {
+          "count": 581815,
+          "coverage": 0.1734
+        },
+        "gyro_x_degs": {
+          "count": 581815,
+          "coverage": 0.1734
+        },
+        "timestamp": {
+          "count": 582068,
+          "coverage": 0.1734
+        },
+        "timestamp_ms": {
+          "count": 582068,
+          "coverage": 0.1734
+        },
+        "pico_timestamp_s": {
+          "count": 582068,
+          "coverage": 0.1734
+        },
+        "coincident": {
+          "count": 582068,
+          "coverage": 0.1734
+        },
+        "coincidence_flag": {
+          "count": 3355891,
+          "coverage": 1.0
+        },
+        "device_id": {
+          "count": 582068,
+          "coverage": 0.1734
+        },
+        "detector_name": {
+          "count": 582068,
+          "coverage": 0.1734
+        },
+        "llm_interpretation": {
+          "count": 2772143,
+          "coverage": 0.8261
+        },
+        "event": {
+          "count": 582068,
+          "coverage": 0.1734
+        }
+      },
+      "time_coverage": {
+        "min": "2025-11-02T18:45:00.000Z",
+        "max": "2026-02-25T23:31:41.000Z",
+        "active_days": 16,
+        "max_docs_in_a_day": 122650,
+        "top_days": [
+          {
+            "day": "2026-01-24",
+            "docs": 122650
+          },
+          {
+            "day": "2026-01-23",
+            "docs": 115066
+          },
+          {
+            "day": "2025-11-09",
+            "docs": 103240
+          },
+          {
+            "day": "2025-11-10",
+            "docs": 100674
+          },
+          {
+            "day": "2026-01-25",
+            "docs": 41991
+          }
+        ]
+      },
+      "numeric_stats": {
+        "adc_value": {
+          "count": 3355891,
+          "min": 52.0,
+          "max": 4095.0,
+          "mean": 305.359,
+          "p1": 85.415,
+          "p25": 137.188,
+          "p50": 210.808,
+          "p75": 369.962,
+          "p99": 1522.199
+        },
+        "sipm_mv": {
+          "count": 3355891,
+          "min": 2.7,
+          "max": 1000.0,
+          "mean": 16.072,
+          "p1": 4.391,
+          "p25": 7.07,
+          "p50": 10.925,
+          "p75": 19.052,
+          "p99": 78.508
+        },
+        "temperature_c": {
+          "count": 3355891,
+          "min": 23.7,
+          "max": 2505832.0,
+          "mean": 49.265,
+          "p1": 24.562,
+          "p25": 26.391,
+          "p50": 26.861,
+          "p75": 27.688,
+          "p99": 29.016
+        },
+        "pressure_pa": {
+          "count": 3355891,
+          "min": 0.0,
+          "max": 349705.406,
+          "mean": 101290.603,
+          "p1": 100792.362,
+          "p25": 101099.633,
+          "p50": 101270.977,
+          "p75": 101469.44,
+          "p99": 102006.171
+        },
+        "deadtime_s": {
+          "count": 3355891,
+          "min": 0.0,
+          "max": 361541248.0,
+          "mean": 1309.327,
+          "p1": 2.298,
+          "p25": 132.891,
+          "p50": 301.499,
+          "p75": 482.961,
+          "p99": 795.549
+        },
+        "accel_x_g": {
+          "count": 581815,
+          "min": -0.886,
+          "max": 0.484,
+          "mean": 0.003,
+          "p1": -0.062,
+          "p25": -0.001,
+          "p50": 0.006,
+          "p75": 0.009,
+          "p99": 0.025
+        },
+        "accel_y_g": {
+          "count": 581815,
+          "min": -0.555,
+          "max": 0.34,
+          "mean": -0.001,
+          "p1": -0.018,
+          "p25": -0.002,
+          "p50": -0.0,
+          "p75": 0.001,
+          "p99": 0.008
+        },
+        "accel_z_g": {
+          "count": 581815,
+          "min": -1.89,
+          "max": 1.229,
+          "mean": -0.987,
+          "p1": -1.024,
+          "p25": -1.006,
+          "p50": -1.003,
+          "p75": -1.0,
+          "p99": -0.428
+        },
+        "gyro_x_degs": {
+          "count": 581815,
+          "min": -154.6,
+          "max": 84.2,
+          "mean": 0.031,
+          "p1": -0.315,
+          "p25": -0.096,
+          "p50": 0.012,
+          "p75": 0.13,
+          "p99": 0.5
+        }
+      },
+      "coincidence": {
+        "counts": {
+          "false": 509407,
+          "true": 72661
+        },
+        "daily_coincident_rate": [
+          [
+            "2025-11-02",
+            0.1309
+          ],
+          [
+            "2025-11-03",
+            0.127
+          ],
+          [
+            "2025-11-04",
+            0.1183
+          ],
+          [
+            "2025-11-08",
+            0.1196
+          ],
+          [
+            "2025-11-09",
+            0.1189
+          ],
+          [
+            "2025-11-10",
+            0.1204
+          ],
+          [
+            "2025-11-12",
+            0.1245
+          ],
+          [
+            "2025-11-13",
+            0.1238
+          ],
+          [
+            "2025-11-17",
+            0.2025
+          ],
+          [
+            "2025-11-18",
+            0.2053
+          ],
+          [
+            "2025-11-19",
+            0.1925
+          ],
+          [
+            "2026-01-22",
+            0.1306
+          ],
+          [
+            "2026-01-23",
+            0.1239
+          ],
+          [
+            "2026-01-24",
+            0.1213
+          ]
+        ]
+      }
+    },
+    "legacy": {
+      "doc_count": 69000,
+      "coverage": {
+        "altitude": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "accuracy": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "height": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "width": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "timestamp": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "device_id": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "location": {
+          "count": 48945,
+          "coverage": 0.7093
+        },
+        "provider": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "team_id": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "user_id": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "visible": {
+          "count": 69000,
+          "coverage": 1.0
+        },
+        "frame_content": {
+          "count": 69000,
+          "coverage": 1.0,
+          "estimated_from_sample": 50
+        }
+      },
+      "time_coverage": {
+        "min": "2017-10-04T04:17:00.374Z",
+        "max": "2018-05-06T03:29:09.749Z",
+        "active_days": 145,
+        "max_docs_in_a_day": 20894,
+        "top_days": [
+          {
+            "day": "2017-11-17",
+            "docs": 20894
+          },
+          {
+            "day": "2017-11-18",
+            "docs": 5902
+          },
+          {
+            "day": "2017-11-16",
+            "docs": 3590
+          },
+          {
+            "day": "2017-11-15",
+            "docs": 2968
+          },
+          {
+            "day": "2017-12-08",
+            "docs": 1752
+          }
+        ]
+      },
+      "numeric_stats": {
+        "altitude": {
+          "count": 69000,
+          "min": -123.0,
+          "max": 409.0,
+          "mean": 80.641,
+          "p1": 0.0,
+          "p25": 0.016,
+          "p50": 99.911,
+          "p75": 121.922,
+          "p99": 221.5
+        },
+        "accuracy": {
+          "count": 69000,
+          "min": 0.0,
+          "max": 20148.719,
+          "mean": 38.54,
+          "p1": 0.0,
+          "p25": 1.334,
+          "p50": 19.529,
+          "p75": 47.396,
+          "p99": 192.0
+        },
+        "height": {
+          "count": 69000,
+          "min": 320.0,
+          "max": 1536.0,
+          "mean": 624.549,
+          "p1": 431.043,
+          "p25": 480.0,
+          "p50": 705.595,
+          "p75": 720.0,
+          "p99": 720.0
+        },
+        "width": {
+          "count": 69000,
+          "min": 480.0,
+          "max": 2048.0,
+          "mean": 871.799,
+          "p1": 581.528,
+          "p25": 797.426,
+          "p50": 898.176,
+          "p75": 960.0,
+          "p99": 981.553
+        }
+      },
+      "geo": {
+        "field": "location",
+        "bounds": {
+          "top_left": {
+            "lat": 54.527672245167196,
+            "lon": 16.81281801313162
+          },
+          "bottom_right": {
+            "lat": 49.80531306937337,
+            "lon": 22.550374483689666
+          }
+        },
+        "centroid": {
+          "lat": 53.1920608711508,
+          "lon": 18.766180162785282
+        }
+      }
+    },
+    "credo.science": {
+      "doc_count": 8999,
+      "coverage": {
+        "energy": {
+          "count": 8999,
+          "coverage": 1.0
+        },
+        "altitude": {
+          "count": 8999,
+          "coverage": 1.0
+        },
+        "timestamp": {
+          "count": 8999,
+          "coverage": 1.0
+        },
+        "device_id": {
+          "count": 8999,
+          "coverage": 1.0
+        },
+        "latitude": {
+          "count": 8999,
+          "coverage": 1.0
+        },
+        "longitude": {
+          "count": 8999,
+          "coverage": 1.0
+        },
+        "particle_type": {
+          "count": 8999,
+          "coverage": 1.0
+        }
+      },
+      "time_coverage": {
+        "min": "2018-05-11T00:00:00.000Z",
+        "max": "2018-05-11T00:00:00.000Z",
+        "active_days": 1,
+        "max_docs_in_a_day": 8999,
+        "top_days": [
+          {
+            "day": "2018-05-11",
+            "docs": 8999
+          }
+        ]
+      },
+      "numeric_stats": {
+        "energy": {
+          "count": 8999,
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "p1": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p99": 0.0
+        },
+        "altitude": {
+          "count": 8999,
+          "min": 0.0,
+          "max": 0.0,
+          "mean": 0.0,
+          "p1": 0.0,
+          "p25": 0.0,
+          "p50": 0.0,
+          "p75": 0.0,
+          "p99": 0.0
+        }
+      },
+      "geo": {
+        "field": "latitude/longitude",
+        "count": 8999,
+        "lat_range": [
+          0.0,
+          0.0
+        ],
+        "lon_range": [
+          0.0,
+          0.0
+        ]
+      },
+      "degenerate": true
+    },
+    "phone-camera": {
+      "doc_count": 3095,
+      "coverage": {
+        "altitude": {
+          "count": 1565,
+          "coverage": 0.5057
+        },
+        "brightness": {
+          "count": 3095,
+          "coverage": 1.0
+        },
+        "cluster_size": {
+          "count": 3095,
+          "coverage": 1.0
+        },
+        "timestamp": {
+          "count": 3094,
+          "coverage": 0.9997
+        },
+        "device_id": {
+          "count": 3095,
+          "coverage": 1.0
+        },
+        "latitude": {
+          "count": 1565,
+          "coverage": 0.5057
+        },
+        "longitude": {
+          "count": 1565,
+          "coverage": 0.5057
+        },
+        "image_b64": {
+          "count": 1569,
+          "coverage": 0.5069
+        },
+        "provider": {
+          "count": 1566,
+          "coverage": 0.506
+        }
+      },
+      "time_coverage": {
+        "min": "2026-05-18T18:20:39.247Z",
+        "max": "2026-06-19T12:13:22.471Z",
+        "active_days": 24,
+        "max_docs_in_a_day": 1528,
+        "top_days": [
+          {
+            "day": "2026-05-18",
+            "docs": 1528
+          },
+          {
+            "day": "2026-05-19",
+            "docs": 249
+          },
+          {
+            "day": "2026-05-20",
+            "docs": 97
+          },
+          {
+            "day": "2026-06-16",
+            "docs": 84
+          },
+          {
+            "day": "2026-06-07",
+            "docs": 80
+          }
+        ]
+      },
+      "numeric_stats": {
+        "altitude": {
+          "count": 1565,
+          "min": -31.184,
+          "max": -7.241,
+          "mean": -17.318,
+          "p1": -17.5,
+          "p25": -17.3,
+          "p50": -17.3,
+          "p75": -17.3,
+          "p99": -17.3
+        },
+        "brightness": {
+          "count": 3095,
+          "min": 28.453,
+          "max": 244.328,
+          "mean": 67.517,
+          "p1": 34.035,
+          "p25": 47.449,
+          "p50": 76.245,
+          "p75": 76.245,
+          "p99": 133.502
+        },
+        "cluster_size": {
+          "count": 3095,
+          "min": 1.0,
+          "max": 76800.0,
+          "mean": 1043.99,
+          "p1": 1.0,
+          "p25": 1.0,
+          "p50": 1.0,
+          "p75": 1.0,
+          "p99": 62543.823
+        }
+      },
+      "geo": {
+        "field": "latitude/longitude",
+        "count": 1565,
+        "lat_range": [
+          33.91595458984375,
+          33.91709518432617
+        ],
+        "lon_range": [
+          -118.33549499511719,
+          -118.33383178710938
+        ]
+      }
+    },
+    "credo-science": {
+      "doc_count": 77,
+      "coverage": {
+        "altitude": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "accuracy": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "height": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "width": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "timestamp": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "device_id": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "location": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "provider": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "team_id": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "user_id": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "visible": {
+          "count": 77,
+          "coverage": 1.0
+        },
+        "frame_content": {
+          "count": 77,
+          "coverage": 1.0,
+          "estimated_from_sample": 50
+        }
+      },
+      "time_coverage": {
+        "min": "2025-11-15T00:13:48.071Z",
+        "max": "2025-11-15T00:36:21.992Z",
+        "active_days": 1,
+        "max_docs_in_a_day": 77,
+        "top_days": [
+          {
+            "day": "2025-11-15",
+            "docs": 77
+          }
+        ]
+      },
+      "numeric_stats": {
+        "altitude": {
+          "count": 77,
+          "min": 0.0,
+          "max": 278.0,
+          "mean": 83.64,
+          "p1": 0.0,
+          "p25": 53.514,
+          "p50": 53.514,
+          "p75": 53.514,
+          "p99": 278.0
+        },
+        "accuracy": {
+          "count": 77,
+          "min": 4.9,
+          "max": 92.0,
+          "mean": 33.017,
+          "p1": 9.156,
+          "p25": 19.0,
+          "p50": 26.0,
+          "p75": 55.0,
+          "p99": 92.0
+        },
+        "height": {
+          "count": 77,
+          "min": 480.0,
+          "max": 1080.0,
+          "mean": 761.299,
+          "p1": 480.0,
+          "p25": 720.0,
+          "p50": 720.0,
+          "p75": 720.0,
+          "p99": 1080.0
+        },
+        "width": {
+          "count": 77,
+          "min": 640.0,
+          "max": 1920.0,
+          "mean": 988.052,
+          "p1": 640.0,
+          "p25": 720.0,
+          "p50": 720.0,
+          "p75": 1280.0,
+          "p99": 1920.0
+        }
+      },
+      "geo": {
+        "field": "location",
+        "bounds": {
+          "top_left": {
+            "lat": 53.65106217563152,
+            "lon": 16.29836923442781
+          },
+          "bottom_right": {
+            "lat": 49.29571317974478,
+            "lon": 22.6199050527066
+          }
+        },
+        "centroid": {
+          "lat": 52.62426576268702,
+          "lon": 18.32212046139523
+        }
+      }
+    }
+  },
+  "field_count": 72,
+  "cosmicwatch_deep_dive": {
+    "device_ids": {
+      "cosmicwatch-001": 582068
+    },
+    "distinct_device_ids": 1,
+    "rows_with_timestamp": 582068,
+    "rows_with_latlon": 0,
+    "adc_histogram": [
+      {
+        "adc": 50.0,
+        "count": 173075
+      },
+      {
+        "adc": 100.0,
+        "count": 869333
+      },
+      {
+        "adc": 150.0,
+        "count": 558273
+      },
+      {
+        "adc": 200.0,
+        "count": 380627
+      },
+      {
+        "adc": 250.0,
+        "count": 279644
+      },
+      {
+        "adc": 300.0,
+        "count": 206818
+      },
+      {
+        "adc": 350.0,
+        "count": 150334
+      },
+      {
+        "adc": 400.0,
+        "count": 122455
+      },
+      {
+        "adc": 450.0,
+        "count": 112261
+      },
+      {
+        "adc": 500.0,
+        "count": 96415
+      },
+      {
+        "adc": 550.0,
+        "count": 71520
+      },
+      {
+        "adc": 600.0,
+        "count": 56973
+      },
+      {
+        "adc": 650.0,
+        "count": 45431
+      },
+      {
+        "adc": 700.0,
+        "count": 35535
+      },
+      {
+        "adc": 750.0,
+        "count": 27844
+      },
+      {
+        "adc": 800.0,
+        "count": 23305
+      },
+      {
+        "adc": 850.0,
+        "count": 19285
+      },
+      {
+        "adc": 900.0,
+        "count": 16402
+      },
+      {
+        "adc": 950.0,
+        "count": 13886
+      },
+      {
+        "adc": 1000.0,
+        "count": 12068
+      },
+      {
+        "adc": 1050.0,
+        "count": 9914
+      },
+      {
+        "adc": 1100.0,
+        "count": 8367
+      },
+      {
+        "adc": 1150.0,
+        "count": 6765
+      },
+      {
+        "adc": 1200.0,
+        "count": 5928
+      },
+      {
+        "adc": 1250.0,
+        "count": 5050
+      },
+      {
+        "adc": 1300.0,
+        "count": 4204
+      },
+      {
+        "adc": 1350.0,
+        "count": 3590
+      },
+      {
+        "adc": 1400.0,
+        "count": 3299
+      },
+      {
+        "adc": 1450.0,
+        "count": 2963
+      },
+      {
+        "adc": 1500.0,
+        "count": 3041
+      },
+      {
+        "adc": 1550.0,
+        "count": 2704
+      },
+      {
+        "adc": 1600.0,
+        "count": 2303
+      },
+      {
+        "adc": 1650.0,
+        "count": 2224
+      },
+      {
+        "adc": 1700.0,
+        "count": 1997
+      },
+      {
+        "adc": 1750.0,
+        "count": 1847
+      },
+      {
+        "adc": 1800.0,
+        "count": 1752
+      },
+      {
+        "adc": 1850.0,
+        "count": 1638
+      },
+      {
+        "adc": 1900.0,
+        "count": 1480
+      },
+      {
+        "adc": 1950.0,
+        "count": 1290
+      },
+      {
+        "adc": 2000.0,
+        "count": 1140
+      },
+      {
+        "adc": 2050.0,
+        "count": 1004
+      },
+      {
+        "adc": 2100.0,
+        "count": 916
+      },
+      {
+        "adc": 2150.0,
+        "count": 853
+      },
+      {
+        "adc": 2200.0,
+        "count": 716
+      },
+      {
+        "adc": 2250.0,
+        "count": 688
+      },
+      {
+        "adc": 2300.0,
+        "count": 569
+      },
+      {
+        "adc": 2350.0,
+        "count": 515
+      },
+      {
+        "adc": 2400.0,
+        "count": 433
+      },
+      {
+        "adc": 2450.0,
+        "count": 461
+      },
+      {
+        "adc": 2500.0,
+        "count": 393
+      },
+      {
+        "adc": 2550.0,
+        "count": 423
+      },
+      {
+        "adc": 2600.0,
+        "count": 357
+      },
+      {
+        "adc": 2650.0,
+        "count": 288
+      },
+      {
+        "adc": 2700.0,
+        "count": 281
+      },
+      {
+        "adc": 2750.0,
+        "count": 266
+      },
+      {
+        "adc": 2800.0,
+        "count": 259
+      },
+      {
+        "adc": 2850.0,
+        "count": 250
+      },
+      {
+        "adc": 2900.0,
+        "count": 243
+      },
+      {
+        "adc": 2950.0,
+        "count": 205
+      },
+      {
+        "adc": 3000.0,
+        "count": 226
+      },
+      {
+        "adc": 3050.0,
+        "count": 188
+      },
+      {
+        "adc": 3100.0,
+        "count": 175
+      },
+      {
+        "adc": 3150.0,
+        "count": 178
+      },
+      {
+        "adc": 3200.0,
+        "count": 166
+      },
+      {
+        "adc": 3250.0,
+        "count": 172
+      },
+      {
+        "adc": 3300.0,
+        "count": 132
+      },
+      {
+        "adc": 3350.0,
+        "count": 134
+      },
+      {
+        "adc": 3400.0,
+        "count": 140
+      },
+      {
+        "adc": 3450.0,
+        "count": 108
+      },
+      {
+        "adc": 3500.0,
+        "count": 129
+      },
+      {
+        "adc": 3550.0,
+        "count": 136
+      },
+      {
+        "adc": 3600.0,
+        "count": 94
+      },
+      {
+        "adc": 3650.0,
+        "count": 112
+      },
+      {
+        "adc": 3700.0,
+        "count": 122
+      },
+      {
+        "adc": 3750.0,
+        "count": 124
+      },
+      {
+        "adc": 3800.0,
+        "count": 110
+      },
+      {
+        "adc": 3850.0,
+        "count": 101
+      },
+      {
+        "adc": 3900.0,
+        "count": 134
+      },
+      {
+        "adc": 3950.0,
+        "count": 176
+      },
+      {
+        "adc": 4000.0,
+        "count": 349
+      },
+      {
+        "adc": 4050.0,
+        "count": 585
+      }
+    ],
+    "adc_by_coincident": {
+      "True": {
+        "count": 72661,
+        "adc_mean": 389.82,
+        "adc_p50": 334.38,
+        "adc_p99": 1201.95
+      },
+      "False": {
+        "count": 509407,
+        "adc_mean": 249.22,
+        "adc_p50": 182.54,
+        "adc_p99": 1053.57
+      }
+    },
+    "schema_partition": {
+      "parsed_with_wallclock_timestamp": 582068,
+      "raw_without_wallclock_timestamp": 2773823,
+      "note": "raw partition uses boot-relative timestamp_s (not wall-clock); single detector; not time-correlatable"
+    }
+  },
+  "findings": [
+    "CosmicWatch is one physical node: 1 device_id (cosmicwatch-001), no lat/lon \u2014 confirms the GNN/FL multi-node blocker.",
+    "CosmicWatch has TWO schemas: 582,068 parsed events with wall-clock `timestamp`+`coincident`, and 2,773,823 raw docs from detector 'AxLab' whose `timestamp_s` is boot-relative (not wall-clock) \u2014 the raw 83% is NOT time-correlatable, so the usable set stays ~582k.",
+    "ADC partially separates coincidence: coincident ADC p50=334.38 vs non-coincident p50=182.54 \u2014 distributions overlap, so an ADC threshold is near the achievable ceiling (matches the edge experiment).",
+    "`legacy` (69,000 docs, 2017\u201318) is the real overlooked asset: decodable PNG hit-crops + genuine Poland GPS (\u224849.8\u201354.5\u00b0N, 16.8\u201322.5\u00b0E), 71% geo-tagged \u2014 the best candidate for a real CV/geo track (the prior CV dismissal only looked at phone-camera).",
+    "`credo.science` (8,999) is DEGENERATE: lat/lon all 0,0, energy all 0, particle_type constant 'cosmic_ray' \u2014 field-present but value-empty; not usable as geo or labels. Correct the handoff.",
+    "`phone-camera` (3,095, 2026, \u2248Los Angeles single site) has 1,569 real images (51%) \u2014 recent and clean but tiny/single-location; toy CV scale.",
+    "All five sources are schema-disjoint AND temporally disjoint (legacy/credo.science 2017\u201318; cosmicwatch/phone-camera/credo-science 2025\u201326) \u2014 zero possibility of synchronized cross-source coincidence; any cross-source learning is inherently heterogeneous/federated."
+  ],
+  "quality_flags": [
+    "cosmicwatch `temperature_c`: max 2505832.0 >> p99 29.016 \u2014 corrupt/outlier tail, needs clipping",
+    "cosmicwatch `deadtime_s`: max 361541248.0 >> p99 795.549 \u2014 corrupt/outlier tail, needs clipping",
+    "cosmicwatch `gyro_x_degs`: max 84.2 >> p99 0.5 \u2014 corrupt/outlier tail, needs clipping",
+    "cosmicwatch `adc_value` saturates at 4095 (12-bit ADC ceiling) \u2014 clipped events present",
+    "cosmicwatch `pressure_pa` has 0 Pa floor \u2014 invalid/missing-as-zero readings",
+    "`credo.science` is degenerate: lat/lon all 0,0, energy all 0, particle_type constant \u2014 not a usable geo or labeled source despite fields being 'present'"
+  ],
+  "plots": [
+    "plots_analysis/adc_distribution.png",
+    "plots_analysis/source_volumes.png"
+  ]
+}
