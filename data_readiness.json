@@ -1,0 +1,231 @@
+{
+  "monthly_by_source": [
+    {
+      "month": "2017-10",
+      "total": 184,
+      "sources": {
+        "legacy": 184
+      }
+    },
+    {
+      "month": "2017-11",
+      "total": 33986,
+      "sources": {
+        "legacy": 33986
+      }
+    },
+    {
+      "month": "2017-12",
+      "total": 11348,
+      "sources": {
+        "legacy": 11348
+      }
+    },
+    {
+      "month": "2018-01",
+      "total": 502,
+      "sources": {
+        "legacy": 502
+      }
+    },
+    {
+      "month": "2018-02",
+      "total": 2958,
+      "sources": {
+        "legacy": 2958
+      }
+    },
+    {
+      "month": "2018-03",
+      "total": 11616,
+      "sources": {
+        "legacy": 11616
+      }
+    },
+    {
+      "month": "2018-04",
+      "total": 5646,
+      "sources": {
+        "legacy": 5646
+      }
+    },
+    {
+      "month": "2018-05",
+      "total": 11759,
+      "sources": {
+        "credo.science": 8999,
+        "legacy": 2760
+      }
+    },
+    {
+      "month": "2025-10",
+      "total": 1,
+      "sources": {}
+    },
+    {
+      "month": "2025-11",
+      "total": 291804,
+      "sources": {
+        "cosmicwatch-v3x": 291727,
+        "credo-science": 77
+      }
+    },
+    {
+      "month": "2026-01",
+      "total": 290340,
+      "sources": {
+        "cosmicwatch-v3x": 290340
+      }
+    },
+    {
+      "month": "2026-02",
+      "total": 1,
+      "sources": {
+        "cosmicwatch-v3x": 1
+      }
+    },
+    {
+      "month": "2026-05",
+      "total": 2157,
+      "sources": {
+        "phone-camera": 2157
+      }
+    },
+    {
+      "month": "2026-06",
+      "total": 937,
+      "sources": {
+        "phone-camera": 937
+      }
+    }
+  ],
+  "cosmicwatch_daily": [
+    {
+      "day": "2025-11-02",
+      "count": 6701,
+      "coincident": 877,
+      "coinc_rate": 13.1
+    },
+    {
+      "day": "2025-11-03",
+      "count": 8418,
+      "coincident": 1069,
+      "coinc_rate": 12.7
+    },
+    {
+      "day": "2025-11-04",
+      "count": 4404,
+      "coincident": 521,
+      "coinc_rate": 11.8
+    },
+    {
+      "day": "2025-11-08",
+      "count": 14950,
+      "coincident": 1788,
+      "coinc_rate": 12.0
+    },
+    {
+      "day": "2025-11-09",
+      "count": 103240,
+      "coincident": 12271,
+      "coinc_rate": 11.9
+    },
+    {
+      "day": "2025-11-10",
+      "count": 100674,
+      "coincident": 12122,
+      "coinc_rate": 12.0
+    },
+    {
+      "day": "2025-11-12",
+      "count": 11394,
+      "coincident": 1419,
+      "coinc_rate": 12.5
+    },
+    {
+      "day": "2025-11-13",
+      "count": 18441,
+      "coincident": 2283,
+      "coinc_rate": 12.4
+    },
+    {
+      "day": "2025-11-17",
+      "count": 4666,
+      "coincident": 945,
+      "coinc_rate": 20.3
+    },
+    {
+      "day": "2025-11-18",
+      "count": 4622,
+      "coincident": 949,
+      "coinc_rate": 20.5
+    },
+    {
+      "day": "2025-11-19",
+      "count": 14217,
+      "coincident": 2737,
+      "coinc_rate": 19.3
+    },
+    {
+      "day": "2026-01-22",
+      "count": 10633,
+      "coincident": 1389,
+      "coinc_rate": 13.1
+    },
+    {
+      "day": "2026-01-23",
+      "count": 115066,
+      "coincident": 14258,
+      "coinc_rate": 12.4
+    },
+    {
+      "day": "2026-01-24",
+      "count": 122650,
+      "coincident": 14872,
+      "coinc_rate": 12.1
+    },
+    {
+      "day": "2026-01-25",
+      "count": 41991,
+      "coincident": 5161,
+      "coinc_rate": 12.3
+    },
+    {
+      "day": "2026-02-25",
+      "count": 1,
+      "coincident": 0,
+      "coinc_rate": 0.0
+    }
+  ],
+  "cosmicwatch_range": {
+    "earliest": "2025-11-02",
+    "latest": "2026-02-25"
+  },
+  "cosmicwatch_gaps": [
+    {
+      "from": "2025-11-05",
+      "to": "2025-11-07",
+      "days": 3
+    },
+    {
+      "from": "2025-11-11",
+      "to": "2025-11-11",
+      "days": 1
+    },
+    {
+      "from": "2025-11-14",
+      "to": "2025-11-16",
+      "days": 3
+    },
+    {
+      "from": "2025-11-20",
+      "to": "2026-01-21",
+      "days": 63
+    },
+    {
+      "from": "2026-01-26",
+      "to": "2026-02-24",
+      "days": 30
+    }
+  ]
+}

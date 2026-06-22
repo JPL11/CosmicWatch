@@ -1,0 +1,167 @@
+{
+  "query": {
+    "source": "cosmicwatch-v3x",
+    "start": "2026-01-23T00:00:00Z",
+    "end": "2026-01-25T00:00:00Z",
+    "max_events": 0
+  },
+  "data": {
+    "rows": 237716,
+    "coincident": 29130,
+    "noncoincident": 208586,
+    "coincident_rate": 0.1225,
+    "time_range_utc": {
+      "start": "2026-01-23T00:00:00Z",
+      "end": "2026-01-24T23:59:58Z"
+    },
+    "event_rate_hz": 1.3757,
+    "median_interarrival_ms": 1000.0
+  },
+  "split": {
+    "method": "chronological 80/20 split",
+    "train_rows": 190172,
+    "test_rows": 47544
+  },
+  "features": {
+    "names": [
+      "adc_value",
+      "sipm_mv",
+      "log1p_interarrival_ms",
+      "temperature_c_clean",
+      "pressure_pa_clean"
+    ],
+    "missing_fill_medians": {
+      "adc_value": 195.0,
+      "sipm_mv": 10.0,
+      "log1p_interarrival_ms": 6.908754825592041,
+      "temperature_c_clean": 28.0,
+      "pressure_pa_clean": 101336.0
+    },
+    "standardization_mean": {
+      "adc_value": 265.7211608886719,
+      "sipm_mv": 13.74206256866455,
+      "log1p_interarrival_ms": 4.299993991851807,
+      "temperature_c_clean": 28.222043991088867,
+      "pressure_pa_clean": 101274.109375
+    },
+    "standardization_std": {
+      "adc_value": 208.7353973388672,
+      "sipm_mv": 13.575140953063965,
+      "log1p_interarrival_ms": 3.4279143810272217,
+      "temperature_c_clean": 0.679259717464447,
+      "pressure_pa_clean": 134.17709350585938
+    }
+  },
+  "baselines": {
+    "adc_threshold": {
+      "description": "Predict coincident=true when adc_value exceeds a tuned threshold.",
+      "adc_threshold": 258.0,
+      "train": {
+        "threshold": 258.0,
+        "accuracy": 0.7203,
+        "precision": 0.2771,
+        "recall": 0.7904,
+        "f1": 0.4103,
+        "true_positive": 18507,
+        "false_positive": 48289,
+        "true_negative": 118469,
+        "false_negative": 4907,
+        "auc": 0.7868
+      },
+      "test": {
+        "threshold": 258.0,
+        "accuracy": 0.7206,
+        "precision": 0.2731,
+        "recall": 0.7965,
+        "f1": 0.4067,
+        "true_positive": 4553,
+        "false_positive": 12119,
+        "true_negative": 29709,
+        "false_negative": 1163,
+        "auc": 0.787
+      }
+    }
+  },
+  "models": {
+    "mlp": {
+      "available": true,
+      "model": "MLP(input -> 8 ReLU -> 1)",
+      "epochs": 20,
+      "size": {
+        "parameters": 57,
+        "float32_bytes": 228,
+        "int8_bytes": 57
+      },
+      "train": {
+        "threshold": 0.6286578845977783,
+        "accuracy": 0.7151,
+        "precision": 0.2753,
+        "recall": 0.8049,
+        "f1": 0.4103,
+        "true_positive": 18847,
+        "false_positive": 49615,
+        "true_negative": 117143,
+        "false_negative": 4567,
+        "auc": 0.7935
+      },
+      "test": {
+        "threshold": 0.6286578845977783,
+        "accuracy": 0.717,
+        "precision": 0.2717,
+        "recall": 0.806,
+        "f1": 0.4064,
+        "true_positive": 4607,
+        "false_positive": 12347,
+        "true_negative": 29481,
+        "false_negative": 1109,
+        "auc": 0.7949
+      }
+    },
+    "snn": {
+      "available": true,
+      "model": "rate-coded LIF SNN(input -> 12 spiking neurons -> 1)",
+      "epochs": 15,
+      "size": {
+        "parameters": 73,
+        "float32_bytes": 292,
+        "int8_bytes": 73,
+        "timesteps": 16,
+        "approx_synaptic_ops_per_event": 1152
+      },
+      "train": {
+        "threshold": 0.5224620699882507,
+        "accuracy": 0.7147,
+        "precision": 0.2684,
+        "recall": 0.7634,
+        "f1": 0.3972,
+        "true_positive": 17875,
+        "false_positive": 48718,
+        "true_negative": 118040,
+        "false_negative": 5539,
+        "auc": 0.7766
+      },
+      "test": {
+        "threshold": 0.5224620699882507,
+        "accuracy": 0.71,
+        "precision": 0.2591,
+        "recall": 0.7598,
+        "f1": 0.3865,
+        "true_positive": 4343,
+        "false_positive": 12417,
+        "true_negative": 29411,
+        "false_negative": 1373,
+        "auc": 0.7752
+      }
+    }
+  },
+  "caveats": [
+    "coincident is a hardware-derived weak label, not independent hand truth",
+    "this is an edge-feasibility prototype, not a final physics classifier",
+    "current ES data has one hardware node, so network-GNN work needs CREDO multi-node data or simulation"
+  ],
+  "plots": [
+    "plots_full/adc_separability.png",
+    "plots_full/interarrival_ms.png"
+  ],
+  "runtime_seconds": 134.51
+}

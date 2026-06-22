@@ -1,0 +1,201 @@
+{
+  "simulation_only": true,
+  "why_simulation": "The ES index has no synchronized multi-source days and only one timestamped CosmicWatch node, so this is not a claim about real network-level CREDO performance.",
+  "real_data_anchors": {
+    "cosmicwatch_full_window": "2026-01-23T00:00:00Z to 2026-01-24T23:59:58Z",
+    "observed_event_rate_hz": 1.3757,
+    "observed_coincident_rate": 0.1225,
+    "cosmicwatch_nodes_in_es": 1,
+    "multi_source_overlap_days_in_es": 0,
+    "adc_context": {
+      "presentation_noncoincident_mean": 249.4,
+      "presentation_coincident_mean": 394.7
+    }
+  },
+  "config": {
+    "graphs": 1000,
+    "nodes": 32,
+    "area_km": 500.0,
+    "window_s": 10.0,
+    "positive_rate": 0.5,
+    "epochs": 10,
+    "batch_size": 64,
+    "hidden": 32,
+    "layers": 3,
+    "neighbors": 6,
+    "learning_rate": 0.003,
+    "timing_jitter_ms": 3.0,
+    "core_sigma_km": 150.0,
+    "seed": 11,
+    "out": "gnn_simulation_test.json",
+    "plots_dir": "plots_gnn_test"
+  },
+  "feature_names": [
+    "log1p_event_count",
+    "coincident_fraction",
+    "mean_adc_scaled",
+    "max_adc_scaled",
+    "relative_time_scaled",
+    "burst_score",
+    "x_position_scaled",
+    "y_position_scaled"
+  ],
+  "detector_layout": {
+    "node_count": 32,
+    "area_km": 500.0,
+    "mean_background_rate_hz": 1.4502,
+    "min_background_rate_hz": 0.8549,
+    "max_background_rate_hz": 2.2113
+  },
+  "split": {
+    "train_graphs": 800,
+    "test_graphs": 200,
+    "train_positive_rate": 0.5138,
+    "test_positive_rate": 0.49
+  },
+  "feature_standardization": {
+    "mean": {
+      "log1p_event_count": 2.70255184173584,
+      "coincident_fraction": 0.13249585032463074,
+      "mean_adc_scaled": 0.06725144386291504,
+      "max_adc_scaled": 0.11235474795103073,
+      "relative_time_scaled": 0.41498085856437683,
+      "burst_score": 0.18817967176437378,
+      "x_position_scaled": -0.058363914489746094,
+      "y_position_scaled": -0.06423064321279526
+    },
+    "std": {
+      "log1p_event_count": 0.3582092225551605,
+      "coincident_fraction": 0.09332486242055893,
+      "mean_adc_scaled": 0.008240547962486744,
+      "max_adc_scaled": 0.041536737233400345,
+      "relative_time_scaled": 0.3240768313407898,
+      "burst_score": 0.26222774386405945,
+      "x_position_scaled": 0.30541089177131653,
+      "y_position_scaled": 0.28783535957336426
+    }
+  },
+  "model": {
+    "type": "plain PyTorch dense message-passing GNN",
+    "hidden": 32,
+    "layers": 3,
+    "size": {
+      "parameters": 5569,
+      "float32_bytes": 22276,
+      "int8_bytes": 5569
+    }
+  },
+  "metrics": {
+    "train": {
+      "threshold": 1.0,
+      "accuracy": 0.9962,
+      "precision": 1.0,
+      "recall": 0.9927,
+      "f1": 0.9963,
+      "auc": 1.0,
+      "true_positive": 408,
+      "false_positive": 0,
+      "true_negative": 389,
+      "false_negative": 3
+    },
+    "test": {
+      "threshold": 1.0,
+      "accuracy": 0.995,
+      "precision": 1.0,
+      "recall": 0.9898,
+      "f1": 0.9949,
+      "auc": 1.0,
+      "true_positive": 97,
+      "false_positive": 0,
+      "true_negative": 102,
+      "false_negative": 1
+    }
+  },
+  "training_history": [
+    {
+      "epoch": 1,
+      "train_loss": 0.4949,
+      "test_loss": 0.2564,
+      "test_auc": 0.9997
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.10152,
+      "test_loss": 0.02484,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.013,
+      "test_loss": 0.01377,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 4,
+      "train_loss": 0.0092,
+      "test_loss": 0.0049,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 5,
+      "train_loss": 0.00319,
+      "test_loss": 0.01116,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 6,
+      "train_loss": 0.00298,
+      "test_loss": 0.00887,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 7,
+      "train_loss": 0.0042,
+      "test_loss": 0.00522,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 8,
+      "train_loss": 0.00161,
+      "test_loss": 0.00791,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 9,
+      "train_loss": 0.00779,
+      "test_loss": 0.01548,
+      "test_auc": 1.0
+    },
+    {
+      "epoch": 10,
+      "train_loss": 0.00493,
+      "test_loss": 0.00841,
+      "test_auc": 1.0
+    }
+  ],
+  "plots": [
+    "plots_gnn_test/training_curve.png",
+    "plots_gnn_test/score_histogram.png",
+    "plots_gnn_test/simulated_positive_graph.png"
+  ],
+  "example_positive_event": {
+    "positive": true,
+    "injected_node_count": 17,
+    "event_time_ms": 3306.5038478547654,
+    "core_km": [
+      280.1001614704233,
+      363.30444546704507
+    ],
+    "direction": [
+      -0.8645623047208787,
+      -0.5025256423862592
+    ]
+  },
+  "caveats": [
+    "Synthetic labels are injected by construction.",
+    "Detector layout, timing jitter, and ensemble hit probability are assumptions.",
+    "This prototype validates software mechanics, not astrophysical discovery power.",
+    "Publication-grade GNN work requires real synchronized multi-node data or a physics-backed simulator with collaborator agreement."
+  ],
+  "runtime_seconds": 0.89
+}

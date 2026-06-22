@@ -1,0 +1,2103 @@
+{
+  "summary": {
+    "index": "credo-detections",
+    "filter": "source=cosmicwatch-v3x AND coincident=true (true-muon events)",
+    "coincident_event_count": 72661,
+    "adc_value": {
+      "count": 72661,
+      "min": 101.0,
+      "max": 4095.0,
+      "avg": 389.82
+    },
+    "sipm_mv": {
+      "count": 72661,
+      "min": 5.199999809265137,
+      "max": 1000.0,
+      "avg": 20.15
+    },
+    "temperature_c_cleaned": {
+      "count": 72628,
+      "min": 23.700000762939453,
+      "max": 30.700000762939453,
+      "avg": 28.09
+    },
+    "pressure_pa": {
+      "count": 72661,
+      "min": 0.0,
+      "max": 102088.0,
+      "avg": 101423.32
+    },
+    "time_range_utc": {
+      "earliest": "2025-11-02T18:45:17Z",
+      "latest": "2026-01-25T08:13:22Z"
+    },
+    "adc_histogram": [
+      {
+        "adc_bin_start": 0,
+        "count": 13226
+      },
+      {
+        "adc_bin_start": 250,
+        "count": 46522
+      },
+      {
+        "adc_bin_start": 500,
+        "count": 8497
+      },
+      {
+        "adc_bin_start": 750,
+        "count": 2618
+      },
+      {
+        "adc_bin_start": 1000,
+        "count": 1206
+      },
+      {
+        "adc_bin_start": 1250,
+        "count": 291
+      },
+      {
+        "adc_bin_start": 1500,
+        "count": 90
+      },
+      {
+        "adc_bin_start": 1750,
+        "count": 75
+      },
+      {
+        "adc_bin_start": 2000,
+        "count": 49
+      },
+      {
+        "adc_bin_start": 2250,
+        "count": 32
+      },
+      {
+        "adc_bin_start": 2500,
+        "count": 21
+      },
+      {
+        "adc_bin_start": 2750,
+        "count": 13
+      },
+      {
+        "adc_bin_start": 3000,
+        "count": 9
+      },
+      {
+        "adc_bin_start": 3250,
+        "count": 4
+      },
+      {
+        "adc_bin_start": 3750,
+        "count": 2
+      },
+      {
+        "adc_bin_start": 4000,
+        "count": 6
+      }
+    ]
+  },
+  "recent_events": [
+    {
+      "coincident": true,
+      "adc_value": 297,
+      "sipm_mv": 15.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328802000
+    },
+    {
+      "coincident": true,
+      "adc_value": 303,
+      "sipm_mv": 15.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328798000
+    },
+    {
+      "coincident": true,
+      "adc_value": 346,
+      "sipm_mv": 17.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328795000
+    },
+    {
+      "coincident": true,
+      "adc_value": 901,
+      "sipm_mv": 46.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101778.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328789000
+    },
+    {
+      "coincident": true,
+      "adc_value": 298,
+      "sipm_mv": 15.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101778.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328787000
+    },
+    {
+      "coincident": true,
+      "adc_value": 286,
+      "sipm_mv": 14.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101778.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328769000
+    },
+    {
+      "coincident": true,
+      "adc_value": 556,
+      "sipm_mv": 28.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328768000
+    },
+    {
+      "coincident": true,
+      "adc_value": 320,
+      "sipm_mv": 16.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328768000
+    },
+    {
+      "coincident": true,
+      "adc_value": 385,
+      "sipm_mv": 19.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328766000
+    },
+    {
+      "coincident": true,
+      "adc_value": 404,
+      "sipm_mv": 20.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328766000
+    },
+    {
+      "coincident": true,
+      "adc_value": 456,
+      "sipm_mv": 23.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328765000
+    },
+    {
+      "coincident": true,
+      "adc_value": 285,
+      "sipm_mv": 14.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328761000
+    },
+    {
+      "coincident": true,
+      "adc_value": 309,
+      "sipm_mv": 15.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101777.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328758000
+    },
+    {
+      "coincident": true,
+      "adc_value": 771,
+      "sipm_mv": 39.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328748000
+    },
+    {
+      "coincident": true,
+      "adc_value": 457,
+      "sipm_mv": 23.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328743000
+    },
+    {
+      "coincident": true,
+      "adc_value": 260,
+      "sipm_mv": 13.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328738000
+    },
+    {
+      "coincident": true,
+      "adc_value": 415,
+      "sipm_mv": 21.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328735000
+    },
+    {
+      "coincident": true,
+      "adc_value": 396,
+      "sipm_mv": 20.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328731000
+    },
+    {
+      "coincident": true,
+      "adc_value": 487,
+      "sipm_mv": 25.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101776.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328730000
+    },
+    {
+      "coincident": true,
+      "adc_value": 271,
+      "sipm_mv": 14.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328729000
+    },
+    {
+      "coincident": true,
+      "adc_value": 294,
+      "sipm_mv": 15.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328729000
+    },
+    {
+      "coincident": true,
+      "adc_value": 291,
+      "sipm_mv": 15.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328721000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1089,
+      "sipm_mv": 56.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101775.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328700000
+    },
+    {
+      "coincident": true,
+      "adc_value": 361,
+      "sipm_mv": 18.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101774.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328668000
+    },
+    {
+      "coincident": true,
+      "adc_value": 245,
+      "sipm_mv": 12.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101773.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328664000
+    },
+    {
+      "coincident": true,
+      "adc_value": 263,
+      "sipm_mv": 13.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101773.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328662000
+    },
+    {
+      "coincident": true,
+      "adc_value": 292,
+      "sipm_mv": 15.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101774.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328654000
+    },
+    {
+      "coincident": true,
+      "adc_value": 281,
+      "sipm_mv": 14.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101774.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328651000
+    },
+    {
+      "coincident": true,
+      "adc_value": 411,
+      "sipm_mv": 21.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101773.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328644000
+    },
+    {
+      "coincident": true,
+      "adc_value": 379,
+      "sipm_mv": 19.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328642000
+    },
+    {
+      "coincident": true,
+      "adc_value": 240,
+      "sipm_mv": 12.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328638000
+    },
+    {
+      "coincident": true,
+      "adc_value": 306,
+      "sipm_mv": 15.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328636000
+    },
+    {
+      "coincident": true,
+      "adc_value": 435,
+      "sipm_mv": 22.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328632000
+    },
+    {
+      "coincident": true,
+      "adc_value": 332,
+      "sipm_mv": 17.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328631000
+    },
+    {
+      "coincident": true,
+      "adc_value": 353,
+      "sipm_mv": 18.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328622000
+    },
+    {
+      "coincident": true,
+      "adc_value": 572,
+      "sipm_mv": 29.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328621000
+    },
+    {
+      "coincident": true,
+      "adc_value": 435,
+      "sipm_mv": 22.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328620000
+    },
+    {
+      "coincident": true,
+      "adc_value": 497,
+      "sipm_mv": 25.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328620000
+    },
+    {
+      "coincident": true,
+      "adc_value": 486,
+      "sipm_mv": 25.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328614000
+    },
+    {
+      "coincident": true,
+      "adc_value": 310,
+      "sipm_mv": 16.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328612000
+    },
+    {
+      "coincident": true,
+      "adc_value": 428,
+      "sipm_mv": 22.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328607000
+    },
+    {
+      "coincident": true,
+      "adc_value": 239,
+      "sipm_mv": 12.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328601000
+    },
+    {
+      "coincident": true,
+      "adc_value": 366,
+      "sipm_mv": 18.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328596000
+    },
+    {
+      "coincident": true,
+      "adc_value": 361,
+      "sipm_mv": 18.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328589000
+    },
+    {
+      "coincident": true,
+      "adc_value": 396,
+      "sipm_mv": 20.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328588000
+    },
+    {
+      "coincident": true,
+      "adc_value": 344,
+      "sipm_mv": 17.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328588000
+    },
+    {
+      "coincident": true,
+      "adc_value": 301,
+      "sipm_mv": 15.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101772.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328575000
+    },
+    {
+      "coincident": true,
+      "adc_value": 481,
+      "sipm_mv": 24.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328565000
+    },
+    {
+      "coincident": true,
+      "adc_value": 408,
+      "sipm_mv": 21.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328565000
+    },
+    {
+      "coincident": true,
+      "adc_value": 307,
+      "sipm_mv": 15.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328555000
+    },
+    {
+      "coincident": true,
+      "adc_value": 418,
+      "sipm_mv": 21.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328549000
+    },
+    {
+      "coincident": true,
+      "adc_value": 849,
+      "sipm_mv": 43.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101771.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328544000
+    },
+    {
+      "coincident": true,
+      "adc_value": 233,
+      "sipm_mv": 12.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328534000
+    },
+    {
+      "coincident": true,
+      "adc_value": 652,
+      "sipm_mv": 33.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328514000
+    },
+    {
+      "coincident": true,
+      "adc_value": 229,
+      "sipm_mv": 11.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328512000
+    },
+    {
+      "coincident": true,
+      "adc_value": 274,
+      "sipm_mv": 14.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328503000
+    },
+    {
+      "coincident": true,
+      "adc_value": 531,
+      "sipm_mv": 27.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328500000
+    },
+    {
+      "coincident": true,
+      "adc_value": 360,
+      "sipm_mv": 18.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328492000
+    },
+    {
+      "coincident": true,
+      "adc_value": 390,
+      "sipm_mv": 20.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328487000
+    },
+    {
+      "coincident": true,
+      "adc_value": 948,
+      "sipm_mv": 48.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328486000
+    },
+    {
+      "coincident": true,
+      "adc_value": 579,
+      "sipm_mv": 29.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328482000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1060,
+      "sipm_mv": 54.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328478000
+    },
+    {
+      "coincident": true,
+      "adc_value": 237,
+      "sipm_mv": 12.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328465000
+    },
+    {
+      "coincident": true,
+      "adc_value": 339,
+      "sipm_mv": 17.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328458000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1052,
+      "sipm_mv": 54.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328437000
+    },
+    {
+      "coincident": true,
+      "adc_value": 405,
+      "sipm_mv": 20.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328435000
+    },
+    {
+      "coincident": true,
+      "adc_value": 374,
+      "sipm_mv": 19.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328428000
+    },
+    {
+      "coincident": true,
+      "adc_value": 427,
+      "sipm_mv": 22.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328420000
+    },
+    {
+      "coincident": true,
+      "adc_value": 307,
+      "sipm_mv": 15.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328409000
+    },
+    {
+      "coincident": true,
+      "adc_value": 317,
+      "sipm_mv": 16.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328402000
+    },
+    {
+      "coincident": true,
+      "adc_value": 204,
+      "sipm_mv": 10.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328396000
+    },
+    {
+      "coincident": true,
+      "adc_value": 237,
+      "sipm_mv": 12.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328391000
+    },
+    {
+      "coincident": true,
+      "adc_value": 283,
+      "sipm_mv": 14.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328372000
+    },
+    {
+      "coincident": true,
+      "adc_value": 515,
+      "sipm_mv": 26.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328366000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1000,
+      "sipm_mv": 51.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328366000
+    },
+    {
+      "coincident": true,
+      "adc_value": 315,
+      "sipm_mv": 16.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328364000
+    },
+    {
+      "coincident": true,
+      "adc_value": 181,
+      "sipm_mv": 9.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328363000
+    },
+    {
+      "coincident": true,
+      "adc_value": 253,
+      "sipm_mv": 13.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328355000
+    },
+    {
+      "coincident": true,
+      "adc_value": 120,
+      "sipm_mv": 6.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328353000
+    },
+    {
+      "coincident": true,
+      "adc_value": 255,
+      "sipm_mv": 13.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328350000
+    },
+    {
+      "coincident": true,
+      "adc_value": 289,
+      "sipm_mv": 14.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328346000
+    },
+    {
+      "coincident": true,
+      "adc_value": 385,
+      "sipm_mv": 19.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328340000
+    },
+    {
+      "coincident": true,
+      "adc_value": 749,
+      "sipm_mv": 38.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328340000
+    },
+    {
+      "coincident": true,
+      "adc_value": 338,
+      "sipm_mv": 17.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328337000
+    },
+    {
+      "coincident": true,
+      "adc_value": 357,
+      "sipm_mv": 18.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328334000
+    },
+    {
+      "coincident": true,
+      "adc_value": 125,
+      "sipm_mv": 6.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328329000
+    },
+    {
+      "coincident": true,
+      "adc_value": 232,
+      "sipm_mv": 11.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328324000
+    },
+    {
+      "coincident": true,
+      "adc_value": 690,
+      "sipm_mv": 35.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328317000
+    },
+    {
+      "coincident": true,
+      "adc_value": 376,
+      "sipm_mv": 19.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328306000
+    },
+    {
+      "coincident": true,
+      "adc_value": 363,
+      "sipm_mv": 18.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328302000
+    },
+    {
+      "coincident": true,
+      "adc_value": 181,
+      "sipm_mv": 9.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328295000
+    },
+    {
+      "coincident": true,
+      "adc_value": 115,
+      "sipm_mv": 5.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328294000
+    },
+    {
+      "coincident": true,
+      "adc_value": 288,
+      "sipm_mv": 14.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328289000
+    },
+    {
+      "coincident": true,
+      "adc_value": 575,
+      "sipm_mv": 29.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328275000
+    },
+    {
+      "coincident": true,
+      "adc_value": 500,
+      "sipm_mv": 25.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328274000
+    },
+    {
+      "coincident": true,
+      "adc_value": 316,
+      "sipm_mv": 16.3,
+      "temperature_c": 27.7,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328273000
+    },
+    {
+      "coincident": true,
+      "adc_value": 365,
+      "sipm_mv": 18.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328272000
+    },
+    {
+      "coincident": true,
+      "adc_value": 198,
+      "sipm_mv": 10.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328270000
+    },
+    {
+      "coincident": true,
+      "adc_value": 410,
+      "sipm_mv": 21.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328265000
+    },
+    {
+      "coincident": true,
+      "adc_value": 242,
+      "sipm_mv": 12.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328264000
+    },
+    {
+      "coincident": true,
+      "adc_value": 283,
+      "sipm_mv": 14.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328263000
+    },
+    {
+      "coincident": true,
+      "adc_value": 211,
+      "sipm_mv": 10.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328261000
+    },
+    {
+      "coincident": true,
+      "adc_value": 177,
+      "sipm_mv": 9.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328259000
+    },
+    {
+      "coincident": true,
+      "adc_value": 420,
+      "sipm_mv": 21.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328258000
+    },
+    {
+      "coincident": true,
+      "adc_value": 3026,
+      "sipm_mv": 155.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328247000
+    },
+    {
+      "coincident": true,
+      "adc_value": 347,
+      "sipm_mv": 17.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328240000
+    },
+    {
+      "coincident": true,
+      "adc_value": 817,
+      "sipm_mv": 42.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328238000
+    },
+    {
+      "coincident": true,
+      "adc_value": 441,
+      "sipm_mv": 22.7,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328219000
+    },
+    {
+      "coincident": true,
+      "adc_value": 275,
+      "sipm_mv": 14.2,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328214000
+    },
+    {
+      "coincident": true,
+      "adc_value": 339,
+      "sipm_mv": 17.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101770.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328197000
+    },
+    {
+      "coincident": true,
+      "adc_value": 352,
+      "sipm_mv": 18.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328194000
+    },
+    {
+      "coincident": true,
+      "adc_value": 378,
+      "sipm_mv": 19.5,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328188000
+    },
+    {
+      "coincident": true,
+      "adc_value": 252,
+      "sipm_mv": 13.0,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328188000
+    },
+    {
+      "coincident": true,
+      "adc_value": 322,
+      "sipm_mv": 16.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328181000
+    },
+    {
+      "coincident": true,
+      "adc_value": 332,
+      "sipm_mv": 17.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328178000
+    },
+    {
+      "coincident": true,
+      "adc_value": 244,
+      "sipm_mv": 12.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328177000
+    },
+    {
+      "coincident": true,
+      "adc_value": 609,
+      "sipm_mv": 31.4,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328176000
+    },
+    {
+      "coincident": true,
+      "adc_value": 313,
+      "sipm_mv": 16.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328169000
+    },
+    {
+      "coincident": true,
+      "adc_value": 351,
+      "sipm_mv": 18.1,
+      "temperature_c": 27.7,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328164000
+    },
+    {
+      "coincident": true,
+      "adc_value": 194,
+      "sipm_mv": 10.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328159000
+    },
+    {
+      "coincident": true,
+      "adc_value": 281,
+      "sipm_mv": 14.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328151000
+    },
+    {
+      "coincident": true,
+      "adc_value": 329,
+      "sipm_mv": 16.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328142000
+    },
+    {
+      "coincident": true,
+      "adc_value": 155,
+      "sipm_mv": 8.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328133000
+    },
+    {
+      "coincident": true,
+      "adc_value": 382,
+      "sipm_mv": 19.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328122000
+    },
+    {
+      "coincident": true,
+      "adc_value": 250,
+      "sipm_mv": 12.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328110000
+    },
+    {
+      "coincident": true,
+      "adc_value": 132,
+      "sipm_mv": 6.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328108000
+    },
+    {
+      "coincident": true,
+      "adc_value": 309,
+      "sipm_mv": 15.9,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328103000
+    },
+    {
+      "coincident": true,
+      "adc_value": 424,
+      "sipm_mv": 21.8,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328102000
+    },
+    {
+      "coincident": true,
+      "adc_value": 276,
+      "sipm_mv": 14.2,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328094000
+    },
+    {
+      "coincident": true,
+      "adc_value": 542,
+      "sipm_mv": 27.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328086000
+    },
+    {
+      "coincident": true,
+      "adc_value": 294,
+      "sipm_mv": 15.1,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328084000
+    },
+    {
+      "coincident": true,
+      "adc_value": 327,
+      "sipm_mv": 16.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328071000
+    },
+    {
+      "coincident": true,
+      "adc_value": 222,
+      "sipm_mv": 11.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328067000
+    },
+    {
+      "coincident": true,
+      "adc_value": 492,
+      "sipm_mv": 25.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328062000
+    },
+    {
+      "coincident": true,
+      "adc_value": 436,
+      "sipm_mv": 22.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328062000
+    },
+    {
+      "coincident": true,
+      "adc_value": 125,
+      "sipm_mv": 6.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328048000
+    },
+    {
+      "coincident": true,
+      "adc_value": 457,
+      "sipm_mv": 23.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328042000
+    },
+    {
+      "coincident": true,
+      "adc_value": 408,
+      "sipm_mv": 21.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328038000
+    },
+    {
+      "coincident": true,
+      "adc_value": 323,
+      "sipm_mv": 16.6,
+      "temperature_c": 27.7,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328035000
+    },
+    {
+      "coincident": true,
+      "adc_value": 365,
+      "sipm_mv": 18.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328032000
+    },
+    {
+      "coincident": true,
+      "adc_value": 417,
+      "sipm_mv": 21.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328028000
+    },
+    {
+      "coincident": true,
+      "adc_value": 789,
+      "sipm_mv": 40.6,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328023000
+    },
+    {
+      "coincident": true,
+      "adc_value": 387,
+      "sipm_mv": 19.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328021000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1480,
+      "sipm_mv": 76.2,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328017000
+    },
+    {
+      "coincident": true,
+      "adc_value": 408,
+      "sipm_mv": 21.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328016000
+    },
+    {
+      "coincident": true,
+      "adc_value": 224,
+      "sipm_mv": 11.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328015000
+    },
+    {
+      "coincident": true,
+      "adc_value": 293,
+      "sipm_mv": 15.1,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328014000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1359,
+      "sipm_mv": 70.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328007000
+    },
+    {
+      "coincident": true,
+      "adc_value": 238,
+      "sipm_mv": 12.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328004000
+    },
+    {
+      "coincident": true,
+      "adc_value": 340,
+      "sipm_mv": 17.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769328000000
+    },
+    {
+      "coincident": true,
+      "adc_value": 577,
+      "sipm_mv": 29.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327993000
+    },
+    {
+      "coincident": true,
+      "adc_value": 436,
+      "sipm_mv": 22.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327984000
+    },
+    {
+      "coincident": true,
+      "adc_value": 328,
+      "sipm_mv": 16.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101768.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327979000
+    },
+    {
+      "coincident": true,
+      "adc_value": 401,
+      "sipm_mv": 20.6,
+      "temperature_c": 27.8,
+      "pressure_pa": 101769.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327977000
+    },
+    {
+      "coincident": true,
+      "adc_value": 907,
+      "sipm_mv": 46.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101767.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327966000
+    },
+    {
+      "coincident": true,
+      "adc_value": 325,
+      "sipm_mv": 16.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327964000
+    },
+    {
+      "coincident": true,
+      "adc_value": 251,
+      "sipm_mv": 12.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327963000
+    },
+    {
+      "coincident": true,
+      "adc_value": 141,
+      "sipm_mv": 7.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327952000
+    },
+    {
+      "coincident": true,
+      "adc_value": 500,
+      "sipm_mv": 25.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327951000
+    },
+    {
+      "coincident": true,
+      "adc_value": 346,
+      "sipm_mv": 17.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101766.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327941000
+    },
+    {
+      "coincident": true,
+      "adc_value": 369,
+      "sipm_mv": 19.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101765.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327936000
+    },
+    {
+      "coincident": true,
+      "adc_value": 261,
+      "sipm_mv": 13.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327906000
+    },
+    {
+      "coincident": true,
+      "adc_value": 277,
+      "sipm_mv": 14.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327904000
+    },
+    {
+      "coincident": true,
+      "adc_value": 514,
+      "sipm_mv": 26.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327904000
+    },
+    {
+      "coincident": true,
+      "adc_value": 483,
+      "sipm_mv": 24.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101764.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327893000
+    },
+    {
+      "coincident": true,
+      "adc_value": 1010,
+      "sipm_mv": 52.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101763.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327881000
+    },
+    {
+      "coincident": true,
+      "adc_value": 290,
+      "sipm_mv": 14.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327868000
+    },
+    {
+      "coincident": true,
+      "adc_value": 255,
+      "sipm_mv": 13.1,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327867000
+    },
+    {
+      "coincident": true,
+      "adc_value": 260,
+      "sipm_mv": 13.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327865000
+    },
+    {
+      "coincident": true,
+      "adc_value": 328,
+      "sipm_mv": 16.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327859000
+    },
+    {
+      "coincident": true,
+      "adc_value": 125,
+      "sipm_mv": 6.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101763.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327854000
+    },
+    {
+      "coincident": true,
+      "adc_value": 420,
+      "sipm_mv": 21.6,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327842000
+    },
+    {
+      "coincident": true,
+      "adc_value": 628,
+      "sipm_mv": 32.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327835000
+    },
+    {
+      "coincident": true,
+      "adc_value": 352,
+      "sipm_mv": 18.1,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327834000
+    },
+    {
+      "coincident": true,
+      "adc_value": 542,
+      "sipm_mv": 27.9,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327827000
+    },
+    {
+      "coincident": true,
+      "adc_value": 207,
+      "sipm_mv": 10.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101762.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327819000
+    },
+    {
+      "coincident": true,
+      "adc_value": 131,
+      "sipm_mv": 6.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101760.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327813000
+    },
+    {
+      "coincident": true,
+      "adc_value": 301,
+      "sipm_mv": 15.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101760.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327800000
+    },
+    {
+      "coincident": true,
+      "adc_value": 275,
+      "sipm_mv": 14.2,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327788000
+    },
+    {
+      "coincident": true,
+      "adc_value": 417,
+      "sipm_mv": 21.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101759.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327786000
+    },
+    {
+      "coincident": true,
+      "adc_value": 321,
+      "sipm_mv": 16.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327776000
+    },
+    {
+      "coincident": true,
+      "adc_value": 374,
+      "sipm_mv": 19.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327771000
+    },
+    {
+      "coincident": true,
+      "adc_value": 344,
+      "sipm_mv": 17.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327771000
+    },
+    {
+      "coincident": true,
+      "adc_value": 547,
+      "sipm_mv": 28.2,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327766000
+    },
+    {
+      "coincident": true,
+      "adc_value": 262,
+      "sipm_mv": 13.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327744000
+    },
+    {
+      "coincident": true,
+      "adc_value": 249,
+      "sipm_mv": 12.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327739000
+    },
+    {
+      "coincident": true,
+      "adc_value": 169,
+      "sipm_mv": 8.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327726000
+    },
+    {
+      "coincident": true,
+      "adc_value": 417,
+      "sipm_mv": 21.5,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327717000
+    },
+    {
+      "coincident": true,
+      "adc_value": 341,
+      "sipm_mv": 17.6,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327709000
+    },
+    {
+      "coincident": true,
+      "adc_value": 259,
+      "sipm_mv": 13.3,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327688000
+    },
+    {
+      "coincident": true,
+      "adc_value": 261,
+      "sipm_mv": 13.4,
+      "temperature_c": 27.8,
+      "pressure_pa": 101757.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327671000
+    },
+    {
+      "coincident": true,
+      "adc_value": 401,
+      "sipm_mv": 20.6,
+      "temperature_c": 27.8,
+      "pressure_pa": 101756.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327662000
+    },
+    {
+      "coincident": true,
+      "adc_value": 252,
+      "sipm_mv": 13.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101756.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327661000
+    },
+    {
+      "coincident": true,
+      "adc_value": 346,
+      "sipm_mv": 17.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101757.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327659000
+    },
+    {
+      "coincident": true,
+      "adc_value": 169,
+      "sipm_mv": 8.7,
+      "temperature_c": 27.8,
+      "pressure_pa": 101755.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327637000
+    },
+    {
+      "coincident": true,
+      "adc_value": 230,
+      "sipm_mv": 11.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101755.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327635000
+    },
+    {
+      "coincident": true,
+      "adc_value": 373,
+      "sipm_mv": 19.2,
+      "temperature_c": 27.8,
+      "pressure_pa": 101755.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327623000
+    },
+    {
+      "coincident": true,
+      "adc_value": 330,
+      "sipm_mv": 17.0,
+      "temperature_c": 27.8,
+      "pressure_pa": 101758.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327613000
+    },
+    {
+      "coincident": true,
+      "adc_value": 237,
+      "sipm_mv": 12.2,
+      "temperature_c": 27.8,
+      "pressure_pa": 101757.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327605000
+    },
+    {
+      "coincident": true,
+      "adc_value": 170,
+      "sipm_mv": 8.8,
+      "temperature_c": 27.8,
+      "pressure_pa": 101755.0,
+      "device_id": "cosmicwatch-001",
+      "detector_name": "AxLab",
+      "timestamp": 1769327601000
+    }
+  ]
+}

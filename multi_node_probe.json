@@ -1,0 +1,1947 @@
+{
+  "source_counts": [
+    {
+      "key": "cosmicwatch-v3x",
+      "doc_count": 3355891
+    },
+    {
+      "key": "legacy",
+      "doc_count": 69000
+    },
+    {
+      "key": "credo.science",
+      "doc_count": 8999
+    },
+    {
+      "key": "phone-camera",
+      "doc_count": 3095
+    },
+    {
+      "key": "credo-science",
+      "doc_count": 77
+    }
+  ],
+  "source_summaries": [
+    {
+      "source": "cosmicwatch-v3x",
+      "total_docs": 3355891,
+      "timestamp_rows": 582068,
+      "earliest_timestamp": "2025-11-02T18:45:00Z",
+      "latest_timestamp": "2026-02-25T23:31:41Z",
+      "device_ids": [
+        {
+          "key": "cosmicwatch-001",
+          "doc_count": 582068
+        }
+      ],
+      "detector_names": [
+        {
+          "key": "AxLab",
+          "doc_count": 581815
+        },
+        {
+          "key": "134.382287",
+          "doc_count": 1
+        },
+        {
+          "key": "135.625451",
+          "doc_count": 1
+        },
+        {
+          "key": "137.599519",
+          "doc_count": 1
+        },
+        {
+          "key": "138.214939",
+          "doc_count": 1
+        },
+        {
+          "key": "138.799077",
+          "doc_count": 1
+        },
+        {
+          "key": "139.367614",
+          "doc_count": 1
+        },
+        {
+          "key": "140.015496",
+          "doc_count": 1
+        },
+        {
+          "key": "140.592131",
+          "doc_count": 1
+        },
+        {
+          "key": "141.242959",
+          "doc_count": 1
+        }
+      ],
+      "detectors": [
+        {
+          "key": "AxLab",
+          "doc_count": 2773823
+        }
+      ],
+      "device_models": [],
+      "user_ids": [],
+      "rows_with": {
+        "latitude": 0,
+        "longitude": 0,
+        "pico_timestamp_s": 582068
+      }
+    },
+    {
+      "source": "legacy",
+      "total_docs": 69000,
+      "timestamp_rows": 69000,
+      "earliest_timestamp": "2017-10-04T04:17:00.374000Z",
+      "latest_timestamp": "2018-05-06T03:29:09.749000Z",
+      "device_ids": [
+        {
+          "key": "13",
+          "doc_count": 34604
+        },
+        {
+          "key": "1",
+          "doc_count": 15828
+        },
+        {
+          "key": "34",
+          "doc_count": 5293
+        },
+        {
+          "key": "30",
+          "doc_count": 2198
+        },
+        {
+          "key": "28",
+          "doc_count": 1736
+        },
+        {
+          "key": "65",
+          "doc_count": 1500
+        },
+        {
+          "key": "38",
+          "doc_count": 962
+        },
+        {
+          "key": "48",
+          "doc_count": 949
+        },
+        {
+          "key": "50",
+          "doc_count": 807
+        },
+        {
+          "key": "58",
+          "doc_count": 751
+        }
+      ],
+      "detector_names": [],
+      "detectors": [],
+      "device_models": [],
+      "user_ids": [
+        {
+          "key": "43",
+          "doc_count": 34630
+        },
+        {
+          "key": "2",
+          "doc_count": 15828
+        },
+        {
+          "key": "926",
+          "doc_count": 5293
+        },
+        {
+          "key": "55",
+          "doc_count": 2198
+        },
+        {
+          "key": "923",
+          "doc_count": 1736
+        },
+        {
+          "key": "72",
+          "doc_count": 1500
+        },
+        {
+          "key": "935",
+          "doc_count": 1397
+        },
+        {
+          "key": "59",
+          "doc_count": 962
+        },
+        {
+          "key": "934",
+          "doc_count": 949
+        },
+        {
+          "key": "67",
+          "doc_count": 751
+        }
+      ],
+      "rows_with": {
+        "latitude": 0,
+        "longitude": 0,
+        "pico_timestamp_s": 0
+      }
+    },
+    {
+      "source": "credo.science",
+      "total_docs": 8999,
+      "timestamp_rows": 8999,
+      "earliest_timestamp": "2018-05-11T00:00:00Z",
+      "latest_timestamp": "2018-05-11T00:00:00Z",
+      "device_ids": [
+        {
+          "key": "1",
+          "doc_count": 8999
+        }
+      ],
+      "detector_names": [],
+      "detectors": [],
+      "device_models": [],
+      "user_ids": [],
+      "rows_with": {
+        "latitude": 8999,
+        "longitude": 8999,
+        "pico_timestamp_s": 0
+      }
+    },
+    {
+      "source": "phone-camera",
+      "total_docs": 3095,
+      "timestamp_rows": 3094,
+      "earliest_timestamp": "2026-05-18T18:20:39.247000Z",
+      "latest_timestamp": "2026-06-19T12:13:22.471000Z",
+      "device_ids": [
+        {
+          "key": "phone-n052c7zj",
+          "doc_count": 1568
+        },
+        {
+          "key": "phone-kbw3dm0a",
+          "doc_count": 1522
+        },
+        {
+          "key": "test-phone-1",
+          "doc_count": 2
+        },
+        {
+          "key": "my-android",
+          "doc_count": 1
+        },
+        {
+          "key": "phone-ud6vj7wh",
+          "doc_count": 1
+        },
+        {
+          "key": "test",
+          "doc_count": 1
+        }
+      ],
+      "detector_names": [],
+      "detectors": [],
+      "device_models": [
+        {
+          "key": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/149.0.0.0 Mobile Safari/537.36",
+          "doc_count": 936
+        },
+        {
+          "key": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/142.0.0.0 Mobile Safari/537.36",
+          "doc_count": 330
+        },
+        {
+          "key": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Mobile Safari/537.36",
+          "doc_count": 298
+        },
+        {
+          "key": "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/138.0.0.0 Mobile Safari/537.36",
+          "doc_count": 1
+        },
+        {
+          "key": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/148.0.0.0 Safari/537.36",
+          "doc_count": 1
+        }
+      ],
+      "user_ids": [],
+      "rows_with": {
+        "latitude": 1565,
+        "longitude": 1565,
+        "pico_timestamp_s": 0
+      }
+    },
+    {
+      "source": "credo-science",
+      "total_docs": 77,
+      "timestamp_rows": 77,
+      "earliest_timestamp": "2025-11-15T00:13:48.071000Z",
+      "latest_timestamp": "2025-11-15T00:36:21.992000Z",
+      "device_ids": [
+        {
+          "key": "28103",
+          "doc_count": 12
+        },
+        {
+          "key": "31157",
+          "doc_count": 10
+        },
+        {
+          "key": "28110",
+          "doc_count": 8
+        },
+        {
+          "key": "16896",
+          "doc_count": 7
+        },
+        {
+          "key": "28107",
+          "doc_count": 6
+        },
+        {
+          "key": "28109",
+          "doc_count": 5
+        },
+        {
+          "key": "30268",
+          "doc_count": 5
+        },
+        {
+          "key": "25047",
+          "doc_count": 4
+        },
+        {
+          "key": "28747",
+          "doc_count": 3
+        },
+        {
+          "key": "30962",
+          "doc_count": 3
+        }
+      ],
+      "detector_names": [],
+      "detectors": [],
+      "device_models": [],
+      "user_ids": [
+        {
+          "key": "39748",
+          "doc_count": 45
+        },
+        {
+          "key": "51473",
+          "doc_count": 10
+        },
+        {
+          "key": "11922",
+          "doc_count": 7
+        },
+        {
+          "key": "39406",
+          "doc_count": 4
+        },
+        {
+          "key": "43",
+          "doc_count": 3
+        },
+        {
+          "key": "53324",
+          "doc_count": 3
+        },
+        {
+          "key": "37236",
+          "doc_count": 2
+        },
+        {
+          "key": "43171",
+          "doc_count": 2
+        },
+        {
+          "key": "31829",
+          "doc_count": 1
+        }
+      ],
+      "rows_with": {
+        "latitude": 0,
+        "longitude": 0,
+        "pico_timestamp_s": 0
+      }
+    }
+  ],
+  "days_with_multiple_sources": [],
+  "multi_device_days_by_source": {
+    "cosmicwatch-v3x": [],
+    "legacy": [
+      {
+        "day": "2017-11-14",
+        "count": 535,
+        "device_count": 10,
+        "devices": [
+          {
+            "key": "54",
+            "doc_count": 454
+          },
+          {
+            "key": "16",
+            "doc_count": 33
+          },
+          {
+            "key": "49",
+            "doc_count": 29
+          },
+          {
+            "key": "37",
+            "doc_count": 11
+          },
+          {
+            "key": "44",
+            "doc_count": 2
+          },
+          {
+            "key": "59",
+            "doc_count": 2
+          },
+          {
+            "key": "22",
+            "doc_count": 1
+          },
+          {
+            "key": "23",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-11-15",
+        "count": 2968,
+        "device_count": 22,
+        "devices": [
+          {
+            "key": "28",
+            "doc_count": 1723
+          },
+          {
+            "key": "13",
+            "doc_count": 669
+          },
+          {
+            "key": "21",
+            "doc_count": 432
+          },
+          {
+            "key": "18",
+            "doc_count": 32
+          },
+          {
+            "key": "34",
+            "doc_count": 25
+          },
+          {
+            "key": "36",
+            "doc_count": 20
+          },
+          {
+            "key": "1",
+            "doc_count": 14
+          },
+          {
+            "key": "64",
+            "doc_count": 10
+          }
+        ]
+      },
+      {
+        "day": "2017-11-16",
+        "count": 3590,
+        "device_count": 32,
+        "devices": [
+          {
+            "key": "65",
+            "doc_count": 1500
+          },
+          {
+            "key": "48",
+            "doc_count": 875
+          },
+          {
+            "key": "49",
+            "doc_count": 443
+          },
+          {
+            "key": "13",
+            "doc_count": 389
+          },
+          {
+            "key": "54",
+            "doc_count": 121
+          },
+          {
+            "key": "58",
+            "doc_count": 49
+          },
+          {
+            "key": "1",
+            "doc_count": 44
+          },
+          {
+            "key": "52",
+            "doc_count": 26
+          }
+        ]
+      },
+      {
+        "day": "2017-11-17",
+        "count": 20894,
+        "device_count": 32,
+        "devices": [
+          {
+            "key": "1",
+            "doc_count": 15770
+          },
+          {
+            "key": "30",
+            "doc_count": 2198
+          },
+          {
+            "key": "38",
+            "doc_count": 941
+          },
+          {
+            "key": "34",
+            "doc_count": 908
+          },
+          {
+            "key": "13",
+            "doc_count": 510
+          },
+          {
+            "key": "40",
+            "doc_count": 172
+          },
+          {
+            "key": "2",
+            "doc_count": 121
+          },
+          {
+            "key": "35",
+            "doc_count": 71
+          }
+        ]
+      },
+      {
+        "day": "2017-11-18",
+        "count": 5902,
+        "device_count": 20,
+        "devices": [
+          {
+            "key": "34",
+            "doc_count": 4312
+          },
+          {
+            "key": "58",
+            "doc_count": 700
+          },
+          {
+            "key": "13",
+            "doc_count": 520
+          },
+          {
+            "key": "2",
+            "doc_count": 169
+          },
+          {
+            "key": "49",
+            "doc_count": 78
+          },
+          {
+            "key": "36",
+            "doc_count": 26
+          },
+          {
+            "key": "16",
+            "doc_count": 23
+          },
+          {
+            "key": "14",
+            "doc_count": 15
+          }
+        ]
+      },
+      {
+        "day": "2017-11-19",
+        "count": 64,
+        "device_count": 9,
+        "devices": [
+          {
+            "key": "2",
+            "doc_count": 31
+          },
+          {
+            "key": "13",
+            "doc_count": 17
+          },
+          {
+            "key": "10",
+            "doc_count": 4
+          },
+          {
+            "key": "34",
+            "doc_count": 4
+          },
+          {
+            "key": "22",
+            "doc_count": 2
+          },
+          {
+            "key": "24",
+            "doc_count": 2
+          },
+          {
+            "key": "38",
+            "doc_count": 2
+          },
+          {
+            "key": "15",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-11-24",
+        "count": 5,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "7",
+            "doc_count": 3
+          },
+          {
+            "key": "39",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2017-12-05",
+        "count": 6,
+        "device_count": 4,
+        "devices": [
+          {
+            "key": "10",
+            "doc_count": 2
+          },
+          {
+            "key": "24",
+            "doc_count": 2
+          },
+          {
+            "key": "15",
+            "doc_count": 1
+          },
+          {
+            "key": "44",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-06",
+        "count": 257,
+        "device_count": 5,
+        "devices": [
+          {
+            "key": "15",
+            "doc_count": 241
+          },
+          {
+            "key": "10",
+            "doc_count": 9
+          },
+          {
+            "key": "24",
+            "doc_count": 3
+          },
+          {
+            "key": "44",
+            "doc_count": 3
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-07",
+        "count": 427,
+        "device_count": 7,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 400
+          },
+          {
+            "key": "10",
+            "doc_count": 15
+          },
+          {
+            "key": "55",
+            "doc_count": 4
+          },
+          {
+            "key": "22",
+            "doc_count": 3
+          },
+          {
+            "key": "41",
+            "doc_count": 3
+          },
+          {
+            "key": "24",
+            "doc_count": 1
+          },
+          {
+            "key": "50",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-08",
+        "count": 1752,
+        "device_count": 8,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 1664
+          },
+          {
+            "key": "48",
+            "doc_count": 56
+          },
+          {
+            "key": "10",
+            "doc_count": 13
+          },
+          {
+            "key": "41",
+            "doc_count": 10
+          },
+          {
+            "key": "24",
+            "doc_count": 4
+          },
+          {
+            "key": "7",
+            "doc_count": 3
+          },
+          {
+            "key": "22",
+            "doc_count": 1
+          },
+          {
+            "key": "55",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-09",
+        "count": 1028,
+        "device_count": 5,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 1014
+          },
+          {
+            "key": "10",
+            "doc_count": 8
+          },
+          {
+            "key": "48",
+            "doc_count": 3
+          },
+          {
+            "key": "24",
+            "doc_count": 2
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-10",
+        "count": 416,
+        "device_count": 5,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 397
+          },
+          {
+            "key": "10",
+            "doc_count": 15
+          },
+          {
+            "key": "15",
+            "doc_count": 2
+          },
+          {
+            "key": "22",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-11",
+        "count": 660,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 367
+          },
+          {
+            "key": "50",
+            "doc_count": 271
+          },
+          {
+            "key": "10",
+            "doc_count": 22
+          }
+        ]
+      },
+      {
+        "day": "2017-12-12",
+        "count": 1418,
+        "device_count": 8,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 1333
+          },
+          {
+            "key": "15",
+            "doc_count": 62
+          },
+          {
+            "key": "10",
+            "doc_count": 13
+          },
+          {
+            "key": "24",
+            "doc_count": 4
+          },
+          {
+            "key": "22",
+            "doc_count": 2
+          },
+          {
+            "key": "44",
+            "doc_count": 2
+          },
+          {
+            "key": "41",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-13",
+        "count": 974,
+        "device_count": 5,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 929
+          },
+          {
+            "key": "7",
+            "doc_count": 30
+          },
+          {
+            "key": "10",
+            "doc_count": 12
+          },
+          {
+            "key": "22",
+            "doc_count": 2
+          },
+          {
+            "key": "24",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-14",
+        "count": 1088,
+        "device_count": 5,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 1019
+          },
+          {
+            "key": "15",
+            "doc_count": 51
+          },
+          {
+            "key": "10",
+            "doc_count": 11
+          },
+          {
+            "key": "24",
+            "doc_count": 6
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-15",
+        "count": 852,
+        "device_count": 4,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 666
+          },
+          {
+            "key": "15",
+            "doc_count": 174
+          },
+          {
+            "key": "10",
+            "doc_count": 8
+          },
+          {
+            "key": "57",
+            "doc_count": 4
+          }
+        ]
+      },
+      {
+        "day": "2017-12-16",
+        "count": 382,
+        "device_count": 4,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 197
+          },
+          {
+            "key": "7",
+            "doc_count": 96
+          },
+          {
+            "key": "15",
+            "doc_count": 85
+          },
+          {
+            "key": "6",
+            "doc_count": 4
+          }
+        ]
+      },
+      {
+        "day": "2017-12-17",
+        "count": 3,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "6",
+            "doc_count": 2
+          },
+          {
+            "key": "64",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-18",
+        "count": 87,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 84
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          },
+          {
+            "key": "15",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-20",
+        "count": 218,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 214
+          },
+          {
+            "key": "15",
+            "doc_count": 3
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-22",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "6",
+            "doc_count": 1
+          },
+          {
+            "key": "7",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-24",
+        "count": 137,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "46",
+            "doc_count": 135
+          },
+          {
+            "key": "7",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2017-12-26",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "58",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2017-12-27",
+        "count": 152,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 148
+          },
+          {
+            "key": "22",
+            "doc_count": 2
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2017-12-28",
+        "count": 795,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 792
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          },
+          {
+            "key": "22",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-03",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-05",
+        "count": 94,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 93
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-06",
+        "count": 16,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 14
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-01-10",
+        "count": 45,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 44
+          },
+          {
+            "key": "22",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-12",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 1
+          },
+          {
+            "key": "58",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-15",
+        "count": 4,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 3
+          },
+          {
+            "key": "55",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-16",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 1
+          },
+          {
+            "key": "55",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-18",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-20",
+        "count": 80,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 75
+          },
+          {
+            "key": "6",
+            "doc_count": 3
+          },
+          {
+            "key": "55",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-01-21",
+        "count": 5,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "55",
+            "doc_count": 3
+          },
+          {
+            "key": "50",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-22",
+        "count": 15,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 12
+          },
+          {
+            "key": "55",
+            "doc_count": 2
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-23",
+        "count": 4,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 3
+          },
+          {
+            "key": "55",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-26",
+        "count": 42,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 40
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-01-27",
+        "count": 56,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 55
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-01-28",
+        "count": 114,
+        "device_count": 4,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 111
+          },
+          {
+            "key": "48",
+            "doc_count": 1
+          },
+          {
+            "key": "55",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-02-03",
+        "count": 38,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 37
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-02-12",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "50",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-02-18",
+        "count": 8,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "34",
+            "doc_count": 7
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-02-19",
+        "count": 1394,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 1391
+          },
+          {
+            "key": "34",
+            "doc_count": 2
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-02-20",
+        "count": 34,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 29
+          },
+          {
+            "key": "34",
+            "doc_count": 5
+          }
+        ]
+      },
+      {
+        "day": "2018-02-21",
+        "count": 699,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 698
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-02-28",
+        "count": 587,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 586
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-03",
+        "count": 92,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 91
+          },
+          {
+            "key": "35",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-04",
+        "count": 1048,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 1046
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-03-05",
+        "count": 649,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 647
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-03-06",
+        "count": 678,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 677
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-07",
+        "count": 720,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 719
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-10",
+        "count": 96,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 94
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-03-11",
+        "count": 721,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 720
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-12",
+        "count": 683,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 671
+          },
+          {
+            "key": "34",
+            "doc_count": 12
+          }
+        ]
+      },
+      {
+        "day": "2018-03-13",
+        "count": 456,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 452
+          },
+          {
+            "key": "34",
+            "doc_count": 3
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-14",
+        "count": 867,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 865
+          },
+          {
+            "key": "34",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-15",
+        "count": 879,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 868
+          },
+          {
+            "key": "34",
+            "doc_count": 9
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-03-24",
+        "count": 8,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 6
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-03-25",
+        "count": 198,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 124
+          },
+          {
+            "key": "22",
+            "doc_count": 71
+          },
+          {
+            "key": "6",
+            "doc_count": 3
+          }
+        ]
+      },
+      {
+        "day": "2018-03-26",
+        "count": 332,
+        "device_count": 3,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 321
+          },
+          {
+            "key": "22",
+            "doc_count": 10
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-03-28",
+        "count": 34,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 29
+          },
+          {
+            "key": "8",
+            "doc_count": 5
+          }
+        ]
+      },
+      {
+        "day": "2018-03-29",
+        "count": 11,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "22",
+            "doc_count": 10
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-04-02",
+        "count": 36,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 35
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-04-06",
+        "count": 424,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 422
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-04-07",
+        "count": 321,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 320
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-04-10",
+        "count": 552,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 551
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-04-14",
+        "count": 680,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 678
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-04-18",
+        "count": 2,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "51",
+            "doc_count": 1
+          },
+          {
+            "key": "6",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-04-19",
+        "count": 40,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "51",
+            "doc_count": 38
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      },
+      {
+        "day": "2018-04-20",
+        "count": 181,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 180
+          },
+          {
+            "key": "51",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2018-04-21",
+        "count": 534,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "13",
+            "doc_count": 532
+          },
+          {
+            "key": "6",
+            "doc_count": 2
+          }
+        ]
+      }
+    ],
+    "credo.science": [],
+    "phone-camera": [
+      {
+        "day": "2026-05-18",
+        "count": 1528,
+        "device_count": 4,
+        "devices": [
+          {
+            "key": "phone-kbw3dm0a",
+            "doc_count": 1521
+          },
+          {
+            "key": "phone-n052c7zj",
+            "doc_count": 4
+          },
+          {
+            "key": "test-phone-1",
+            "doc_count": 2
+          },
+          {
+            "key": "my-android",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2026-05-19",
+        "count": 249,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "phone-n052c7zj",
+            "doc_count": 248
+          },
+          {
+            "key": "phone-kbw3dm0a",
+            "doc_count": 1
+          }
+        ]
+      },
+      {
+        "day": "2026-06-05",
+        "count": 24,
+        "device_count": 2,
+        "devices": [
+          {
+            "key": "phone-n052c7zj",
+            "doc_count": 23
+          },
+          {
+            "key": "phone-ud6vj7wh",
+            "doc_count": 1
+          }
+        ]
+      }
+    ],
+    "credo-science": [
+      {
+        "day": "2025-11-15",
+        "count": 77,
+        "device_count": 18,
+        "devices": [
+          {
+            "key": "28103",
+            "doc_count": 12
+          },
+          {
+            "key": "31157",
+            "doc_count": 10
+          },
+          {
+            "key": "28110",
+            "doc_count": 8
+          },
+          {
+            "key": "16896",
+            "doc_count": 7
+          },
+          {
+            "key": "28107",
+            "doc_count": 6
+          },
+          {
+            "key": "28109",
+            "doc_count": 5
+          },
+          {
+            "key": "30268",
+            "doc_count": 5
+          },
+          {
+            "key": "25047",
+            "doc_count": 4
+          }
+        ]
+      }
+    ]
+  },
+  "conclusion": "No synchronized multi-source CosmicWatch/CREDO data is present in this index. CosmicWatch timestamped rows come from one device_id, and there are zero days where multiple sources overlap."
+}
