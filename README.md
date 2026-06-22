@@ -38,7 +38,3 @@ python3 gnn_simulation.py
 
 Use `--max-events 0` on `edge_ai_experiment.py` to pull the full selected date window.
 
-## Meeting Artifacts
-
-- `MEETING_BRIEF.md` gives the short technical story and questions for Carlyn/Yifan.
-- `LITERATURE_NOTES.md` maps the local PDFs and public papers into the FL/GNN/SNN/edge-AI positioning.
