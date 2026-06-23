@@ -15,3 +15,7 @@ SNN_GNN_FL_design.md
 
 # PDFs: source slides/briefs and the generated one-pager
 *.pdf
+
+# Raw data exports — too large for GitHub (>100 MB); keep local
+credo_export*.csv
+*.csv.gz
