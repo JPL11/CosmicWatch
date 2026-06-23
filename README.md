@@ -1,6 +1,6 @@
 # Cosmic Ray Sensor Network Notes
 
-Small working repo for exploring the CREDO / CosmicWatch Elasticsearch data and shaping the edge-AI research direction before the Caltech/CPP sync.
+Small working repo for exploring the CREDO / CosmicWatch Elasticsearch data and shaping the edge-AI research direction.
 
 ## Setup
 
