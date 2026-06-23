@@ -50,7 +50,7 @@ The *physics being measured* is quantum/particle physics, even though the *analy
   **cannot** do network/ensemble physics (air-shower reconstruction, Cosmic-Ray Ensembles, directional
   reconstruction) — that requires multiple spatially-separated, time-synchronized detectors.
 
-## One-paragraph summary (for slides / meeting)
+## One-paragraph summary
 The data behaves exactly as cosmic-ray physics predicts: a Landau-shaped energy-deposit (ADC) spectrum,
 a ~1.2 Hz muon rate, and dead-time-regularized (sub-Poissonian) arrival statistics, from a SiPM
 scintillator whose detection physics is genuinely quantum-limited. Because energy deposition *is* the
