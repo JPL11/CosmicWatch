@@ -1095,13 +1095,13 @@
     },
     "schema_partition": {
       "parsed_with_wallclock_timestamp": 582068,
-      "raw_without_wallclock_timestamp": 2773823,
-      "note": "raw partition uses boot-relative timestamp_s (not wall-clock); single detector; not time-correlatable"
+      "raw_with_walltime_field": 2773823,
+      "note": "raw 'AxLab' partition has NO `timestamp`, but DOES have `wall_time` (real epoch seconds, us precision) + adc_value + coincidence_flag -> fully usable; still a single detector"
     }
   },
   "findings": [
     "CosmicWatch is one physical node: 1 device_id (cosmicwatch-001), no lat/lon \u2014 confirms the GNN/FL multi-node blocker.",
-    "CosmicWatch has TWO schemas: 582,068 parsed events with wall-clock `timestamp`+`coincident`, and 2,773,823 raw docs from detector 'AxLab' whose `timestamp_s` is boot-relative (not wall-clock) \u2014 the raw 83% is NOT time-correlatable, so the usable set stays ~582k.",
+    "CosmicWatch has TWO schemas: 582,068 parsed events (`timestamp`+`coincident`) and 2,773,823 raw 'AxLab' docs that use `wall_time` (real epoch, us precision) + `coincidence_flag`. BOTH are usable (key the raw set on wall_time), so the usable CosmicWatch set is ~3.36M, not 582k. Still ONE detector -> GNN blocker unchanged.",
     "ADC partially separates coincidence: coincident ADC p50=334.38 vs non-coincident p50=182.54 \u2014 distributions overlap, so an ADC threshold is near the achievable ceiling (matches the edge experiment).",
     "`legacy` (69,000 docs, 2017\u201318) is the real overlooked asset: decodable PNG hit-crops + genuine Poland GPS (\u224849.8\u201354.5\u00b0N, 16.8\u201322.5\u00b0E), 71% geo-tagged \u2014 the best candidate for a real CV/geo track (the prior CV dismissal only looked at phone-camera).",
     "`credo.science` (8,999) is DEGENERATE: lat/lon all 0,0, energy all 0, particle_type constant 'cosmic_ray' \u2014 field-present but value-empty; not usable as geo or labels. Correct the handoff.",
@@ -1115,9 +1115,5 @@
     "cosmicwatch `adc_value` saturates at 4095 (12-bit ADC ceiling) \u2014 clipped events present",
     "cosmicwatch `pressure_pa` has 0 Pa floor \u2014 invalid/missing-as-zero readings",
     "`credo.science` is degenerate: lat/lon all 0,0, energy all 0, particle_type constant \u2014 not a usable geo or labeled source despite fields being 'present'"
-  ],
-  "plots": [
-    "plots_analysis/adc_distribution.png",
-    "plots_analysis/source_volumes.png"
   ]
 }

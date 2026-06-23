@@ -40,12 +40,12 @@ DESC = {
     # --- timing ---
     "timestamp": ("ISO-8601 UTC", "Wall-clock event time.", "Only on the 582k PARSED CosmicWatch + image sources; 1-second resolution."),
     "timestamp_ms": ("ms since epoch", "Wall-clock time in epoch milliseconds.", "Quantized to 1 second (ends in 000); use pico_timestamp_s for fine timing."),
-    "timestamp_s": ("s (boot-relative)", "Seconds since device power-on (raw partition).", "NOT wall-clock; not time-correlatable across boots."),
+    "timestamp_s": ("s (boot-relative)", "Seconds since device power-on (raw partition).", "Boot-relative; use `wall_time` for ABSOLUTE time on the raw partition."),
     "pico_timestamp_s": ("s (boot-relative)", "High-resolution (microsecond) device clock.", "Boot-relative; DIFFERENCES are valid inter-arrival times (Poisson check)."),
     "comp_date": ("", "On-device computed date string.", "parsed CosmicWatch."),
     "comp_time": ("", "On-device computed time string.", "parsed CosmicWatch."),
     "time_received": ("date", "Server-side ingestion time.", "image sources."),
-    "wall_time": ("s", "Wall-clock seconds counter (raw / phone-camera).", "inferred."),
+    "wall_time": ("s (epoch)", "REAL wall-clock time: Unix epoch seconds, microsecond precision.", "The absolute-time ANCHOR for the raw AxLab partition (which has no `timestamp`); also on phone-camera. Convert to UTC."),
     "ml_timestamp": ("date", "Time an ML/LLM inference was attached.", ""),
     # --- CosmicWatch detector physics ---
     "adc_value": ("ADC counts", "Pulse height; PROPORTIONAL TO ENERGY DEPOSITED.", "0-4095 (12-bit); saturates at 4095; ~5.8 keV/ADC (approx MIP calibration)."),
@@ -169,9 +169,11 @@ def main():
          "and the sources. Nested fields (`location`, `metadata`) and lists are JSON-encoded in their cells; "
          "booleans are `true`/`false`; image fields hold base64 PNG text.\n",
          "## Key caveats (read first)\n",
-         "- `cosmicwatch_parsed` (582k) is the **usable** event set (wall-clock `timestamp`, `coincident`).",
-         "- `cosmicwatch_raw_axlab` (2.77M) uses **boot-relative** `timestamp_s` --- not time-correlatable.",
-         "- `timestamp_ms` is **1-second** resolution; use `pico_timestamp_s` differences for fine timing.",
+         "- **Both** CosmicWatch partitions are usable (~3.36M events): `cosmicwatch_parsed` (582k) keys on "
+         "`timestamp`+`coincident`; `cosmicwatch_raw_axlab` (2.77M) keys on `wall_time`+`coincidence_flag`.",
+         "- Canonical fields: time = `timestamp` else `wall_time`; label = `coincident` else `coincidence_flag` "
+         "(see `credo_loader.py`).",
+         "- `timestamp_ms` is **1-second** resolution; `wall_time`/`pico_timestamp_s` are microsecond.",
          "- `credo.science` is **degenerate**: `latitude`/`longitude` = 0,0, `energy` = 0, `particle_type` constant.",
          "- `visible` is constant `False`; `llm_interpretation` is mostly error strings --- neither is a usable label.",
          "- `adc_value` is 0--4095 (12-bit, saturates at 4095); ~5.8 keV/ADC by approximate MIP calibration.\n"]

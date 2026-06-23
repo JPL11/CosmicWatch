@@ -25,10 +25,12 @@ Every row is labeled so you can split cleanly without knowing the schema quirks:
 | `legacy` | 69,000 | **real image hit-crops** (20×20 PNG) + Poland GPS (2017–18) |
 | `phone-camera` | 3,095 | recent images (1,569 with `image_b64`), LA area |
 | `credo-science` | 77 | tiny image set |
-| `cosmicwatch_raw_axlab` | 2,773,823 | raw partition, **boot-relative time — not time-correlatable** |
+| `cosmicwatch_raw_axlab` | 2,773,823 | **usable** detector events — key on `wall_time` (real epoch) + `coincidence_flag` |
 | `credo.science` | 8,999 | **degenerate** (lat/lon 0,0, energy 0) — avoid |
 
-`credo_useful.csv` already drops the last two rows of that table.
+Both CosmicWatch partitions are usable (~3.36M events total); only `credo.science` is dropped from the
+useful set. Use `credo_loader.py` for a canonical view (time = `timestamp` else `wall_time`;
+coincidence = `coincident` else `coincidence_flag`).
 
 ## Quick start (pandas)
 
@@ -51,9 +53,11 @@ zcat credo_useful.csv.gz | awk -F, 'NR==1 || $1=="cosmicwatch_parsed"' > events.
 
 ## Read-first caveats (full list in the dictionary)
 
-- **Usable events = `cosmicwatch_parsed` only.** The 2.77M `cosmicwatch_raw_axlab` rows have
-  boot-relative timestamps and cannot be placed on a real timeline.
-- `timestamp_ms` is **1-second** resolution; use `pico_timestamp_s` *differences* for fine timing.
+- **Usable events ≈ 3.36M** = `cosmicwatch_parsed` (582k, `timestamp`+`coincident`) **plus**
+  `cosmicwatch_raw_axlab` (2.77M, `wall_time`+`coincidence_flag`). `wall_time` is real epoch seconds.
+- `timestamp_ms` is **1-second** resolution; `wall_time`/`pico_timestamp_s` are **microsecond** precision.
+- The two partitions cover different windows (parsed 2025-11→2026-02; raw 2026-05→2026-06) and the
+  detector response drifted between them (coincidence rate 13%→8%).
 - `adc_value` ∝ energy, 0–4095 (saturates at 4095); ≈ **5.8 keV/ADC** by approximate MIP calibration.
 - `credo.science` lat/lon/energy are degenerate; `visible` is constant `False`; `llm_interpretation`
   is mostly error strings — none are usable labels.

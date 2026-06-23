@@ -15,12 +15,12 @@ event_num,long,,—,Event counter (raw partition).,
 es_synced,long,,—,Elasticsearch sync flag/marker.,inferred.
 timestamp,date,ISO-8601 UTC,"cosmicwatch-v3x, credo-science, credo.science, legacy, phone-camera",Wall-clock event time.,Only on the 582k PARSED CosmicWatch + image sources; 1-second resolution.
 timestamp_ms,long,ms since epoch,cosmicwatch-v3x,Wall-clock time in epoch milliseconds.,Quantized to 1 second (ends in 000); use pico_timestamp_s for fine timing.
-timestamp_s,float,s (boot-relative),—,Seconds since device power-on (raw partition).,NOT wall-clock; not time-correlatable across boots.
+timestamp_s,float,s (boot-relative),—,Seconds since device power-on (raw partition).,Boot-relative; use `wall_time` for ABSOLUTE time on the raw partition.
 pico_timestamp_s,float,s (boot-relative),cosmicwatch-v3x,High-resolution (microsecond) device clock.,Boot-relative; DIFFERENCES are valid inter-arrival times (Poisson check).
 comp_date,text,,—,On-device computed date string.,parsed CosmicWatch.
 comp_time,text,,—,On-device computed time string.,parsed CosmicWatch.
 time_received,date,date,—,Server-side ingestion time.,image sources.
-wall_time,float,s,—,Wall-clock seconds counter (raw / phone-camera).,inferred.
+wall_time,float,s (epoch),—,"REAL wall-clock time: Unix epoch seconds, microsecond precision.",The absolute-time ANCHOR for the raw AxLab partition (which has no `timestamp`); also on phone-camera. Convert to UTC.
 ml_timestamp,date,date,—,Time an ML/LLM inference was attached.,
 adc_value,long,ADC counts,cosmicwatch-v3x,Pulse height; PROPORTIONAL TO ENERGY DEPOSITED.,0-4095 (12-bit); saturates at 4095; ~5.8 keV/ADC (approx MIP calibration).
 sipm_mv,float,mV,cosmicwatch-v3x,SiPM pulse amplitude in millivolts.,

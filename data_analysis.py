@@ -229,8 +229,9 @@ def cosmicwatch_deep_dive():
     raw = count({"bool": {"filter": [source_query(src)], "must_not": [{"exists": {"field": "timestamp"}}]}})
     out["schema_partition"] = {
         "parsed_with_wallclock_timestamp": out["rows_with_timestamp"],
-        "raw_without_wallclock_timestamp": raw,
-        "note": "raw partition uses boot-relative timestamp_s (not wall-clock); single detector; not time-correlatable",
+        "raw_with_walltime_field": raw,
+        "note": ("raw 'AxLab' partition has NO `timestamp`, but DOES have `wall_time` (real epoch seconds, "
+                 "us precision) + adc_value + coincidence_flag -> fully usable; still a single detector"),
     }
     return out
 
@@ -414,10 +415,10 @@ def derive_findings(profile):
     sp = dd["schema_partition"]
     f.append(f"CosmicWatch is one physical node: 1 device_id (cosmicwatch-001), no lat/lon — confirms the "
              "GNN/FL multi-node blocker.")
-    f.append(f"CosmicWatch has TWO schemas: {sp['parsed_with_wallclock_timestamp']:,} parsed events with "
-             f"wall-clock `timestamp`+`coincident`, and {sp['raw_without_wallclock_timestamp']:,} raw docs "
-             "from detector 'AxLab' whose `timestamp_s` is boot-relative (not wall-clock) — the raw 83% is "
-             "NOT time-correlatable, so the usable set stays ~582k.")
+    f.append(f"CosmicWatch has TWO schemas: {sp['parsed_with_wallclock_timestamp']:,} parsed events "
+             f"(`timestamp`+`coincident`) and {sp['raw_with_walltime_field']:,} raw 'AxLab' docs that use "
+             "`wall_time` (real epoch, us precision) + `coincidence_flag`. BOTH are usable (key the raw set on "
+             "wall_time), so the usable CosmicWatch set is ~3.36M, not 582k. Still ONE detector -> GNN blocker unchanged.")
     sep = dd["adc_by_coincident"]
     f.append(f"ADC partially separates coincidence: coincident ADC p50={sep['True']['adc_p50']} vs "
              f"non-coincident p50={sep['False']['adc_p50']} — distributions overlap, so an ADC threshold is "

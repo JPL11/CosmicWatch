@@ -6,9 +6,9 @@ Companion to `credo_export.csv(.gz)` (full index) and `credo_useful.csv(.gz)` (u
 
 ## Key caveats (read first)
 
-- `cosmicwatch_parsed` (582k) is the **usable** event set (wall-clock `timestamp`, `coincident`).
-- `cosmicwatch_raw_axlab` (2.77M) uses **boot-relative** `timestamp_s` --- not time-correlatable.
-- `timestamp_ms` is **1-second** resolution; use `pico_timestamp_s` differences for fine timing.
+- **Both** CosmicWatch partitions are usable (~3.36M events): `cosmicwatch_parsed` (582k) keys on `timestamp`+`coincident`; `cosmicwatch_raw_axlab` (2.77M) keys on `wall_time`+`coincidence_flag`.
+- Canonical fields: time = `timestamp` else `wall_time`; label = `coincident` else `coincidence_flag` (see `credo_loader.py`).
+- `timestamp_ms` is **1-second** resolution; `wall_time`/`pico_timestamp_s` are microsecond.
 - `credo.science` is **degenerate**: `latitude`/`longitude` = 0,0, `energy` = 0, `particle_type` constant.
 - `visible` is constant `False`; `llm_interpretation` is mostly error strings --- neither is a usable label.
 - `adc_value` is 0--4095 (12-bit, saturates at 4095); ~5.8 keV/ADC by approximate MIP calibration.
@@ -38,12 +38,12 @@ Companion to `credo_export.csv(.gz)` (full index) and `credo_useful.csv(.gz)` (u
 |---|---|---|---|---|---|
 | `timestamp` | date | ISO-8601 UTC | cosmicwatch-v3x, credo-science, credo.science, legacy, phone-camera | Wall-clock event time. | Only on the 582k PARSED CosmicWatch + image sources; 1-second resolution. |
 | `timestamp_ms` | long | ms since epoch | cosmicwatch-v3x | Wall-clock time in epoch milliseconds. | Quantized to 1 second (ends in 000); use pico_timestamp_s for fine timing. |
-| `timestamp_s` | float | s (boot-relative) | — | Seconds since device power-on (raw partition). | NOT wall-clock; not time-correlatable across boots. |
+| `timestamp_s` | float | s (boot-relative) | — | Seconds since device power-on (raw partition). | Boot-relative; use `wall_time` for ABSOLUTE time on the raw partition. |
 | `pico_timestamp_s` | float | s (boot-relative) | cosmicwatch-v3x | High-resolution (microsecond) device clock. | Boot-relative; DIFFERENCES are valid inter-arrival times (Poisson check). |
 | `comp_date` | text |  | — | On-device computed date string. | parsed CosmicWatch. |
 | `comp_time` | text |  | — | On-device computed time string. | parsed CosmicWatch. |
 | `time_received` | date | date | — | Server-side ingestion time. | image sources. |
-| `wall_time` | float | s | — | Wall-clock seconds counter (raw / phone-camera). | inferred. |
+| `wall_time` | float | s (epoch) | — | REAL wall-clock time: Unix epoch seconds, microsecond precision. | The absolute-time ANCHOR for the raw AxLab partition (which has no `timestamp`); also on phone-camera. Convert to UTC. |
 | `ml_timestamp` | date | date | — | Time an ML/LLM inference was attached. |  |
 
 ## CosmicWatch detector (physics)
