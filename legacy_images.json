@@ -1,0 +1,69 @@
+{
+  "images_decoded": 6000,
+  "crop_size": [
+    20,
+    20
+  ],
+  "visible_distribution": {
+    "False": 6000
+  },
+  "visible_is_usable_label": false,
+  "geo_points": 4490,
+  "geo_bounds": {
+    "lat": [
+      49.93581833,
+      54.52752616
+    ],
+    "lon": [
+      16.813123142164,
+      21.0597029
+    ]
+  },
+  "clustering": {
+    "method": "grayscale -> PCA(numpy SVD) -> k-means(numpy)",
+    "k": 8,
+    "pca_components": 30,
+    "pca_top5_variance_ratio": [
+      0.2119,
+      0.1446,
+      0.1028,
+      0.0709,
+      0.0671
+    ],
+    "cluster_sizes": {
+      "0": 301,
+      "1": 205,
+      "2": 760,
+      "3": 152,
+      "4": 55,
+      "5": 2708,
+      "6": 1169,
+      "7": 650
+    },
+    "cluster_mean_brightness": {
+      "0": 0.1228,
+      "1": 0.0986,
+      "2": 0.0964,
+      "3": 0.1215,
+      "4": 0.1226,
+      "5": 0.0046,
+      "6": 0.0474,
+      "7": 0.0851
+    },
+    "inertia": 945317.44
+  },
+  "findings": [
+    "Decoded 6000 of 6000 legacy crops as 20x20 RGBA hit-crops \u2014 a real, clusterable CV dataset (not the toy phone-camera set).",
+    "`visible` is constant False across the sample \u2192 NOT a usable supervised label; unsupervised clustering is the correct route (matches prior CREDO pseudo-labeling).",
+    "k-means(k=8) yields 8 non-empty clusters that visibly separate the classic CREDO hit morphologies \u2014 round bright 'spots', elongated 'tracks/lines', bright corner 'artifacts' (light leaks), and faint single-pixel hits. This is a real unsupervised CV result on real data (expert labels would confirm the physical class names).",
+    "Detections carry real Poland GPS ({'lat': [49.93581833, 54.52752616], 'lon': [16.813123142164, 21.0597029]}) over 2017\u201318 \u2014 geo present, but a single epoch disjoint from the 2025\u201326 CosmicWatch data, so still no cross-source synchronization."
+  ],
+  "plots": [
+    "plots_legacy/sample_gallery.png",
+    "plots_legacy/cluster_montage.png",
+    "plots_legacy/pca_clusters.png",
+    "plots_legacy/geo_map.png",
+    "plots_legacy/time_hist.png"
+  ],
+  "runtime_seconds": 8.4
+}

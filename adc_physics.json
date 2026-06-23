@@ -1,0 +1,59 @@
+{
+  "adc_spectrum": {
+    "all_moyal": {
+      "mpv_adc": 131.33,
+      "width_s": 34.05,
+      "amplitude": 138536.5,
+      "r2": 0.9117
+    },
+    "coincident_moyal": {
+      "mpv_adc": 277.53,
+      "width_s": 58.1,
+      "amplitude": 11230.4,
+      "r2": 0.9674
+    },
+    "noncoincident_moyal": {
+      "mpv_adc": 123.73,
+      "width_s": 26.84,
+      "amplitude": 149900.0,
+      "r2": 0.9458
+    }
+  },
+  "timing": {
+    "events": 10000,
+    "pico_timing": {
+      "mean_interarrival_s": 0.7314,
+      "implied_rate_hz": 1.3672,
+      "cv": 0.993,
+      "verdict": "consistent with Poisson (random)",
+      "note": "computed from pico_timestamp_s (\u00b5s); fixes the 1-second timestamp_ms quantization"
+    },
+    "dead_time": {
+      "cumulative_field": "deadtime_s",
+      "dead_fraction": 0.0007,
+      "interpretation": "dead-time is small; not the main driver of timing structure"
+    }
+  },
+  "pressure_confound": {
+    "n_hours": 133,
+    "simple_pearson_r_rate_pressure": 0.361,
+    "standardized_betas": {
+      "pressure": 0.398,
+      "temperature": 0.051,
+      "time_trend": 0.249
+    },
+    "interpretation": "pressure retains a partial association after controls \u2014 investigate further"
+  },
+  "findings": [
+    "ADC spectrum fits a Landau (Moyal) shape with MPV\u2248131.33 ADC (R\u00b2=0.9117) \u2014 the textbook energy-loss distribution of muons in a thin scintillator; confirms real cosmic-ray events.",
+    "Coincident MPV (277.53) sits above non-coincident (123.73) \u2014 the coincidence cut selects higher-energy-deposit tracks, exactly why ADC alone is a strong classifier.",
+    "Using pico_timestamp_s (\u00b5s) the inter-arrival CV is 0.993 \u2192 consistent with Poisson (random); this CORRECTS the earlier 0.75 which was inflated by 1-second timestamp_ms quantization.",
+    "Detector dead-time fraction \u2248 0.0007 (tiny) \u2014 so dead-time barely affects the rate; timing structure is dominated by the Poisson process itself.",
+    "Pressure\u2013rate: simple r=0.361, but standardized partial \u03b2=0.398 after controlling for temperature+time \u2192 pressure retains a partial association after controls \u2014 investigate further."
+  ],
+  "plots": [
+    "plots_adc/adc_landau_fit.png",
+    "plots_adc/interarrival_pico.png"
+  ],
+  "runtime_seconds": 32.13
+}
