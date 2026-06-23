@@ -16,6 +16,9 @@ SNN_GNN_FL_design.md
 # PDFs: source slides/briefs and the generated one-pager
 *.pdf
 
+# LaTeX build artifacts
+*.tex
+
 # Raw data exports — too large for GitHub (>100 MB); keep local
 credo_export*.csv
 credo_useful*.csv
