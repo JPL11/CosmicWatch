@@ -18,4 +18,5 @@ SNN_GNN_FL_design.md
 
 # Raw data exports — too large for GitHub (>100 MB); keep local
 credo_export*.csv
+credo_useful*.csv
 *.csv.gz
