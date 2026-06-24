@@ -74,6 +74,52 @@ def benchmark(w, dim, n=20000, single=4000):
             "headroom_vs_event_rate": round(eps / EVENT_RATE_HZ, 0)}
 
 
+def read_sensors():
+    """Best-effort on-device sensors (Pi/Linux); fields absent where unavailable."""
+    import shutil
+    import subprocess
+    s = {}
+    for path, key, div in [("/sys/class/thermal/thermal_zone0/temp", "cpu_temp_c", 1000.0),
+                           ("/sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq", "cpu_freq_mhz", 1000.0)]:
+        try:
+            s[key] = round(int(open(path).read().strip()) / div, 1)
+        except Exception:
+            pass
+    if shutil.which("vcgencmd"):  # Raspberry Pi specific
+        for cmd in ("measure_temp", "measure_volts core", "get_throttled"):
+            try:
+                s[cmd.replace(" ", "_")] = subprocess.run(["vcgencmd", *cmd.split()],
+                                                          capture_output=True, text=True, timeout=5).stdout.strip()
+            except Exception:
+                pass
+    return s
+
+
+def power_profile(w, dim, duration, idle_watts, load_watts):
+    """Sustained-load throughput + sensors; energy/inference when a measured wattage is given."""
+    before = read_sensors()
+    rng = np.random.default_rng(1)
+    X = rng.standard_normal((4096, dim)).astype(np.float32)
+    n = 0
+    t_end = time.perf_counter() + duration
+    while time.perf_counter() < t_end:
+        forward_np(X, w)
+        n += len(X)
+    eps = n / duration
+    out = {"sustained_throughput_eps": round(eps, 1), "duration_s": duration,
+           "sensors_before": before, "sensors_after": read_sensors()}
+    if load_watts is not None:
+        out["load_watts"] = load_watts
+        out["energy_per_inference_uJ"] = round(load_watts / max(1e-9, eps) * 1e6, 4)
+        if idle_watts is not None:
+            out["idle_watts"] = idle_watts
+            out["active_watts"] = round(load_watts - idle_watts, 3)
+            out["active_energy_per_inference_uJ"] = round((load_watts - idle_watts) / max(1e-9, eps) * 1e6, 4)
+    else:
+        out["note"] = "pass --load-watts (and --idle-watts) from a USB power meter to get energy per inference"
+    return out
+
+
 def platform_info():
     try:
         import platform
@@ -126,6 +172,9 @@ def main():
     ap.add_argument("--train", action="store_true", help="train on real data (needs torch + ES) and export weights")
     ap.add_argument("--per-partition", type=int, default=80000)
     ap.add_argument("--n", type=int, default=20000)
+    ap.add_argument("--power-duration", type=float, default=2.0, help="sustained-load seconds for the power profile")
+    ap.add_argument("--idle-watts", type=float, default=None, help="board idle power (USB meter)")
+    ap.add_argument("--load-watts", type=float, default=None, help="board power under inference load (USB meter)")
     ap.add_argument("--out", default="pi_benchmark.json")
     args = ap.parse_args()
 
@@ -139,11 +188,12 @@ def main():
             raise SystemExit(f"No {WFILE.name}; run once with --train on a machine that has torch + ES.")
         w = json.loads(WFILE.read_text())
 
-    dim = len(w["b1"][0]) if isinstance(w["b1"][0], list) else len(w["W1"][0])
     size = model_size(w)
-    bench = benchmark(w, dim=len(w["W1"]), n=args.n)
+    dim = len(w["W1"])
+    bench = benchmark(w, dim=dim, n=args.n)
+    power = power_profile(w, dim, args.power_duration, args.idle_watts, args.load_watts)
     out = {"platform": platform_info(), "model": {"arch": "MLP(4->8->1)", **size},
-           "trained_on_events": trained_on, "benchmark": bench,
+           "trained_on_events": trained_on, "benchmark": bench, "power": power,
            "interpretation": (
                f"{size['int8_bytes']} bytes (int8). numpy inference "
                f"{bench['per_event_us_numpy']} us/event, {bench['throughput_eps_numpy']:,.0f} events/s "
@@ -156,6 +206,11 @@ def main():
     print(f"numpy: {bench['per_event_us_numpy']} us/event, {bench['throughput_eps_numpy']:,.0f} ev/s "
           f"({bench['headroom_vs_event_rate']:,.0f}x rate)")
     print(f"pure-python (MCU proxy): {bench['per_event_us_pure_python']} us/event")
+    if "energy_per_inference_uJ" in power:
+        print(f"power: {power.get('load_watts')} W load -> {power['energy_per_inference_uJ']} uJ/inference")
+    else:
+        print(f"power: sustained {power['sustained_throughput_eps']:,.0f} ev/s; "
+              "pass --load-watts (USB meter) for energy/inference")
     print(f"Wrote {args.out}")
 
 

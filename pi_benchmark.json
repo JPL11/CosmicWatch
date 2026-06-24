@@ -10,12 +10,25 @@
     "float32_bytes": 196,
     "int8_bytes": 49
   },
-  "trained_on_events": 120000,
+  "trained_on_events": null,
   "benchmark": {
-    "per_event_us_numpy": 5.14,
-    "throughput_eps_numpy": 56019278.8,
-    "per_event_us_pure_python": 2.35,
-    "headroom_vs_event_rate": 40720563.0
+    "per_event_us_numpy": 7.27,
+    "throughput_eps_numpy": 29442852.6,
+    "per_event_us_pure_python": 2.34,
+    "headroom_vs_event_rate": 21402088.0
   },
-  "interpretation": "49 bytes (int8). numpy inference 5.14 us/event, 56,019,279 events/s = 40,720,563x the 1.3757 Hz detector rate. Re-run on the target Raspberry Pi for on-device numbers."
+  "power": {
+    "sustained_throughput_eps": 103700480.0,
+    "duration_s": 2.0,
+    "sensors_before": {
+      "cpu_temp_c": 27.8,
+      "cpu_freq_mhz": 5323.7
+    },
+    "sensors_after": {
+      "cpu_temp_c": 27.8,
+      "cpu_freq_mhz": 650.1
+    },
+    "note": "pass --load-watts (and --idle-watts) from a USB power meter to get energy per inference"
+  },
+  "interpretation": "49 bytes (int8). numpy inference 7.27 us/event, 29,442,853 events/s = 21,402,088x the 1.3757 Hz detector rate. Re-run on the target Raspberry Pi for on-device numbers."
 }

@@ -57,6 +57,8 @@ AP = load("adc_physics.json")
 EC = load("energy_calibration.json")
 LG = load("legacy_images.json")
 EM = load("event_ml.json")
+PB = load("pi_benchmark.json")
+EVENT_RATE_HZ = 1.3757
 
 L = []
 A = L.append
@@ -116,13 +118,15 @@ A(fig("plots_analysis/source_volumes.png", "Document counts per source (log scal
 
 # Key data findings
 parsed = g(DA, "cosmicwatch_deep_dive.schema_partition.parsed_with_wallclock_timestamp", "?")
-raw = g(DA, "cosmicwatch_deep_dive.schema_partition.raw_without_wallclock_timestamp", "?")
+raw = g(DA, "cosmicwatch_deep_dive.schema_partition.raw_with_walltime_field", "?")
+cw_total = g(DA, "sources.cosmicwatch-v3x.doc_count", "?")
 A(r"\subsection{Key data findings and corrections}")
 A(r"\begin{itemize}")
-A(f"\\item \\textbf{{Single usable node.}} \\texttt{{cosmicwatch-v3x}} has one timestamped device "
-  f"(\\texttt{{cosmicwatch-001}}); only {parsed:,} of its {g(DA,'sources.cosmicwatch-v3x.doc_count','?'):,} "
-  f"docs carry wall-clock timestamps. The other {raw:,} are a raw \\texttt{{AxLab}} partition whose "
-  "\\texttt{timestamp\\_s} is boot-relative (not wall-clock) and therefore not time-correlatable.")
+A(f"\\item \\textbf{{Single unit, two schemas, both usable (~3.36M events).}} \\texttt{{cosmicwatch-v3x}} "
+  f"is one detector; {c(parsed)} \\emph{{parsed}} events carry wall-clock \\texttt{{timestamp}}+"
+  f"\\texttt{{coincident}}, and {c(raw)} \\emph{{raw AxLab}} events use \\texttt{{wall\\_time}} (real epoch, "
+  "us precision) + \\texttt{coincidence\\_flag}. Both are usable via a canonical loader; still one unit, so "
+  "the network/GNN conclusion is unchanged.")
 A(r"\item \textbf{\texttt{credo.science} is degenerate:} latitude/longitude all $0,0$, energy all $0$, "
   r"\texttt{particle\_type} constant --- fields present but value-empty.")
 A(r"\item \textbf{\texttt{legacy} is the real image asset:} 69{,}000 decodable PNG hit-crops with genuine "
@@ -298,6 +302,31 @@ A("We match the method to the data: \\textbf{supervised} where a label exists, "
   "the label and score worse. For the \\texttt{legacy} images there are no labels, so clustering is the "
   "right tool. Network correlation (GNN) and the training-distribution layer (FL) are the appropriate "
   "methods for the network problem, but require multi-node data and are simulation-only here.")
+
+# 6b. Edge deployment + flight/satellite outlook
+A(r"\section{Edge Deployment and Flight/Satellite Outlook}")
+b = g(PB, "model.int8_bytes", "?")
+lat = g(PB, "benchmark.per_event_us_numpy", "?")
+latp = g(PB, "benchmark.per_event_us_pure_python", "?")
+head = g(PB, "benchmark.headroom_vs_event_rate", "?")
+A("The classifier exports to portable weights with \\textbf{torch-free} inference (pure numpy, plus a "
+  "pure-Python path for MCU/MicroPython), so it runs on a Raspberry Pi or flight computer unchanged. "
+  "Dev-machine baseline (Table~\\ref{tab:pi}); re-run on target hardware for on-device latency and, with "
+  "a USB power meter, energy per inference (the flight-relevant metric).")
+A(r"""\begin{table}[h!]\centering\caption{Edge inference benchmark (x86 baseline).}\label{tab:pi}
+\begin{tabular}{lr}\toprule Metric & Value \\ \midrule""")
+A(f"Model size & {b} bytes (int8) \\\\")
+A(f"Latency (numpy) & {lat} us/event \\\\")
+A(f"Latency (pure-Python, MCU proxy) & {latp} us/event \\\\")
+A(f"Headroom vs {EVENT_RATE_HZ} Hz event rate & {c(head)}x \\\\")
+A(r"\bottomrule\end{tabular}\end{table}")
+A("\\textbf{Why this matters off the ground.} On the ground latency/size are non-issues, so the edge "
+  "model is optional. At altitude/in space the headline physics is single-point (flux vs altitude — the "
+  "Pfotzer maximum; geomagnetic latitude; the South Atlantic Anomaly; dosimetry/LET; solar particle "
+  "events), so a \\emph{single} unit does real science, and downlink bandwidth is scarce — making an "
+  "onboard tiny classifier for event selection / anomaly detection / data reduction genuinely valuable. "
+  "A \\emph{constellation} of GPS-synchronized units would finally supply the spatially-separated, "
+  "time-synchronized data the GNN/federated track needs. (See the flight/satellite concept note.)")
 
 # 7. Conclusions
 A(r"\section{Conclusions and Path Forward}")
