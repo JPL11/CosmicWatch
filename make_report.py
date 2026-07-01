@@ -58,6 +58,7 @@ EC = load("energy_calibration.json")
 LG = load("legacy_images.json")
 EM = load("event_ml.json")
 PB = load("pi_benchmark.json")
+TD = load("time_domain_physics.json")
 EVENT_RATE_HZ = 1.3757
 
 L = []
@@ -191,14 +192,39 @@ A(f"Using the microsecond \\texttt{{pico\\_timestamp\\_s}} field, the inter-arri
   f"(fraction~$\\approx{deadf}$).")
 A(fig("plots_adc/interarrival_pico.png", "Inter-arrival distribution (pico timing) vs.\\ exponential (Poisson).", 0.62))
 
-A(r"\subsection{Environmental systematic}")
+A(r"\subsection{Environmental systematic --- resolved}")
 pr = g(AP, "pressure_confound.simple_pearson_r_rate_pressure", "?")
-beta = g(AP, "pressure_confound.standardized_betas.pressure", "?")
-A(f"A positive rate--pressure correlation (Pearson $r={pr}$, standardized partial $\\beta={beta}$) "
-  "\\emph{survives} controlling for temperature and time, but it has the \\emph{wrong sign} for the known "
-  "barometric muon effect (which is negative). Over only $\\sim$16 active days this is most plausibly an "
-  "instrumental/site systematic (e.g.\\ SiPM gain coupling or deployment drift), and is flagged rather "
-  "than claimed as physics.")
+pr2 = g(TD, "pressure_retest.simple_r_rate_pressure", "?")
+bc2 = g(TD, "pressure_retest.barometric_pct_per_hPaa", g(TD, "pressure_retest.barometric_pct_per_hPa", "?"))
+A(f"The sparse 2025 epoch showed a \\emph{{wrong-sign}} (positive, $r={pr}$) rate--pressure correlation, "
+  f"initially flagged as a systematic. Re-testing on the densely-sampled 2026 window resolves it: the "
+  f"correlation flips to the physically correct \\textbf{{negative}} sign ($r={pr2}$, "
+  f"$\\approx{bc2}$\\%/hPa), consistent with the known barometric muon effect; after controlling for "
+  "temperature and the diurnal phase the pressure term weakens (it co-varies with the indoor temperature "
+  "cycle). Conclusion: the 2025 anomaly was a sparse-sampling artifact, not detector physics.")
+
+A(r"\subsection{Time-domain results}")
+lt = g(TD, "lifetime_feasibility.min_inter_event_gap_ms", "?")
+di = g(TD, "diurnal", {})
+ori = g(TD, "orientation", {})
+sw = g(TD, "space_weather", {})
+A(r"\begin{itemize}")
+A(f"\\item \\textbf{{Muon-lifetime measurement is cleanly impossible:}} the readout floor is "
+  f"$\\sim${lt}~ms between events --- four orders of magnitude above the 2.2~\\textmu s muon lifetime, so "
+  "stopped-muon decay pairs cannot be recorded. A documented negative.")
+A(f"\\item \\textbf{{Diurnal cycle:}} {di.get('peak_to_trough_amplitude_pct','?')}\\% peak-to-trough daily "
+  f"rate modulation, anti-correlated with the indoor temperature cycle "
+  f"($r={di.get('rate_temp_correlation','?')}$).")
+A(f"\\item \\textbf{{Detector drift explained by threshold/gain, not tilt:}} the recorded accelerometer "
+  f"shows the tilt changed {g(ori,'parsed.tilt_deg_from_vertical','?')}$^\\circ$ (2025) $\\to$ "
+  f"{g(ori,'raw.tilt_deg_from_vertical','?')}$^\\circ$ (2026), but the $\\cos^2$ acceptance factor "
+  "($\\sim$4\\%) cannot explain the coincidence-rate drop (12\\%$\\to$8\\%) or the 2.3$\\times$ rate "
+  "increase; the efficiency turn-on shift ($\\sim$200 ADC) points to a threshold/gain change.")
+A(f"\\item \\textbf{{Space weather:}} GFZ $K_p$ indices fetched for the window (max $K_p={sw.get('max_kp_in_window','?')}$); "
+  f"no rate correlation ($r={sw.get('corr_rate_vs_maxKp','?')}$) and zero 2$\\sigma$ daily dips --- no "
+  "Forbush decrease occurred in the window (method demonstrated; no detection claimed).")
+A(r"\end{itemize}")
+A(fig("plots_timedomain/diurnal_fold.png", "Diurnal fold of event rate vs.\\ temperature (dense 2026 window).", 0.62))
 
 A(r"\subsection{Where quantum mechanics enters}")
 A("The measured process is genuinely quantum/particle physics: muon production and decay (weak "
