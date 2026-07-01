@@ -1,0 +1,211 @@
+{
+  "lifetime_feasibility": {
+    "min_inter_event_gap_ms": 13.91,
+    "muon_lifetime_us": 2.2,
+    "verdict": "IMPOSSIBLE with this data: readout floor ~13.91 ms is ~4 orders of magnitude above the 2.2 us muon lifetime; decay pairs cannot be recorded. Clean negative."
+  },
+  "diurnal": {
+    "fold": [
+      {
+        "hour_utc": 0,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3987,
+        "mean_temp_c": 27.04
+      },
+      {
+        "hour_utc": 1,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3336,
+        "mean_temp_c": 27.01
+      },
+      {
+        "hour_utc": 2,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3414,
+        "mean_temp_c": 26.94
+      },
+      {
+        "hour_utc": 3,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3696,
+        "mean_temp_c": 26.82
+      },
+      {
+        "hour_utc": 4,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3682,
+        "mean_temp_c": 26.67
+      },
+      {
+        "hour_utc": 5,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3787,
+        "mean_temp_c": 26.53
+      },
+      {
+        "hour_utc": 6,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3551,
+        "mean_temp_c": 26.47
+      },
+      {
+        "hour_utc": 7,
+        "n_hours": 14,
+        "mean_rate_hz": 2.387,
+        "mean_temp_c": 26.39
+      },
+      {
+        "hour_utc": 8,
+        "n_hours": 14,
+        "mean_rate_hz": 2.4657,
+        "mean_temp_c": 26.36
+      },
+      {
+        "hour_utc": 9,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3404,
+        "mean_temp_c": 26.33
+      },
+      {
+        "hour_utc": 10,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3836,
+        "mean_temp_c": 26.32
+      },
+      {
+        "hour_utc": 11,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3821,
+        "mean_temp_c": 26.3
+      },
+      {
+        "hour_utc": 12,
+        "n_hours": 14,
+        "mean_rate_hz": 2.3147,
+        "mean_temp_c": 26.27
+      },
+      {
+        "hour_utc": 13,
+        "n_hours": 13,
+        "mean_rate_hz": 2.3829,
+        "mean_temp_c": 26.26
+      },
+      {
+        "hour_utc": 14,
+        "n_hours": 13,
+        "mean_rate_hz": 2.3323,
+        "mean_temp_c": 26.28
+      },
+      {
+        "hour_utc": 15,
+        "n_hours": 12,
+        "mean_rate_hz": 2.4198,
+        "mean_temp_c": 26.4
+      },
+      {
+        "hour_utc": 16,
+        "n_hours": 12,
+        "mean_rate_hz": 2.4931,
+        "mean_temp_c": 26.44
+      },
+      {
+        "hour_utc": 17,
+        "n_hours": 12,
+        "mean_rate_hz": 2.3928,
+        "mean_temp_c": 26.6
+      },
+      {
+        "hour_utc": 18,
+        "n_hours": 12,
+        "mean_rate_hz": 2.3728,
+        "mean_temp_c": 26.75
+      },
+      {
+        "hour_utc": 19,
+        "n_hours": 12,
+        "mean_rate_hz": 2.3665,
+        "mean_temp_c": 26.86
+      },
+      {
+        "hour_utc": 20,
+        "n_hours": 13,
+        "mean_rate_hz": 2.175,
+        "mean_temp_c": 26.91
+      },
+      {
+        "hour_utc": 21,
+        "n_hours": 13,
+        "mean_rate_hz": 2.3205,
+        "mean_temp_c": 27.03
+      },
+      {
+        "hour_utc": 22,
+        "n_hours": 13,
+        "mean_rate_hz": 2.3167,
+        "mean_temp_c": 27.02
+      },
+      {
+        "hour_utc": 23,
+        "n_hours": 13,
+        "mean_rate_hz": 2.2927,
+        "mean_temp_c": 27.02
+      }
+    ],
+    "peak_hour_utc": 16,
+    "trough_hour_utc": 20,
+    "peak_to_trough_amplitude_pct": 13.47,
+    "rate_temp_correlation": -0.421
+  },
+  "pressure_retest": {
+    "n_hours": 320,
+    "simple_r_rate_pressure": -0.478,
+    "barometric_pct_per_hPa": -3.462,
+    "partial_betas": {
+      "pressure": 0.076,
+      "temperature": 0.402,
+      "time_trend": -0.658,
+      "diurnal_sin": 0.106,
+      "diurnal_cos": -0.261
+    },
+    "note": "controls: temperature, linear time trend, and the diurnal phase"
+  },
+  "orientation": {
+    "parsed": {
+      "field": "accel_z_g",
+      "count": 581815,
+      "mean_z": -0.9873,
+      "p50_z": -1.0032,
+      "tilt_deg_from_vertical": 9.2
+    },
+    "raw": {
+      "field": "accel_z",
+      "count": 2773823,
+      "mean_z": -0.9652,
+      "p50_z": -1.0008,
+      "tilt_deg_from_vertical": 15.2
+    },
+    "interpretation": "Tilt changed between epochs: 9.2 deg (parsed 2025) -> 15.2 deg (raw 2026). A cos^2 acceptance argument gives a flux factor ~0.956 \u2014 small; tilt alone does NOT explain the coincidence-rate drop 12%->8% or the 2.3x rate increase. The dominant drift cause is more consistent with a threshold/gain change (efficiency turn-on shifted ~200 ADC). Caveat: raw accel_z units assumed ~g (mean ~ -1 supports this); single-point calibration."
+  },
+  "space_weather": {
+    "days_analyzed": 14,
+    "mean_daily_rate_hz": 2.347,
+    "rate_dips_2sigma": [],
+    "kp_source": "GFZ Potsdam",
+    "days_with_kp": 14,
+    "max_kp_in_window": 5.0,
+    "corr_rate_vs_maxKp": 0.171,
+    "interpretation": "A Forbush decrease would show as a multi-day rate dip following high Kp. Window max Kp=5.0; correlation r=0.171 over 14 days. With ~14 dense days this is a feasibility check, not a detection claim."
+  },
+  "findings": [
+    "Muon-lifetime measurement is cleanly IMPOSSIBLE: readout floor 13.91 ms vs 2.2 us decay \u2014 documented negative, not a missed opportunity.",
+    "Diurnal modulation of 13.47% peak-to-trough (peak 16h, trough 20h UTC), rate-temperature correlation r=-0.421 \u2014 an indoor temperature-coupled cycle is the simplest explanation.",
+    "Pressure retest on the dense 2026 window: simple r=-0.478, partial pressure beta=0.076 with temperature/time/diurnal controls, barometric coefficient -3.462%/hPa.",
+    "Orientation: tilt 9.2 deg (2025) -> 15.2 deg (2026); cos^2 flux factor is small \u2014 tilt does NOT explain the drift; threshold/gain change remains the leading explanation.",
+    "Space weather: max Kp 5.0 in window; rate-vs-Kp r=0.171; 0 two-sigma daily dips."
+  ],
+  "plots": [
+    "plots_timedomain/diurnal_fold.png",
+    "plots_timedomain/daily_rate.png"
+  ],
+  "runtime_seconds": 112.87
+}
