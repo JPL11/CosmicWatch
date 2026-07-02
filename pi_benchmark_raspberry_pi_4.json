@@ -1,0 +1,40 @@
+{
+  "platform": {
+    "machine": "aarch64",
+    "processor": "?",
+    "python": "3.11.2"
+  },
+  "model": {
+    "arch": "MLP(4->8->1)",
+    "parameters": 49,
+    "float32_bytes": 196,
+    "int8_bytes": 49
+  },
+  "trained_on_events": null,
+  "benchmark": {
+    "per_event_us_numpy": 76.95,
+    "throughput_eps_numpy": 4153701.1,
+    "per_event_us_pure_python": 30.04,
+    "headroom_vs_event_rate": 3019336.0
+  },
+  "power": {
+    "sustained_throughput_eps": 5273600.0,
+    "duration_s": 2.0,
+    "sensors_before": {
+      "cpu_temp_c": 44.3,
+      "cpu_freq_mhz": 1800.0,
+      "measure_temp": "temp=44.3'C",
+      "measure_volts_core": "volt=0.9160V",
+      "get_throttled": "throttled=0x50000"
+    },
+    "sensors_after": {
+      "cpu_temp_c": 43.8,
+      "cpu_freq_mhz": 1800.0,
+      "measure_temp": "temp=43.8'C",
+      "measure_volts_core": "volt=0.8500V",
+      "get_throttled": "throttled=0x50005"
+    },
+    "note": "pass --load-watts (and --idle-watts) from a USB power meter to get energy per inference"
+  },
+  "interpretation": "49 bytes (int8). numpy inference 76.95 us/event, 4,153,701 events/s = 3,019,336x the 1.3757 Hz detector rate. Re-run on the target Raspberry Pi for on-device numbers."
+}
