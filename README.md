@@ -105,13 +105,22 @@ energy-per-inference figure.
 
 `pi_benchmark.py` writes `pi_benchmark.json` per run. Suggested comparison table:
 
-| Platform | µs/event (numpy) | events/s | idle W | load W | µJ/inference |
-|---|--:|--:|--:|--:|--:|
-| x86_64 dev (baseline) | ~5–7 | ~30–50M | — | — | — |
-| Raspberry Pi 4 | | | | | |
-| Raspberry Pi 400 | | | | | |
-| Jetson Orin Nano (7W) | | | | | |
-| Jetson Orin Nano (MAXN) | | | | | |
+| Platform | µs/event (numpy) | µs/event (pure py) | sustained events/s | idle W | load W | µJ/inference |
+|---|--:|--:|--:|--:|--:|--:|
+| x86_64 dev (baseline) | ~5–7 | ~2.4 | ~105M | — | — | — |
+| Raspberry Pi 4 (measured 2026-07-01)¹ | 77.0 | 30.0 | 5.27M | | | |
+| Raspberry Pi 400 (measured 2026-07-01) | 78.2 | 29.3 | 6.25M | | | |
+| Jetson Orin Nano (7W) | | | | | | |
+| Jetson Orin Nano (MAXN) | | | | | | |
+
+¹ The Pi 4 run showed **active under-voltage throttling** (`get_throttled=0x50005`, core volts sagged to
+0.85 V) — its numbers are a floor; use the official 5.1 V/3 A supply and re-run before power measurement.
+The Pi 400 ran clean (better thermals/supply), which is why it out-sustains the Pi 4 at the same clock.
+
+Two measured cross-platform findings: (a) even a Pi has ~3×10⁶ headroom over the detector rate — at
+1.4–2.8 Hz the classifier is ~0.01% CPU duty cycle, so the *board's idle power* is the whole budget;
+(b) pure-Python single-event inference beats numpy ~2.6× on every platform (per-call overhead dominates
+a 49-parameter model), so on-device single-event paths should skip numpy entirely.
 
 For context: the detector event rate is ~1.4–2.8 Hz, so every platform above has ≥10⁶× headroom —
 the scientifically interesting number is **energy per inference** (the flight power budget), not speed.
