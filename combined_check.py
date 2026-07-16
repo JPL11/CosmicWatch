@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
 """
 Confirm the edge-ML and Poisson conclusions hold on the COMBINED ~3.36M events
-(both CosmicWatch partitions) via credo_loader, and test cross-epoch generalization.
+(both CosmicWatch partitions) via credo_loader, and test cross-deployment generalization.
 
   - Edge classifier (ADC threshold + tiny MLP) trained on combined data; evaluated on
-    combined, parsed-only, and raw-only test sets (does a 2025-trained model hold in 2026?).
+    combined, parsed-only, and raw-only test sets.
   - Per-partition coincidence rate + ADC separation (confirms the drift + the cut).
-  - Poisson check on the raw partition via wall_time (microsecond timing).
+  - Poisson check on raw `_source.wall_time`, sorted client-side because the
+    Elasticsearch mapping stores this field as a precision-losing float.
 
 Outputs: combined_check.json (+ console summary).
 """
@@ -21,8 +22,8 @@ try:
 except ImportError:
     torch = None
 
-from credo_loader import fetch, partition_query, post
-from credo_config import es_settings
+from credo_loader import fetch
+from cosmicwatch_common import iter_cosmicwatch
 from edge_ai_experiment import best_threshold, binary_metrics
 
 FEATS = ["adc_value", "sipm_mv", "temperature_c", "pressure_pa"]
@@ -71,22 +72,35 @@ def train_mlp(x, y, epochs=12, batch=512, lr=0.003, seed=7):
     return m
 
 
+def domain_transfer(train_x, train_y, test_x, test_y):
+    """Train on exactly one deployment and evaluate on the other."""
+    train_f, test_f = fill(train_x, test_x)
+    train_s, test_s = standardize(train_f, test_f)
+    model = train_mlp(train_s, train_y)
+    train_scores = scores(model, train_s)
+    threshold = best_threshold(train_y, train_scores)
+    adc_threshold = best_threshold(train_y, train_f[:, 0])
+    return {
+        "train_rows": int(len(train_y)),
+        "test_rows": int(len(test_y)),
+        "mlp": binary_metrics(test_y, scores(model, test_s), threshold),
+        "adc_threshold": binary_metrics(test_y, test_f[:, 0], adc_threshold),
+    }
+
+
 def scores(m, x):
     with torch.no_grad():
         return torch.sigmoid(m(torch.tensor(x, dtype=torch.float32)).squeeze(-1)).numpy()
 
 
-def raw_poisson(n=10000):
-    _, index = es_settings()
-    body = {"size": n, "_source": ["wall_time"], "query": partition_query("raw"),
-            "sort": [{"wall_time": "asc"}]}
-    hits = post(f"{index}/_search", body)["hits"]["hits"]
-    t = np.array([h["_source"]["wall_time"] for h in hits], float)
+def raw_poisson(csv_path):
+    t = np.array(sorted(row["time_epoch_s"] for row in iter_cosmicwatch(csv_path)
+                        if row["partition"] == "raw" and row["time_epoch_s"] is not None), float)
     g = np.diff(t); g = g[(g > 0) & (g < 60)]
     if len(g) < 100:
         return {"note": "too few"}
     cv = float(g.std() / g.mean())
-    return {"events": len(hits), "mean_interarrival_s": round(float(g.mean()), 3),
+    return {"events": len(t), "mean_interarrival_s": round(float(g.mean()), 3),
             "rate_hz": round(1 / g.mean(), 4), "cv": round(cv, 3),
             "verdict": "Poisson" if 0.85 <= cv <= 1.15 else ("sub-Poisson" if cv < 0.85 else "bursty")}
 
@@ -97,8 +111,24 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--per-partition", type=int, default=120000)
     ap.add_argument("--out", default="combined_check.json")
+    ap.add_argument("--csv", default="credo_useful.csv")
+    ap.add_argument("--refresh-poisson-only", action="store_true")
     args = ap.parse_args()
     started = time.time()
+
+    if args.refresh_poisson_only:
+        with open(args.out) as fh:
+            out = json.load(fh)
+        out["raw_poisson_walltime"] = raw_poisson(args.csv)
+        out["findings"][-1] = (
+            f"Raw partition is genuinely Poisson: full-export wall_time inter-arrival CV "
+            f"{out['raw_poisson_walltime'].get('cv')} ({out['raw_poisson_walltime'].get('verdict')}) at "
+            f"{out['raw_poisson_walltime'].get('rate_hz')} Hz."
+        )
+        with open(args.out, "w") as fh:
+            json.dump(out, fh, indent=2)
+        print(f"Refreshed full-export Poisson result in {args.out}")
+        return
 
     print("Fetching samples from both partitions ...")
     rp = fetch("parsed", max_events=args.per_partition)
@@ -139,7 +169,12 @@ def main():
             "parsed_test": binary_metrics(yp_te, scores(m, Xp_te_s), thr),
             "raw_test": binary_metrics(yr_te, scores(m, Xr_te_s), thr),
         },
-        "raw_poisson_walltime": raw_poisson(),
+        "true_cross_deployment_transfer": {
+            "parsed_to_raw": domain_transfer(Xp, yp, Xr, yr),
+            "raw_to_parsed": domain_transfer(Xr, yr, Xp, yp),
+            "note": "Each direction trains on one deployment only; no target-deployment rows enter training.",
+        },
+        "raw_poisson_walltime": raw_poisson(args.csv),
     }
     for lab, X, y in [("parsed", Xp, yp), ("raw", Xr, yr)]:
         adc = X[:, 0]
@@ -149,13 +184,14 @@ def main():
         }
 
     out["findings"] = [
-        f"Coincidence rate differs by epoch: parsed {out['coincidence_rate']['parsed']} (2025) vs raw "
-        f"{out['coincidence_rate']['raw']} (2026) — confirms the detector-response drift.",
+        f"Coincidence rate differs by deployment: parsed {out['coincidence_rate']['parsed']} vs raw "
+        f"{out['coincidence_rate']['raw']} — confirms detector-response drift.",
         f"Edge accuracy holds on 6x data: combined MLP F1 {out['mlp']['combined']['f1']} "
         f"(ADC baseline {out['adc_threshold_baseline']['combined']['f1']}) — same ~0.40 ceiling as the "
         "582k-only result; more data does not change it (physics + weak label bound it).",
-        f"Cross-epoch generalization: a model trained on combined data scores F1 {out['mlp']['parsed_test']['f1']} "
-        f"on parsed-test and {out['mlp']['raw_test']['f1']} on raw-test — it transfers across the two deployments.",
+        f"True cross-deployment transfer (no target rows in training): parsed->raw F1 "
+        f"{out['true_cross_deployment_transfer']['parsed_to_raw']['mlp']['f1']}; raw->parsed F1 "
+        f"{out['true_cross_deployment_transfer']['raw_to_parsed']['mlp']['f1']}.",
         f"Raw partition is genuinely Poisson too: wall_time inter-arrival CV {out['raw_poisson_walltime'].get('cv')} "
         f"({out['raw_poisson_walltime'].get('verdict')}) at {out['raw_poisson_walltime'].get('rate_hz')} Hz.",
     ]
@@ -166,6 +202,9 @@ def main():
     print(f"coincidence rate: parsed {out['coincidence_rate']['parsed']}  raw {out['coincidence_rate']['raw']}")
     print(f"MLP F1 combined {out['mlp']['combined']['f1']}  parsed-test {out['mlp']['parsed_test']['f1']}  "
           f"raw-test {out['mlp']['raw_test']['f1']}  (ADC baseline {out['adc_threshold_baseline']['combined']['f1']})")
+    print("True transfer F1 "
+          f"parsed->raw {out['true_cross_deployment_transfer']['parsed_to_raw']['mlp']['f1']}  "
+          f"raw->parsed {out['true_cross_deployment_transfer']['raw_to_parsed']['mlp']['f1']}")
     print(f"raw Poisson CV {out['raw_poisson_walltime'].get('cv')} ({out['raw_poisson_walltime'].get('verdict')})")
     print(f"Wrote {args.out}")
 

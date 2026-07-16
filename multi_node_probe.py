@@ -171,17 +171,21 @@ def multi_device_days(source):
 def main():
     sources = source_terms()
     source_names = [source["key"] for source in sources]
+    summaries = [summarize_source(source) for source in source_names]
+    multi_days = {source: multi_device_days(source) for source in source_names}
+    real_multi_sources = [source for source, days in multi_days.items() if days]
     output = {
         "source_counts": sources,
-        "source_summaries": [summarize_source(source) for source in source_names],
+        "source_summaries": summaries,
         "days_with_multiple_sources": days_with_multiple_sources(),
-        "multi_device_days_by_source": {
-            source: multi_device_days(source) for source in source_names
-        },
+        "multi_device_days_by_source": multi_days,
+        "sources_with_multi_device_days": real_multi_sources,
         "conclusion": (
-            "No synchronized multi-source CosmicWatch/CREDO data is present in this "
-            "index. CosmicWatch timestamped rows come from one device_id, and there "
-            "are zero days where multiple sources overlap."
+            "CosmicWatch remains a single identified device and no sources overlap by day. "
+            f"However, the following partitions contain days with multiple device IDs: "
+            f"{', '.join(real_multi_sources) if real_multi_sources else 'none'}. "
+            "They can support real-device "
+            "federated or exploratory within-source timing work, subject to clock and location validation."
         ),
     }
     with open("multi_node_probe.json", "w") as output_file:
@@ -193,4 +197,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-

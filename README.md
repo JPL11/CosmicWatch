@@ -39,6 +39,21 @@ Machine learning:
 - `legacy_images.py` — decode + cluster the 69k CREDO image hit-crops (fully unsupervised).
 - `combined_check.py` — conclusions re-validated on the combined ~3.36M events.
 - `fl_simulation.py`, `gnn_simulation.py` — **simulation-only** federated-learning and GNN prototypes.
+- `federated_legacy.py` — self-supervised FedAvg on real legacy image device IDs, with centralized and
+  local-only comparisons.
+
+Extended validation and operations:
+- `edge_reduction.py` — chronological transmission-policy simulation: retained coincidence events vs bytes/day.
+- `detector_health.py` — daily robust outliers, regime-change alerts, and ingestion-staleness monitoring.
+- `legacy_timing.py` — deduplicated cross-device timing search with a device/day time-shift null.
+- `legacy_common.py`, `cosmicwatch_common.py` — canonical readers for the local CSV export.
+- `extended_analysis_report.md` — consolidated results and the measurements that still require hardware.
+
+Hardware deployment:
+- `event_gateway.py` — blocking UART/stdin event gateway with ADC, coincidence, MLP, or hybrid selection.
+- `prepare_fl_hardware_data.py` — generate the compact real-device FL dataset for transfer to a target.
+- `fl_hardware_benchmark.py` — benchmark one real FL client's local workload on CPU or CUDA, with power hooks.
+- `EVENT_DRIVEN_HARDWARE.md` — Pi 4 and Jetson Orin Nano deployment and measurement procedure.
 
 Reporting:
 - `make_report.py` — regenerate the consolidated PDF report from the result JSONs.

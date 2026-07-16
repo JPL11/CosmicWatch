@@ -1943,5 +1943,10 @@
       }
     ]
   },
-  "conclusion": "No synchronized multi-source CosmicWatch/CREDO data is present in this index. CosmicWatch timestamped rows come from one device_id, and there are zero days where multiple sources overlap."
+  "sources_with_multi_device_days": [
+    "legacy",
+    "phone-camera",
+    "credo-science"
+  ],
+  "conclusion": "CosmicWatch remains a single identified device and no sources overlap by day. However, the following partitions contain days with multiple device IDs: legacy, phone-camera, credo-science. They can support real-device federated or exploratory within-source timing work, subject to clock and location validation."
 }
