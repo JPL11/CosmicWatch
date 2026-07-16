@@ -1,0 +1,60 @@
+{
+  "data": {
+    "unique_events": 65994,
+    "duplicates_removed": 3006,
+    "devices": 57,
+    "device_days": 386
+  },
+  "method": "Within each device/day, circularly shift the complete event train by a random signed 30-1800 s lag.",
+  "windows_ms": {
+    "10": {
+      "observed_pairs": 7,
+      "distinct_device_pairs": 7,
+      "null_mean": 11.25,
+      "null_sd": 20.046,
+      "null_range": [
+        1,
+        160
+      ],
+      "empirical_upper_tail_p": 0.54726,
+      "observed_to_null_mean": 0.6222
+    },
+    "100": {
+      "observed_pairs": 56,
+      "distinct_device_pairs": 13,
+      "null_mean": 107.885,
+      "null_sd": 195.408,
+      "null_range": [
+        22,
+        1554
+      ],
+      "empirical_upper_tail_p": 0.66667,
+      "observed_to_null_mean": 0.5191
+    },
+    "1000": {
+      "observed_pairs": 594,
+      "distinct_device_pairs": 28,
+      "null_mean": 1073.145,
+      "null_sd": 1945.709,
+      "null_range": [
+        243,
+        15422
+      ],
+      "empirical_upper_tail_p": 0.58209,
+      "observed_to_null_mean": 0.5535
+    }
+  },
+  "spatial_for_observed_pairs_within_1s": {
+    "pairs_with_two_locations": 33,
+    "median_distance_km": 279.317,
+    "min_distance_km": 108.71,
+    "max_distance_km": 414.821
+  },
+  "conclusion": "No cross-device timing excess is established when the upper-tail p-value is not small.",
+  "limitations": [
+    "Phone clock synchronization is unverified.",
+    "Acquisition live-time is not explicitly recorded.",
+    "The time-shift null preserves device/day event trains but approximates shared live-time."
+  ],
+  "runtime_seconds": 14.77
+}

@@ -31,6 +31,7 @@ import urllib3
 from PIL import Image
 
 from credo_config import es_auth, es_settings, verify_certs
+from legacy_common import load_images
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 CROP = 20  # standard crop size
@@ -133,7 +134,7 @@ def montage(images, path, title, cols=12, rows=8):
     fig.savefig(path, dpi=130); plt.close(fig)
 
 
-def write_plots(imgs, labels, scores, coords, times, k, out, plots_dir):
+def write_plots(imgs, labels, scores, centroids, locations, times, k, out, plots_dir):
     import os
     os.environ.setdefault("MPLCONFIGDIR", "/tmp/matplotlib")
     import matplotlib
@@ -147,11 +148,12 @@ def write_plots(imgs, labels, scores, coords, times, k, out, plots_dir):
     montage(imgs[:96], d / "sample_gallery.png", "Legacy hit-crops (random sample)")
     paths.append(str(d / "sample_gallery.png"))
 
-    # per-cluster representative montage (closest to centroid)
+    # Per-cluster representatives, ordered by distance to the fitted centroid.
     reps = []
     for j in range(k):
         members = np.where(labels == j)[0]
-        reps.extend(members[:12])
+        order = np.argsort(((scores[members] - centroids[j]) ** 2).sum(1))
+        reps.extend(members[order[:12]])
     montage([imgs[i] for i in reps], d / "cluster_montage.png",
             f"Representative crops by cluster (k={k}, 12/cluster)", cols=12, rows=k)
     paths.append(str(d / "cluster_montage.png"))
@@ -164,10 +166,11 @@ def write_plots(imgs, labels, scores, coords, times, k, out, plots_dir):
     plt.savefig(d / "pca_clusters.png", dpi=150); plt.close(); paths.append(str(d / "pca_clusters.png"))
 
     # geo scatter
-    if coords:
-        lats = [c[0] for c in coords]; lons = [c[1] for c in coords]
+    geo_indices = [i for i, location in enumerate(locations) if location is not None]
+    if geo_indices:
+        lats = [locations[i][0] for i in geo_indices]; lons = [locations[i][1] for i in geo_indices]
         plt.figure(figsize=(7, 6))
-        plt.scatter(lons, lats, s=8, alpha=0.4, c=labels[:len(coords)], cmap="tab10")
+        plt.scatter(lons, lats, s=8, alpha=0.4, c=labels[geo_indices], cmap="tab10")
         plt.xlabel("longitude"); plt.ylabel("latitude")
         plt.title("Legacy detections — Poland (colored by cluster)")
         plt.tight_layout(); plt.savefig(d / "geo_map.png", dpi=150); plt.close()
@@ -175,7 +178,7 @@ def write_plots(imgs, labels, scores, coords, times, k, out, plots_dir):
 
     # time histogram
     if times:
-        days = [dt.datetime.utcfromtimestamp(t / 1000) for t in times]
+        days = [dt.datetime.fromtimestamp(t / 1000, dt.timezone.utc) for t in times]
         plt.figure(figsize=(9, 4)); plt.hist(days, bins=60)
         plt.ylabel("detections"); plt.title("Legacy detection times (2017–18)")
         plt.tight_layout(); plt.savefig(d / "time_hist.png", dpi=150); plt.close()
@@ -186,6 +189,7 @@ def write_plots(imgs, labels, scores, coords, times, k, out, plots_dir):
 def parse_args():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-images", type=int, default=6000)
+    ap.add_argument("--csv", default="credo_useful.csv")
     ap.add_argument("--clusters", type=int, default=8)
     ap.add_argument("--pca-comp", type=int, default=30)
     ap.add_argument("--seed", type=int, default=7)
@@ -198,23 +202,21 @@ def parse_args():
 def main():
     args = parse_args()
     started = time.time()
-    print(f"Fetching up to {args.max_images} legacy images ...")
-    docs = fetch_legacy(args.max_images)
-
-    imgs, feats, coords, times = [], [], [], []
+    print("Loading and deduplicating legacy images from the local export ...")
+    loaded = load_images(args.csv)
+    rng = np.random.default_rng(args.seed)
+    indices = np.arange(len(loaded["images"]))
+    if args.max_images and len(indices) > args.max_images:
+        indices = np.sort(rng.choice(indices, args.max_images, replace=False))
+    imgs = loaded["images"][indices].astype(np.float32) / 255.0
+    locations = [loaded["locations"][i] for i in indices]
+    times = loaded["times"][indices].tolist()
+    devices = loaded["devices"][indices]
+    feats = [image.flatten() for image in imgs]
     visible_vals = {}
-    for s in docs:
-        visible_vals[str(s.get("visible"))] = visible_vals.get(str(s.get("visible")), 0) + 1
-        arr = decode_crop(s.get("frame_content", ""))
-        if arr is None:
-            continue
-        imgs.append(arr)
-        feats.append(arr.mean(2).flatten())  # grayscale flatten
-        loc = s.get("location")
-        if isinstance(loc, dict) and loc.get("lat") is not None:
-            coords.append((loc["lat"], loc["lon"]))
-        if s.get("timestamp"):
-            times.append(s["timestamp"])
+    for i in indices:
+        value = str(loaded["visible"][i])
+        visible_vals[value] = visible_vals.get(value, 0) + 1
 
     if len(feats) < 50:
         raise SystemExit(f"Only {len(feats)} decodable images.")
@@ -230,12 +232,16 @@ def main():
 
     out = {
         "images_decoded": len(imgs),
+        "sampling": "deterministic uniform random sample from all deduplicated decodable images",
+        "duplicates_removed": loaded["duplicates_removed"],
+        "devices_in_sample": int(len(set(devices))),
         "crop_size": [CROP, CROP],
         "visible_distribution": visible_vals,
         "visible_is_usable_label": len(visible_vals) > 1,
-        "geo_points": len(coords),
-        "geo_bounds": ({"lat": [min(c[0] for c in coords), max(c[0] for c in coords)],
-                        "lon": [min(c[1] for c in coords), max(c[1] for c in coords)]} if coords else None),
+        "geo_points": sum(location is not None for location in locations),
+        "geo_bounds": ({"lat": [min(c[0] for c in locations if c), max(c[0] for c in locations if c)],
+                        "lon": [min(c[1] for c in locations if c), max(c[1] for c in locations if c)]}
+                       if any(c is not None for c in locations) else None),
         "clustering": {
             "method": "grayscale -> PCA(numpy SVD) -> k-means(numpy)",
             "k": args.clusters,
@@ -248,7 +254,8 @@ def main():
         "findings": [],
     }
     out["findings"] = [
-        f"Decoded {len(imgs)} of {len(docs)} legacy crops as {CROP}x{CROP} RGBA hit-crops — a real, "
+        f"Randomly sampled {len(imgs)} of {len(loaded['images'])} deduplicated legacy crops as "
+        f"{CROP}x{CROP} grayscale hit-crops; removed {loaded['duplicates_removed']} exact duplicates — a real, "
         "clusterable CV dataset (not the toy phone-camera set).",
         f"`visible` is {'constant ' + list(visible_vals)[0] if len(visible_vals)==1 else 'mixed'} across the "
         "sample → NOT a usable supervised label; unsupervised clustering is the correct route (matches prior "
@@ -262,7 +269,8 @@ def main():
     ]
 
     if args.plots_dir:
-        out["plots"] = write_plots(imgs, labels, scores, coords, times, args.clusters, out, args.plots_dir)
+        out["plots"] = write_plots(imgs, labels, scores, cent, locations, times,
+                                   args.clusters, out, args.plots_dir)
     out["runtime_seconds"] = round(time.time() - started, 2)
 
     with open(args.out, "w") as fh:

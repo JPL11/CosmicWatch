@@ -24,3 +24,6 @@ FLIGHT_SATELLITE.md
 credo_export*.csv
 credo_useful*.csv
 *.csv.gz
+
+# Local hardware smoke result (platform-specific target results may be committed)
+fl_hardware_benchmark_local.json

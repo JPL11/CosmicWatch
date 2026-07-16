@@ -1,0 +1,127 @@
+{
+  "data": {
+    "rows": 3355891,
+    "chronological_train_rows": 2349123,
+    "test_rows": 1006768,
+    "test_coincidence_rate": 0.08403
+  },
+  "assumptions": {
+    "payload_bytes_per_event": 32,
+    "event_rate_hz": 1.3757,
+    "excludes_protocol_headers_radio_retries_and_idle_power": true
+  },
+  "policies": {
+    "transmit_all": {
+      "transmit_fraction": 1.0,
+      "data_reduction_x": 1.0,
+      "coincident_recall": 1.0,
+      "coincident_precision": 0.08403,
+      "events_per_day": 118860.5,
+      "payload_kib_per_day": 3714.39
+    },
+    "hardware_coincidence_only": {
+      "transmit_fraction": 0.08403,
+      "data_reduction_x": 11.9,
+      "coincident_recall": 1.0,
+      "coincident_precision": 1.0,
+      "events_per_day": 9988.1,
+      "payload_kib_per_day": 312.13
+    },
+    "adc_target_recall_50": {
+      "threshold": 475.0,
+      "transmit_fraction": 0.19837,
+      "data_reduction_x": 5.04,
+      "coincident_recall": 0.67643,
+      "coincident_precision": 0.28655,
+      "events_per_day": 23578.1,
+      "payload_kib_per_day": 736.81
+    },
+    "mlp_target_recall_50": {
+      "threshold": 0.771703,
+      "transmit_fraction": 0.24365,
+      "data_reduction_x": 4.1,
+      "coincident_recall": 0.78271,
+      "coincident_precision": 0.26995,
+      "events_per_day": 28960.5,
+      "payload_kib_per_day": 905.01
+    },
+    "adc_target_recall_75": {
+      "threshold": 329.0,
+      "transmit_fraction": 0.32575,
+      "data_reduction_x": 3.07,
+      "coincident_recall": 0.88785,
+      "coincident_precision": 0.22903,
+      "events_per_day": 38719.3,
+      "payload_kib_per_day": 1209.98
+    },
+    "mlp_target_recall_75": {
+      "threshold": 0.659803,
+      "transmit_fraction": 0.38234,
+      "data_reduction_x": 2.62,
+      "coincident_recall": 0.90741,
+      "coincident_precision": 0.19943,
+      "events_per_day": 45445.5,
+      "payload_kib_per_day": 1420.17
+    },
+    "adc_target_recall_90": {
+      "threshold": 238.0,
+      "transmit_fraction": 0.47384,
+      "data_reduction_x": 2.11,
+      "coincident_recall": 0.93358,
+      "coincident_precision": 0.16556,
+      "events_per_day": 56321.3,
+      "payload_kib_per_day": 1760.04
+    },
+    "mlp_target_recall_90": {
+      "threshold": 0.390279,
+      "transmit_fraction": 0.525,
+      "data_reduction_x": 1.9,
+      "coincident_recall": 0.94582,
+      "coincident_precision": 0.15139,
+      "events_per_day": 62402.3,
+      "payload_kib_per_day": 1950.07
+    },
+    "adc_target_recall_95": {
+      "threshold": 179.0,
+      "transmit_fraction": 0.62823,
+      "data_reduction_x": 1.59,
+      "coincident_recall": 0.96292,
+      "coincident_precision": 0.1288,
+      "events_per_day": 74672.0,
+      "payload_kib_per_day": 2333.5
+    },
+    "mlp_target_recall_95": {
+      "threshold": 0.178728,
+      "transmit_fraction": 0.69791,
+      "data_reduction_x": 1.43,
+      "coincident_recall": 0.97175,
+      "coincident_precision": 0.117,
+      "events_per_day": 82954.0,
+      "payload_kib_per_day": 2592.31
+    },
+    "adc_target_recall_99": {
+      "threshold": 113.0,
+      "transmit_fraction": 0.92177,
+      "data_reduction_x": 1.08,
+      "coincident_recall": 0.99371,
+      "coincident_precision": 0.09059,
+      "events_per_day": 109562.4,
+      "payload_kib_per_day": 3423.83
+    },
+    "mlp_target_recall_99": {
+      "threshold": 0.047806,
+      "transmit_fraction": 0.99869,
+      "data_reduction_x": 1.0,
+      "coincident_recall": 0.99995,
+      "coincident_precision": 0.08414,
+      "events_per_day": 118705.0,
+      "payload_kib_per_day": 3709.53
+    }
+  },
+  "interpretation": [
+    "This evaluates data volume and weak-label retention, not measured radio energy.",
+    "Hardware coincidence is an oracle for the existing weak label but discards unusual noncoincident events.",
+    "ADC and MLP thresholds are selected on the chronological training segment only."
+  ],
+  "runtime_seconds": 17.51
+}

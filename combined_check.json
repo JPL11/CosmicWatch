@@ -58,54 +58,113 @@
   },
   "mlp": {
     "combined": {
-      "threshold": 0.6221926027536391,
-      "accuracy": 0.7786,
-      "precision": 0.2581,
-      "recall": 0.7646,
-      "f1": 0.3859,
-      "true_positive": 3339,
-      "false_positive": 9597,
-      "true_negative": 34036,
-      "false_negative": 1028,
+      "threshold": 0.6490506422519684,
+      "accuracy": 0.7847,
+      "precision": 0.2605,
+      "recall": 0.7428,
+      "f1": 0.3857,
+      "true_positive": 3244,
+      "false_positive": 9210,
+      "true_negative": 34423,
+      "false_negative": 1123,
       "auc": 0.832
     },
     "parsed_test": {
-      "threshold": 0.6221926027536391,
-      "accuracy": 0.7264,
-      "precision": 0.2647,
-      "recall": 0.7483,
-      "f1": 0.391,
-      "true_positive": 2108,
-      "false_positive": 5857,
-      "true_negative": 15326,
-      "false_negative": 709,
+      "threshold": 0.6490506422519684,
+      "accuracy": 0.7331,
+      "precision": 0.2657,
+      "recall": 0.7224,
+      "f1": 0.3885,
+      "true_positive": 2035,
+      "false_positive": 5624,
+      "true_negative": 15559,
+      "false_negative": 782,
       "auc": 0.7922
     },
     "raw_test": {
-      "threshold": 0.6221926027536391,
-      "accuracy": 0.8309,
-      "precision": 0.2476,
-      "recall": 0.7942,
-      "f1": 0.3775,
-      "true_positive": 1231,
-      "false_positive": 3740,
-      "true_negative": 18710,
-      "false_negative": 319,
+      "threshold": 0.6490506422519684,
+      "accuracy": 0.8364,
+      "precision": 0.2521,
+      "recall": 0.78,
+      "f1": 0.3811,
+      "true_positive": 1209,
+      "false_positive": 3586,
+      "true_negative": 18864,
+      "false_negative": 341,
       "auc": 0.8667
     }
   },
+  "true_cross_deployment_transfer": {
+    "parsed_to_raw": {
+      "train_rows": 120000,
+      "test_rows": 120000,
+      "mlp": {
+        "threshold": 0.5757024621963501,
+        "accuracy": 0.6961,
+        "precision": 0.1962,
+        "recall": 0.9109,
+        "f1": 0.3228,
+        "true_positive": 8692,
+        "false_positive": 35621,
+        "true_negative": 74837,
+        "false_negative": 850,
+        "auc": 0.7718
+      },
+      "adc_threshold": {
+        "threshold": 258.0,
+        "accuracy": 0.7037,
+        "precision": 0.2003,
+        "recall": 0.9111,
+        "f1": 0.3284,
+        "true_positive": 8694,
+        "false_positive": 34709,
+        "true_negative": 75749,
+        "false_negative": 848,
+        "auc": 0.8726
+      }
+    },
+    "raw_to_parsed": {
+      "train_rows": 120000,
+      "test_rows": 120000,
+      "mlp": {
+        "threshold": 0.6914496845006944,
+        "accuracy": 0.7838,
+        "precision": 0.2665,
+        "recall": 0.4504,
+        "f1": 0.3349,
+        "true_positive": 6530,
+        "false_positive": 17973,
+        "true_negative": 87530,
+        "false_negative": 7967,
+        "auc": 0.7729
+      },
+      "adc_threshold": {
+        "threshold": 420.0,
+        "accuracy": 0.8117,
+        "precision": 0.2476,
+        "recall": 0.2739,
+        "f1": 0.2601,
+        "true_positive": 3971,
+        "false_positive": 12064,
+        "true_negative": 93439,
+        "false_negative": 10526,
+        "auc": 0.7856
+      }
+    },
+    "note": "Each direction trains on one deployment only; no target-deployment rows enter training."
+  },
   "raw_poisson_walltime": {
-    "events": 10000,
-    "mean_interarrival_s": 4.451,
-    "rate_hz": 0.2247,
-    "cv": 1.149,
+    "events": 2773823,
+    "mean_interarrival_s": 0.419,
+    "rate_hz": 2.3878,
+    "cv": 1.015,
     "verdict": "Poisson"
   },
   "findings": [
-    "Coincidence rate differs by epoch: parsed 0.1208 (2025) vs raw 0.0795 (2026) \u2014 confirms the detector-response drift.",
-    "Edge accuracy holds on 6x data: combined MLP F1 0.3859 (ADC baseline 0.3434) \u2014 same ~0.40 ceiling as the 582k-only result; more data does not change it (physics + weak label bound it).",
-    "Cross-epoch generalization: a model trained on combined data scores F1 0.391 on parsed-test and 0.3775 on raw-test \u2014 it transfers across the two deployments.",
-    "Raw partition is genuinely Poisson too: wall_time inter-arrival CV 1.149 (Poisson) at 0.2247 Hz."
+    "Coincidence rate differs by deployment: parsed 0.1208 vs raw 0.0795 \u2014 confirms detector-response drift.",
+    "Edge accuracy holds on 6x data: combined MLP F1 0.3857 (ADC baseline 0.3434) \u2014 same ~0.40 ceiling as the 582k-only result; more data does not change it (physics + weak label bound it).",
+    "True cross-deployment transfer (no target rows in training): parsed->raw F1 0.3228; raw->parsed F1 0.3349.",
+    "Raw partition is genuinely Poisson: full-export wall_time inter-arrival CV 1.015 (Poisson) at 2.3878 Hz."
   ],
-  "runtime_seconds": 126.82
+  "runtime_seconds": 120.31
 }
