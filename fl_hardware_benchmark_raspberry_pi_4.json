@@ -1,0 +1,82 @@
+{
+  "platform": {
+    "system": "Linux",
+    "machine": "aarch64",
+    "platform": "Linux-6.18.37-v8+-aarch64-with-glibc2.36",
+    "python": "3.11.2",
+    "torch": "2.13.0+cpu",
+    "compute_device": "cpu",
+    "cuda_name": null,
+    "torch_threads": 4
+  },
+  "workload": {
+    "real_device_id": "13",
+    "train_images": 2400,
+    "test_images": 600,
+    "rounds": 6,
+    "local_epochs_per_round": 1,
+    "batch_size": 256,
+    "parameters": 26584,
+    "float32_update_bytes": 106336,
+    "raw_grayscale_train_bytes": 960000
+  },
+  "performance": {
+    "total_train_seconds": 5.402396,
+    "mean_seconds_per_round": 0.900399,
+    "images_per_second": 2665.48,
+    "final_test_weighted_mse": 0.062642,
+    "max_rss_mib": 323.42,
+    "history": [
+      {
+        "round": 1,
+        "seconds": 4.59433,
+        "train_weighted_mse": 0.2394469
+      },
+      {
+        "round": 2,
+        "seconds": 0.159043,
+        "train_weighted_mse": 0.2205342
+      },
+      {
+        "round": 3,
+        "seconds": 0.161025,
+        "train_weighted_mse": 0.1967103
+      },
+      {
+        "round": 4,
+        "seconds": 0.165322,
+        "train_weighted_mse": 0.1666413
+      },
+      {
+        "round": 5,
+        "seconds": 0.155442,
+        "train_weighted_mse": 0.130639
+      },
+      {
+        "round": 6,
+        "seconds": 0.166986,
+        "train_weighted_mse": 0.0893182
+      }
+    ]
+  },
+  "sensors": {
+    "before": {
+      "cpu_temp_c": 47.71,
+      "cpu_freq_mhz": 1800.0,
+      "vcgencmd_measure_temp": "temp=47.7'C",
+      "vcgencmd_measure_volts_core": "volt=0.9160V",
+      "vcgencmd_get_throttled": "throttled=0x0"
+    },
+    "after": {
+      "cpu_temp_c": 49.66,
+      "cpu_freq_mhz": 1800.0,
+      "vcgencmd_measure_temp": "temp=49.6'C",
+      "vcgencmd_measure_volts_core": "volt=0.9160V",
+      "vcgencmd_get_throttled": "throttled=0x0"
+    }
+  },
+  "power": {
+    "measurement_required": true
+  },
+  "interpretation": "This is one real FL client's local workload; FedAvg aggregation is negligible and is not timed."
+}
