@@ -89,6 +89,39 @@ Use average `VDD_IN` readings from `tegrastats` for the wattage arguments, then 
 not win for this 26,584-parameter autoencoder because launch and transfer overhead are significant; that is a
 result to measure, not assume.
 
+## Power measurement on the Pi 4
+
+The Pi 4 exposes no software-readable power sensor. `vcgencmd` reports core voltage and throttle state but
+no current, so no on-board procedure yields board watts; the committed Pi 4 results correctly leave
+`measurement_required` set. A Pi 5 reports per-rail current via `vcgencmd pmic_read_adc`, and the Jetson's
+INA3221 rails are read by `tegrastats` — only the Pi 4 requires external hardware.
+
+Measurement options, cheapest first:
+
+1. Inline USB-C meter between the official PSU and the Pi (the setup this document assumes). A logging
+   meter (FNIRSI FNB48, AVHzY CT-3, RD UM25C) is preferred so the run can be averaged instead of read by
+   eye. Measures true 5 V board draw.
+2. Energy-monitoring smart plug at the wall with a local API (Shelly Plug S, Tasmota). Roughly 1 s
+   resolution and ±0.5 W, and it includes PSU conversion loss — the honest number for a 24/7 deployment's
+   energy budget. Fully scriptable: poll the API during a run and average.
+3. INA260/INA219 breakout spliced into the 5 V line, read over I²C by a second device. Highest fidelity
+   and sample rate; requires a pass-through cable.
+
+Procedure once a meter is attached:
+
+- Idle: gateway blocked on input, average watts for 2–3 minutes → `--idle-watts`.
+- FL load: run `fl_hardware_benchmark.py` with enough rounds for a stable average (for example
+  `--rounds 200`, about 40 s of steady state on the Pi 4 at ~0.16 s/round), then rerun with
+  `--idle-watts` / `--load-watts` to fill total and active joules. The first round pays a one-time ~4 s
+  torch lazy-initialization cost; use the per-round history to exclude it or amortize it explicitly.
+- Gateway under a realistic stream: replay at the measured event rate for several minutes. The measured
+  CPU duty fraction at 1.38 Hz is 0.041%, so the expected result is load ≈ idle; confirming that is the
+  substance of the always-on-gateway decision criterion below.
+
+If measured idle lands well above ~3 W, disable HDMI, activity LEDs, and unused USB before attributing
+the draw to the workload. Published typical Pi 4 figures (idle ~2.7 W, load ~4.1 W) are sanity checks
+only — do not substitute them for measurements in result JSONs.
+
 ## Decision criteria
 
 - Prefer the Pi as the always-on gateway if it meets reliability and I/O requirements at lower board power.
