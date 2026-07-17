@@ -1,0 +1,38 @@
+{
+  "platform": {
+    "machine": "aarch64",
+    "processor": "aarch64",
+    "python": "3.12.3"
+  },
+  "model": {
+    "arch": "MLP(4->8->1)",
+    "parameters": 49,
+    "float32_bytes": 196,
+    "int8_bytes": 49
+  },
+  "trained_on_events": null,
+  "benchmark": {
+    "per_event_us_numpy": 60.65,
+    "throughput_eps_numpy": 5528288.8,
+    "per_event_us_pure_python": 24.25,
+    "headroom_vs_event_rate": 4018528.0
+  },
+  "power": {
+    "sustained_throughput_eps": 7715362.1,
+    "duration_s": 30.0,
+    "sensors_before": {
+      "cpu_temp_c": 48.9,
+      "cpu_freq_mhz": 960.0
+    },
+    "sensors_after": {
+      "cpu_temp_c": 48.9,
+      "cpu_freq_mhz": 960.0
+    },
+    "load_watts": 3.979,
+    "energy_per_inference_uJ": 0.5157,
+    "idle_watts": 3.577,
+    "active_watts": 0.402,
+    "active_energy_per_inference_uJ": 0.0521
+  },
+  "interpretation": "49 bytes (int8). numpy inference 60.65 us/event, 5,528,289 events/s = 4,018,528x the 1.3757 Hz detector rate. Re-run on the target Raspberry Pi for on-device numbers."
+}

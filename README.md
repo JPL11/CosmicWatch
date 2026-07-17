@@ -125,12 +125,19 @@ energy-per-inference figure.
 | x86_64 dev (baseline) | ~5–7 | ~2.4 | ~105M | — | — | — |
 | Raspberry Pi 4 (measured 2026-07-01)¹ | 77.0 | 30.0 | 5.27M | | | |
 | Raspberry Pi 400 (measured 2026-07-01) | 78.2 | 29.3 | 6.25M | | | |
-| Jetson Orin Nano (7W) | | | | | | |
-| Jetson Orin Nano (MAXN) | | | | | | |
+| Jetson Orin Nano 7W (measured 2026-07-17)² | 60.7 | 24.3 | 7.72M | 3.58 | 3.98 | 0.52 (0.052 active) |
+| Jetson Orin Nano 15W/MAXN (measured 2026-07-17)² | 38.4 | 15.3 | 12.25M | 3.74 | 4.64 | 0.38 (0.074 active) |
 
 ¹ The Pi 4 run showed **active under-voltage throttling** (`get_throttled=0x50005`, core volts sagged to
 0.85 V) — its numbers are a floor; use the official 5.1 V/3 A supply and re-run before power measurement.
 The Pi 400 ran clean (better thermals/supply), which is why it out-sustains the Pi 4 at the same clock.
+
+² Jetson power is the board-input **VDD_IN rail read from the onboard INA3221** (sysfs, 5 Hz sampling,
+median over 25 s idle / 35 s mid-load) — no USB meter. This dev kit's JetPack exposes two modes:
+7W (mode 1, 4 cores) and 15W (mode 0, 6 cores, the "MAXN" of the original Orin Nano). µJ/inference is
+total load power over sustained throughput; "active" uses (load − idle) W, i.e. the marginal cost with
+the desktop session's idle draw excluded. Results: `pi_benchmark_jetson_orin_nano_7w.json` /
+`pi_benchmark_jetson_orin_nano_15w.json`.
 
 Two measured cross-platform findings: (a) even a Pi has ~3×10⁶ headroom over the detector rate — at
 1.4–2.8 Hz the classifier is ~0.01% CPU duty cycle, so the *board's idle power* is the whole budget;
