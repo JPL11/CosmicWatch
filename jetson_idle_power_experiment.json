@@ -1,0 +1,26 @@
+{
+  "purpose": "Idle-power minimization experiment on the Jetson Orin Nano Dev Kit: since the edge classifier is ~10^-6 duty cycle at real event rates, board idle power is the entire deployment power budget. This measures how much of that idle is actually reducible by software configuration (desktop vs headless, 7W vs 15W nvpmodel).",
+  "method": "VDD_IN board-input rail read from the onboard INA3221 via sysfs (in1_input mV x curr1_input mA), 5 Hz sampling, median over the stated window. 'Settled' samples were taken after 1-min load average dropped below 0.15. JetPack Ubuntu, Orin Nano Dev Kit carrier board, no display sleep forced, fan in default profile.",
+  "measurements": [
+    {"label": "15W desktop idle (2026-07-17, post-boot)", "median_w": 3.738, "duration_s": 25,
+     "note": "taken minutes after boot, desktop session up, SSH via USB gadget"},
+    {"label": "7W desktop idle (2026-07-17, post-boot)", "median_w": 3.577, "duration_s": 25,
+     "note": "taken ~5 min after reboot into 7W mode"},
+    {"label": "15W desktop idle (2026-07-18, mid-session)", "median_w": 3.140, "duration_s": 25,
+     "note": "anomalously low sample; same nominal state as the settled desktop measurement below, which read 0.56 W higher. Demonstrates untracked state dependence (suspects: fan state, network path, EMC/regulator state). Raw file was named idle_7w_desktop.json but the board was in 15W mode"},
+    {"label": "15W headless idle (settled, 2026-07-18)", "median_w": 3.657, "duration_s": 60,
+     "note": "graphical.target stopped; CPU 0%, GR3D 0%; rails: VDD_CPU_GPU_CV 0.481 W, VDD_SOC 1.165 W"},
+    {"label": "15W desktop idle (settled, 2026-07-18)", "median_w": 3.698, "duration_s": 60,
+     "note": "graphical.target restored, same LAN SSH path as headless sample; rails identical: VDD_CPU_GPU_CV 0.481 W, VDD_SOC 1.165 W"}
+  ],
+  "findings": {
+    "headless_saving_w": 0.041,
+    "headless_saving_note": "Desktop vs headless is a null result: 3.698 vs 3.657 W (~1%), within the board's own idle wander. An idle desktop costs essentially nothing because the GPU rail-gates either way (GR3D 0%, identical per-rail readings).",
+    "power_mode_saving_w": 0.16,
+    "power_mode_saving_note": "7W mode saves ~0.16 W idle vs 15W while costing 37% of (unused) throughput.",
+    "idle_floor_w": 3.66,
+    "idle_floor_breakdown": "Of ~3.7 W idle: VDD_SOC 1.17 W + VDD_CPU_GPU_CV 0.48 W; the remaining ~2 W is dev-kit carrier overhead (regulators, PHYs, fan, USB) not addressable from software.",
+    "variability_w": "Idle wanders 3.14-3.74 W across sessions under nominally identical conditions; single idle samples carry ~+/-0.3 W of state uncertainty.",
+    "conclusion": "Software configuration cannot meaningfully reduce the Orin Nano Dev Kit idle floor (~3.6-3.7 W). For a flight/low-power deployment the levers are hardware: a custom carrier for the module, aggressive duty-cycling/deep sleep, or moving the (49-parameter, pure-Python-capable) classifier to a microcontroller-class device where idle is milliwatts."
+  }
+}
