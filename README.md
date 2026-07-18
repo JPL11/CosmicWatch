@@ -123,14 +123,16 @@ energy-per-inference figure.
 | Platform | µs/event (numpy) | µs/event (pure py) | sustained events/s | idle W | load W | µJ/inference |
 |---|--:|--:|--:|--:|--:|--:|
 | x86_64 dev (baseline) | ~5–7 | ~2.4 | ~105M | — | — | — |
-| Raspberry Pi 4 (measured 2026-07-01)¹ | 77.0 | 30.0 | 5.27M | | | |
+| Raspberry Pi 4 (re-measured 2026-07-18, clean supply)¹ | 75.9 | 29.9 | 6.80M | | | |
 | Raspberry Pi 400 (measured 2026-07-01) | 78.2 | 29.3 | 6.25M | | | |
 | Jetson Orin Nano 7W (measured 2026-07-17)² | 60.7 | 24.3 | 7.72M | 3.58 | 3.98 | 0.52 (0.052 active) |
 | Jetson Orin Nano 15W/MAXN (measured 2026-07-17)² | 38.4 | 15.3 | 12.25M | 3.74 | 4.64 | 0.38 (0.074 active) |
 
-¹ The Pi 4 run showed **active under-voltage throttling** (`get_throttled=0x50005`, core volts sagged to
-0.85 V) — its numbers are a floor; use the official 5.1 V/3 A supply and re-run before power measurement.
-The Pi 400 ran clean (better thermals/supply), which is why it out-sustains the Pi 4 at the same clock.
+¹ The original 2026-07-01 Pi 4 run was under-voltage throttling (`0x50005`, core sagged to 0.85 V —
+root cause: powered from a desktop USB-C data port). Re-run 2026-07-18 on a proper supply
+(`throttled=0x0` before and after, core 0.916 V): single-event latency was barely affected
+(77.0→75.9 µs) but **sustained throughput rose 29%** (5.27M→6.80M ev/s) — under-voltage capped
+sustained clocks, not single-shot latency. The clean Pi 4 out-sustains the Pi 400.
 
 ² Jetson power is the board-input **VDD_IN rail read from the onboard INA3221** (sysfs, 5 Hz sampling,
 median over 25 s idle / 35 s mid-load) — no USB meter. This dev kit's JetPack exposes two modes:
@@ -146,3 +148,14 @@ a 49-parameter model), so on-device single-event paths should skip numpy entirel
 
 For context: the detector event rate is ~1.4–2.8 Hz, so every platform above has ≥10⁶× headroom —
 the scientifically interesting number is **energy per inference** (the flight power budget), not speed.
+
+### Idle-power experiment (Jetson, measured 2026-07-18)
+
+Because the classifier is ~10⁻⁶ duty cycle at real rates, board **idle** power is the whole budget —
+so we measured how much of the Orin Nano's idle is software-reducible (`jetson_idle_power_experiment.json`).
+Answer: essentially none. Desktop vs headless is a null result (3.70 vs 3.66 W, rails identical —
+the GPU rail-gates either way); 7W mode saves only ~0.16 W. The ~3.7 W floor is VDD_SOC (1.17 W) +
+CPU/GPU/CV (0.48 W) + ~2 W of dev-kit carrier overhead (regulators, PHYs, fan) that software can't
+touch. Idle also wanders 3.1–3.7 W across sessions, so single idle samples carry ±0.3 W uncertainty.
+Implication: low-power deployment is a *hardware* decision — custom carrier, duty-cycling/deep sleep,
+or an MCU (the pure-Python path exists precisely for that) — not a software-config one.
