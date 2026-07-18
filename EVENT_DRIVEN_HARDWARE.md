@@ -89,6 +89,28 @@ Use average `VDD_IN` readings from `tegrastats` for the wattage arguments, then 
 not win for this 26,584-parameter autoencoder because launch and transfer overhead are significant; that is a
 result to measure, not assume.
 
+### Measured results (2026-07-18, 15W mode, torch 2.13.0+cu130 in `~/torchenv`)
+
+`fl_hardware_benchmark_jetson_15w_cpu.json` / `fl_hardware_benchmark_jetson_15w_cuda.json`. Power is the
+INA3221 VDD_IN median (5 Hz sysfs sampling): idle 3.18 W (rock-stable across four samples), load measured
+mid-run during long sustained probes (1000 CPU / 700 CUDA rounds), because the 6-round workload finishes
+too fast to sample. Note this JetPack-7 PyPI wheel excludes CC 8.7 from its binary kernels, so CUDA runs
+via PTX JIT — it works, with a first-use JIT cost but no steady-state penalty observed.
+
+| device | 6-round s/round | steady s/round | load W | active W | steady J/round (total) | steady J/round (active) |
+|---|--:|--:|--:|--:|--:|--:|
+| CPU (6× A78AE) | 0.438 | 0.063 | 5.95 | 2.77 | 0.37 | 0.17 |
+| CUDA (Orin iGPU) | 0.481 | 0.110 | 3.89 | 0.71 | 0.43 | 0.08 |
+
+The hypothesis above is confirmed on throughput: in steady state the **CPU is ~1.8× faster per round** than
+the GPU for this 26,584-parameter model (launch/transfer overhead dominates; the quick 6-round comparison is
+misleading because round 1 carries ~4 s of one-time warmup). But the GPU trains at barely above idle power,
+so it wins **~2.2× on active energy** (0.08 vs 0.17 J/round). Either way the absolute numbers are tiny —
+one FL round costs less than half a joule — and, as with inference, the deployment budget is the 3.18 W
+idle floor, not the compute. The Jetson's per-round time equals the Pi 4's (0.44 vs 0.90 s/round on the
+6-round workload, 6× faster in steady state), so a Jetson FL client is justified by GPU-sized models only,
+which this autoencoder is not.
+
 ## Power measurement on the Pi 4
 
 The Pi 4 exposes no software-readable power sensor. `vcgencmd` reports core voltage and throttle state but

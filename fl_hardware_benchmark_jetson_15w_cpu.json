@@ -1,0 +1,85 @@
+{
+  "platform": {
+    "system": "Linux",
+    "machine": "aarch64",
+    "platform": "Linux-6.8.12-1021-tegra-aarch64-with-glibc2.39",
+    "python": "3.12.3",
+    "torch": "2.13.0+cu130",
+    "compute_device": "cpu",
+    "cuda_name": null,
+    "torch_threads": 6
+  },
+  "workload": {
+    "real_device_id": "13",
+    "train_images": 2400,
+    "test_images": 600,
+    "rounds": 6,
+    "local_epochs_per_round": 1,
+    "batch_size": 256,
+    "parameters": 26584,
+    "float32_update_bytes": 106336,
+    "raw_grayscale_train_bytes": 960000
+  },
+  "performance": {
+    "total_train_seconds": 2.625093,
+    "mean_seconds_per_round": 0.437516,
+    "images_per_second": 5485.52,
+    "final_test_weighted_mse": 0.0786716,
+    "max_rss_mib": 756.64,
+    "history": [
+      {
+        "round": 1,
+        "seconds": 2.299723,
+        "train_weighted_mse": 0.2418143
+      },
+      {
+        "round": 2,
+        "seconds": 0.070863,
+        "train_weighted_mse": 0.2198253
+      },
+      {
+        "round": 3,
+        "seconds": 0.063588,
+        "train_weighted_mse": 0.1950293
+      },
+      {
+        "round": 4,
+        "seconds": 0.062367,
+        "train_weighted_mse": 0.1662554
+      },
+      {
+        "round": 5,
+        "seconds": 0.064974,
+        "train_weighted_mse": 0.1339304
+      },
+      {
+        "round": 6,
+        "seconds": 0.063456,
+        "train_weighted_mse": 0.099655
+      }
+    ]
+  },
+  "sensors": {
+    "before": {
+      "cpu_temp_c": 48.84,
+      "cpu_freq_mhz": 1510.4,
+      "nvpmodel": "NV Power Mode: 15W\n0"
+    },
+    "after": {
+      "cpu_temp_c": 49.47,
+      "cpu_freq_mhz": 1510.4,
+      "nvpmodel": "NV Power Mode: 15W\n0"
+    }
+  },
+  "power": {
+    "measurement_required": false,
+    "load_watts": 5.952,
+    "idle_watts": 3.18,
+    "total_joules": 15.6246,
+    "joules_per_round": 2.6041,
+    "joules_per_training_image": 0.00108504,
+    "active_joules": 7.2768,
+    "active_joules_per_round": 1.2128
+  },
+  "interpretation": "This is one real FL client's local workload; FedAvg aggregation is negligible and is not timed."
+}
