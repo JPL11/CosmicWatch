@@ -16,6 +16,8 @@ FLIGHT_SATELLITE.md
 
 # PDFs: source slides/briefs and the generated one-pager
 *.pdf
+# ...except the shareable hardware benchmark brief (numbers all come from committed JSONs)
+!hardware_benchmark_brief.pdf
 
 # LaTeX build artifacts
 *.tex
