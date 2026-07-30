@@ -7,15 +7,15 @@
   },
   "data": {
     "events": {
-      "rows": 50000,
-      "coincident": 6258,
-      "noncoincident": 43742,
-      "coincident_rate": 0.1252,
+      "rows": 237716,
+      "coincident": 29130,
+      "noncoincident": 208586,
+      "coincident_rate": 0.1225,
       "time_range_utc": {
         "start": "2026-01-23T00:00:00Z",
-        "end": "2026-01-23T10:39:36Z"
+        "end": "2026-01-24T23:59:58Z"
       },
-      "event_rate_hz": 1.3029,
+      "event_rate_hz": 1.3757,
       "median_interarrival_ms": 1000.0
     },
     "image_clients": {
@@ -30,122 +30,152 @@
     }
   },
   "config": {
-    "rounds": 10,
+    "rounds": 15,
     "event_clients": 8,
     "image_clients": 8
   },
   "event_modality": {
     "federated": {
-      "threshold": 0.49577556848526,
-      "accuracy": 0.7804,
-      "precision": 0.2617,
-      "recall": 0.4424,
-      "f1": 0.3289,
-      "true_positive": 538,
-      "false_positive": 1518,
-      "true_negative": 7266,
-      "false_negative": 678,
-      "auc": 0.644
+      "threshold": 0.5128759169578552,
+      "accuracy": 0.7204,
+      "precision": 0.2673,
+      "recall": 0.7608,
+      "f1": 0.3956,
+      "true_positive": 4349,
+      "false_positive": 11924,
+      "true_negative": 29904,
+      "false_negative": 1367,
+      "auc": 0.775
     },
     "centralized": {
-      "threshold": 0.5957604217529298,
-      "accuracy": 0.7229,
-      "precision": 0.2727,
-      "recall": 0.7673,
-      "f1": 0.4024,
-      "true_positive": 933,
-      "false_positive": 2488,
-      "true_negative": 6296,
-      "false_negative": 283,
-      "auc": 0.7911
+      "threshold": 0.606421480178833,
+      "accuracy": 0.7172,
+      "precision": 0.272,
+      "recall": 0.8067,
+      "f1": 0.4069,
+      "true_positive": 4611,
+      "false_positive": 12339,
+      "true_negative": 29489,
+      "false_negative": 1105,
+      "auc": 0.7971
     }
   },
   "image_modality": {
     "federated": {
-      "weighted_mse": 0.040418,
-      "worst_device_weighted_mse": 0.0651656
+      "weighted_mse": 0.0292228,
+      "worst_device_weighted_mse": 0.0588017
     },
     "centralized": {
-      "weighted_mse": 0.0069412,
-      "worst_device_weighted_mse": 0.0218971
+      "weighted_mse": 0.0051557,
+      "worst_device_weighted_mse": 0.0164928
     }
   },
   "rounds_history": [
     {
       "round": 1,
-      "event_f1": 0.2783,
-      "event_auc": 0.5091,
+      "event_f1": 0.2087,
+      "event_auc": 0.5387,
       "image_weighted_mse": 0.2191635
     },
     {
       "round": 2,
-      "event_f1": 0.2861,
-      "event_auc": 0.523,
+      "event_f1": 0.2465,
+      "event_auc": 0.6066,
       "image_weighted_mse": 0.191396
     },
     {
       "round": 3,
-      "event_f1": 0.2957,
-      "event_auc": 0.5448,
+      "event_f1": 0.3046,
+      "event_auc": 0.6888,
       "image_weighted_mse": 0.1433931
     },
     {
       "round": 4,
-      "event_f1": 0.3044,
-      "event_auc": 0.5651,
+      "event_f1": 0.3673,
+      "event_auc": 0.7246,
       "image_weighted_mse": 0.0923622
     },
     {
       "round": 5,
-      "event_f1": 0.3123,
-      "event_auc": 0.5835,
+      "event_f1": 0.3811,
+      "event_auc": 0.7401,
       "image_weighted_mse": 0.0669673
     },
     {
       "round": 6,
-      "event_f1": 0.3187,
-      "event_auc": 0.6105,
+      "event_f1": 0.3849,
+      "event_auc": 0.7525,
       "image_weighted_mse": 0.0565958
     },
     {
       "round": 7,
-      "event_f1": 0.3193,
-      "event_auc": 0.6168,
+      "event_f1": 0.3863,
+      "event_auc": 0.7633,
       "image_weighted_mse": 0.0508107
     },
     {
       "round": 8,
-      "event_f1": 0.3246,
-      "event_auc": 0.6308,
+      "event_f1": 0.3905,
+      "event_auc": 0.7679,
       "image_weighted_mse": 0.0466188
     },
     {
       "round": 9,
-      "event_f1": 0.3274,
-      "event_auc": 0.6425,
+      "event_f1": 0.3918,
+      "event_auc": 0.7706,
       "image_weighted_mse": 0.04324
     },
     {
       "round": 10,
-      "event_f1": 0.3289,
-      "event_auc": 0.644,
+      "event_f1": 0.3896,
+      "event_auc": 0.7694,
       "image_weighted_mse": 0.040418
+    },
+    {
+      "round": 11,
+      "event_f1": 0.3919,
+      "event_auc": 0.7718,
+      "image_weighted_mse": 0.0379158
+    },
+    {
+      "round": 12,
+      "event_f1": 0.3923,
+      "event_auc": 0.7725,
+      "image_weighted_mse": 0.0356154
+    },
+    {
+      "round": 13,
+      "event_f1": 0.3918,
+      "event_auc": 0.7727,
+      "image_weighted_mse": 0.0335557
+    },
+    {
+      "round": 14,
+      "event_f1": 0.3925,
+      "event_auc": 0.7733,
+      "image_weighted_mse": 0.0314194
+    },
+    {
+      "round": 15,
+      "event_f1": 0.3956,
+      "event_auc": 0.775,
+      "image_weighted_mse": 0.0292228
     }
   ],
   "communication": {
     "event_modality": {
       "model_parameters": 57,
       "bytes_per_update_float32": 228,
-      "federated_total_bytes_with_broadcast": 36480,
-      "raw_data_bytes_if_centralized": 800000,
-      "federated_vs_raw_ratio": 0.0456
+      "federated_total_bytes_with_broadcast": 54720,
+      "raw_data_bytes_if_centralized": 3803440,
+      "federated_vs_raw_ratio": 0.0144
     },
     "image_modality": {
       "model_parameters": 26584,
       "bytes_per_update_float32": 106336,
-      "federated_total_bytes_with_broadcast": 17013760,
+      "federated_total_bytes_with_broadcast": 25520640,
       "raw_data_bytes_if_centralized": 5229600,
-      "federated_vs_raw_ratio": 3.2534
+      "federated_vs_raw_ratio": 4.88
     },
     "note": "the communication win is modality-dependent: tiny event model vs large raw stream wins; 26.6k-param image model vs 400-byte images does not"
   },
@@ -158,5 +188,5 @@
     "plots_multimodal/multimodal_convergence.png",
     "plots_multimodal/multimodal_communication.png"
   ],
-  "runtime_seconds": 106.53
+  "runtime_seconds": 283.66
 }
