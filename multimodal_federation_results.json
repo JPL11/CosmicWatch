@@ -1,0 +1,162 @@
+{
+  "framing": {
+    "claim": "One FedAvg orchestration layer serves two sensor modalities with separate model heads; the federation is the shared layer, not the representation.",
+    "real": "event features/labels are real ES data; image clients are 8 real devices",
+    "simulated": "the event-side client split is synthetic (one physical detector)",
+    "not_done_and_why": "no shared cross-modal latent space: all sources are temporally disjoint (zero cross-source coincidence), so per-sample fusion has no data to validate against"
+  },
+  "data": {
+    "events": {
+      "rows": 50000,
+      "coincident": 6258,
+      "noncoincident": 43742,
+      "coincident_rate": 0.1252,
+      "time_range_utc": {
+        "start": "2026-01-23T00:00:00Z",
+        "end": "2026-01-23T10:39:36Z"
+      },
+      "event_rate_hz": 1.3029,
+      "median_interarrival_ms": 1000.0
+    },
+    "image_clients": {
+      "13": 2400,
+      "1": 2400,
+      "34": 2400,
+      "30": 1758,
+      "28": 1388,
+      "65": 1200,
+      "38": 769,
+      "48": 759
+    }
+  },
+  "config": {
+    "rounds": 10,
+    "event_clients": 8,
+    "image_clients": 8
+  },
+  "event_modality": {
+    "federated": {
+      "threshold": 0.49577556848526,
+      "accuracy": 0.7804,
+      "precision": 0.2617,
+      "recall": 0.4424,
+      "f1": 0.3289,
+      "true_positive": 538,
+      "false_positive": 1518,
+      "true_negative": 7266,
+      "false_negative": 678,
+      "auc": 0.644
+    },
+    "centralized": {
+      "threshold": 0.5957604217529298,
+      "accuracy": 0.7229,
+      "precision": 0.2727,
+      "recall": 0.7673,
+      "f1": 0.4024,
+      "true_positive": 933,
+      "false_positive": 2488,
+      "true_negative": 6296,
+      "false_negative": 283,
+      "auc": 0.7911
+    }
+  },
+  "image_modality": {
+    "federated": {
+      "weighted_mse": 0.040418,
+      "worst_device_weighted_mse": 0.0651656
+    },
+    "centralized": {
+      "weighted_mse": 0.0069412,
+      "worst_device_weighted_mse": 0.0218971
+    }
+  },
+  "rounds_history": [
+    {
+      "round": 1,
+      "event_f1": 0.2783,
+      "event_auc": 0.5091,
+      "image_weighted_mse": 0.2191635
+    },
+    {
+      "round": 2,
+      "event_f1": 0.2861,
+      "event_auc": 0.523,
+      "image_weighted_mse": 0.191396
+    },
+    {
+      "round": 3,
+      "event_f1": 0.2957,
+      "event_auc": 0.5448,
+      "image_weighted_mse": 0.1433931
+    },
+    {
+      "round": 4,
+      "event_f1": 0.3044,
+      "event_auc": 0.5651,
+      "image_weighted_mse": 0.0923622
+    },
+    {
+      "round": 5,
+      "event_f1": 0.3123,
+      "event_auc": 0.5835,
+      "image_weighted_mse": 0.0669673
+    },
+    {
+      "round": 6,
+      "event_f1": 0.3187,
+      "event_auc": 0.6105,
+      "image_weighted_mse": 0.0565958
+    },
+    {
+      "round": 7,
+      "event_f1": 0.3193,
+      "event_auc": 0.6168,
+      "image_weighted_mse": 0.0508107
+    },
+    {
+      "round": 8,
+      "event_f1": 0.3246,
+      "event_auc": 0.6308,
+      "image_weighted_mse": 0.0466188
+    },
+    {
+      "round": 9,
+      "event_f1": 0.3274,
+      "event_auc": 0.6425,
+      "image_weighted_mse": 0.04324
+    },
+    {
+      "round": 10,
+      "event_f1": 0.3289,
+      "event_auc": 0.644,
+      "image_weighted_mse": 0.040418
+    }
+  ],
+  "communication": {
+    "event_modality": {
+      "model_parameters": 57,
+      "bytes_per_update_float32": 228,
+      "federated_total_bytes_with_broadcast": 36480,
+      "raw_data_bytes_if_centralized": 800000,
+      "federated_vs_raw_ratio": 0.0456
+    },
+    "image_modality": {
+      "model_parameters": 26584,
+      "bytes_per_update_float32": 106336,
+      "federated_total_bytes_with_broadcast": 17013760,
+      "raw_data_bytes_if_centralized": 5229600,
+      "federated_vs_raw_ratio": 3.2534
+    },
+    "note": "the communication win is modality-dependent: tiny event model vs large raw stream wins; 26.6k-param image model vs 400-byte images does not"
+  },
+  "caveats": [
+    "event federation is SIMULATED (synthetic partition of one physical detector)",
+    "image federation uses real device partitions but runs on one machine here; per-client on-device cost is measured separately (fl_hardware_benchmark_*.json)",
+    "coincident is a weak hardware label; the event F1 ceiling ~0.40 is label noise, not model capacity"
+  ],
+  "plots": [
+    "plots_multimodal/multimodal_convergence.png",
+    "plots_multimodal/multimodal_communication.png"
+  ],
+  "runtime_seconds": 106.53
+}
