@@ -11,7 +11,7 @@ import numpy as np
 import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
-                        pack_state, unpack_state)
+                        pack_state, unpack_state, Int8EF)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--server", required=True)
@@ -40,11 +40,14 @@ send_msg(sock, {"host": args.host, "clients": cids})
 
 net = model()
 pulls = 0
+comp = None
 while True:
     msg, _ = recv_msg(sock)
     if msg.get("stop"):
         break
     wire = msg.get("wire", "fp32")
+    if wire == "int8ef" and comp is None:
+        comp = Int8EF()
     global_state = unpack_state(msg["state"], wire)
     per_client_states, ns = [], []
     t_train0 = time.time()
@@ -69,7 +72,7 @@ while True:
            for k in per_client_states[0]}
     send_msg(sock, {"host": args.host, "n": total,
                     "base_version": msg["version"],
-                    "state": pack_state(agg, wire),
+                    "state": comp.pack(agg) if comp else pack_state(agg, wire),
                     "timing": {"train_s": round(t_train, 3),
                                "n_logical_clients": len(cids)}})
     pulls += 1

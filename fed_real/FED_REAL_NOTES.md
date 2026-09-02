@@ -122,6 +122,18 @@ fed_common.py, `--wire` flag). Heterogeneous fleet, same 12 s budget:
   floor engages" shape as the PTQ results in the quantization work.
   At this scale fp16 is strictly the right wire format; int8 would
   only win where bytes are the actual constraint (WAN/cellular).
+- **int8 + error feedback** (`int8ef`: each endpoint carries its
+  quantization residual into the next pack, 1-bit-SGD / EF-SGD
+  style): tail-window (9-12 s) mean MSE 0.0191 vs int8's 0.0207 and
+  fp32's 0.0172 — EF recovers roughly HALF the int8 floor at the
+  same byte cost (56.6 MB). Partial rather than full recovery makes
+  sense in this design: we quantize full model *states*, so each
+  sender's residual corrects its own sequence but the classic EF
+  guarantee (for compressed *deltas*) does not directly apply, and
+  the staleness-weighted mixing attenuates the correction. Full
+  recovery would need delta-transmission (send state minus base,
+  quantized, with EF) — the natural next rung if int8-level bytes
+  ever actually matter.
 
 ## Files
 

@@ -24,14 +24,14 @@ import numpy as np
 import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
-                        pack_state, unpack_state)
+                        pack_state, unpack_state, Int8EF)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
 ap.add_argument("--hosts", type=int, default=3)
 ap.add_argument("--seconds", type=float, default=12.0)
 ap.add_argument("--alpha0", type=float, default=0.6)
-ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8"])
+ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef"])
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
 args = ap.parse_args()
@@ -70,9 +70,11 @@ deadline = t0 + args.seconds
 def serve(c, hello):
     global version
     host = hello["host"]
+    comp = Int8EF() if args.wire == "int8ef" else None
     while True:
         with lock:
-            state = pack_state(net.state_dict(), args.wire)
+            state = (comp.pack(net.state_dict()) if comp
+                     else pack_state(net.state_dict(), args.wire))
             base = version
             stop = time.time() >= deadline
         n = send_msg(c, {"stop": stop, "version": base, "state": state,

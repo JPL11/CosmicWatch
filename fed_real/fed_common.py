@@ -18,6 +18,27 @@ def weighted_loss(prediction, target):
     return (((prediction - target) ** 2) * (1.0 + 4.0 * target)).mean()
 
 
+class Int8EF:
+    """Per-endpoint error-feedback int8 compressor (1-bit-SGD / EF-SGD
+    style): the residual of each quantization is carried into the next
+    one, so rounding error becomes a correction instead of a loss."""
+
+    def __init__(self):
+        self.e = {}
+
+    def pack(self, state):
+        import numpy as np
+        out = {}
+        for k, v in state.items():
+            a = (v.detach().cpu().numpy().astype("float32")
+                 + self.e.get(k, 0.0))
+            scale = float(np.abs(a).max()) / 127.0 or 1e-12
+            q = np.round(a / scale).astype("int8")
+            self.e[k] = a - q.astype("float32") * scale
+            out[k] = (q, scale)
+        return out
+
+
 def pack_state(state, wire):
     """Encode a float32 state dict for the wire: fp32 | fp16 | int8."""
     import numpy as np
@@ -41,7 +62,7 @@ def unpack_state(packed, wire):
     import torch as _t
     out = {}
     for k, v in packed.items():
-        if wire == "int8":
+        if wire in ("int8", "int8ef"):
             q, scale = v
             a = q.astype("float32") * scale
         else:

@@ -113,7 +113,10 @@ Details: `PI5_BENCHMARK_NOTES.md`, `hardware_benchmark_brief.pdf`.
     MSE, and ~7% more updates/s since smaller payloads serialize
     faster; int8 cuts bytes 71% and matches everyone early, but
     plateaus ~25% above fp32 near convergence — per-mix quantization
-    noise sets a floor extra iterations cannot buy back.
+    noise sets a floor extra iterations cannot buy back. Adding error
+    feedback (int8ef) recovers about half that floor at the same byte
+    cost; full recovery would need delta-transmission, since EF's
+    guarantee is for compressed deltas, not full states.
   - **Findings:** (a) a synchronous round is priced by the slowest
     host, so a fast machine buys idle time, not speed — the
     homogeneous cheap fleet is the efficient shape for sync, and
