@@ -1,0 +1,50 @@
+{
+ "platform": {
+  "model": "Raspberry Pi 5 Model B Rev 1.1",
+  "machine": "aarch64",
+  "platform": "Linux-6.18.34+rpt-rpi-2712-aarch64-with-glibc2.41",
+  "python": "3.13.5",
+  "throttled": "throttled=0x0"
+ },
+ "input_caveat": "Synthetic JSONL stream with feature scales from model_weights.json standardization constants and the 8.4% coincidence rate from edge_reduction.json. Selection fractions here are NOT physics results; only per-event CPU cost, throughput headroom, and duty fraction are hardware measurements.",
+ "throughput_as_fast_as_possible": {
+  "coincidence": {
+   "events": 200000,
+   "process_cpu_seconds": 0.794825,
+   "cpu_microseconds_per_event": 3.97,
+   "cpu_limited_events_per_second": 251627.7,
+   "selected_fraction_on_synthetic_stream": 0.084955
+  },
+  "adc": {
+   "events": 200000,
+   "process_cpu_seconds": 1.352979,
+   "cpu_microseconds_per_event": 6.76,
+   "cpu_limited_events_per_second": 147822.0,
+   "selected_fraction_on_synthetic_stream": 0.561385
+  },
+  "mlp": {
+   "events": 200000,
+   "process_cpu_seconds": 3.852741,
+   "cpu_microseconds_per_event": 19.26,
+   "cpu_limited_events_per_second": 51911.1,
+   "selected_fraction_on_synthetic_stream": 0.53038
+  },
+  "hybrid": {
+   "events": 200000,
+   "process_cpu_seconds": 4.01435,
+   "cpu_microseconds_per_event": 20.07,
+   "cpu_limited_events_per_second": 49821.3,
+   "selected_fraction_on_synthetic_stream": 0.66248
+  }
+ },
+ "realistic_rate_run": {
+  "policy": "hybrid",
+  "poisson_rate_hz": 1.3757,
+  "received": 165,
+  "wall_seconds": 110.797163,
+  "process_cpu_seconds": 0.017488,
+  "cpu_duty_fraction_during_run": 0.00015784
+ },
+ "headroom_hybrid_vs_detector_rate": 36215.2,
+ "power_note": "Pass USB-meter idle/load watts to the pi_benchmark harness for energy columns; gateway runs report CPU duty only."
+}
