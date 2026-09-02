@@ -59,7 +59,7 @@ Reporting:
 - `make_report.py` — regenerate the consolidated PDF report from the result JSONs.
 - `make_onepager.py` — one-page summary PDF.
 
-## Edge deployment & benchmarking (Raspberry Pi 4 / Pi 400, Jetson Orin Nano)
+## Edge deployment & benchmarking (Raspberry Pi 4 / Pi 400 / Pi 5, Jetson Orin Nano)
 
 The trained classifier exports to `model_weights.json` (49 parameters) with **torch-free** inference —
 `pi_benchmark.py` needs only Python 3 + numpy on the target. Nothing else from this repo is required
@@ -74,10 +74,10 @@ scp pi_benchmark.py model_weights.json <user>@<device>:~/
 
 (`model_weights.json` is committed, so you can skip `--train` and just copy the repo's copy.)
 
-### Raspberry Pi 4 and Pi 400
+### Raspberry Pi 4, Pi 400, and Pi 5
 
 The Pi 400 is a Pi 4 in a keyboard (same SoC, 1.8 GHz vs 1.5 GHz) — identical steps for both.
-Use 64-bit Raspberry Pi OS.
+The Pi 5 uses the same steps too (numpy ships current on Pi OS trixie). Use 64-bit Raspberry Pi OS.
 
 ```bash
 sudo apt install -y python3-numpy          # or: pip3 install numpy
@@ -125,6 +125,7 @@ energy-per-inference figure.
 | x86_64 dev (baseline) | ~5–7 | ~2.4 | ~105M | — | — | — |
 | Raspberry Pi 4 (re-measured 2026-07-18, clean supply)¹ | 75.9 | 29.9 | 6.80M | | | |
 | Raspberry Pi 400 (measured 2026-07-01) | 78.2 | 29.3 | 6.25M | | | |
+| Raspberry Pi 5 16GB (measured 2026-09-02)³ | **23.7** | **8.6** | **13.59M** | | | |
 | Jetson Orin Nano 7W (measured 2026-07-17)² | 60.7 | 24.3 | 7.72M | 3.58 | 3.98 | 0.52 (0.052 active) |
 | Jetson Orin Nano 15W/MAXN (measured 2026-07-17)² | 38.4 | 15.3 | 12.25M | 3.74 | 4.64 | 0.38 (0.074 active) |
 
@@ -133,6 +134,13 @@ root cause: powered from a desktop USB-C data port). Re-run 2026-07-18 on a prop
 (`throttled=0x0` before and after, core 0.916 V): single-event latency was barely affected
 (77.0→75.9 µs) but **sustained throughput rose 29%** (5.27M→6.80M ev/s) — under-voltage capped
 sustained clocks, not single-shot latency. The clean Pi 4 out-sustains the Pi 400.
+
+³ Fastest board in the fleet on every harness (Python 3.13, numpy 2.2, 30 s sustained
+protocol, `throttled=0x0`): 3.0× Pi 4 batched throughput, 1.4× Jetson-15W; also 3.8–4.5× Pi 4
+on the event gateway and 1.6× the Jetson's CUDA path on FL steady-state rounds — see
+`PI5_BENCHMARK_NOTES.md` and the last two pages of `hardware_benchmark_brief.pdf`. Energy
+columns await an inline USB-C meter (note: meters may renegotiate the Pi 5's 5 A PD to 3 A —
+harmless at these loads).
 
 ² Jetson power is the board-input **VDD_IN rail read from the onboard INA3221** (sysfs, 5 Hz sampling,
 median over 25 s idle / 35 s mid-load) — no USB meter. This dev kit's JetPack exposes two modes:
