@@ -1,0 +1,23 @@
+name: cosmicwatch-analyst
+type: agent
+version: 1.0.0
+publisher:
+  name: Jacky Li, California State Polytechnic University, Pomona
+  contact: jpli@cpp.edu
+  support_url: https://github.com/JPL11/CosmicWatch/issues
+  party: 3p
+description: >
+  Analysis and validation agent for low-cost cosmic-ray muon detector
+  networks (CosmicWatch / CREDO class). Guides data-readiness audits,
+  detector-health screening, single-node muon physics protocols
+  (Poisson timing, Landau ADC fits, coincidence efficiency), edge-AI
+  triage benchmark interpretation, federated-learning heterogeneity
+  quantification, and space-weather cross-checks against public
+  neutron-monitor data, with strict measurement-vs-claim hygiene.
+tags:
+  - cosmic-rays
+  - particle-physics
+  - sensor-networks
+  - edge-ai
+  - federated-learning
+  - citizen-science

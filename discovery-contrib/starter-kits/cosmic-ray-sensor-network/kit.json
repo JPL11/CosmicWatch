@@ -1,0 +1,54 @@
+{
+  "$schema": "../../docs/schemas/starter-kit-schema.json",
+  "name": "cosmic-ray-sensor-network",
+  "version": "1.0.0",
+  "description": "Audit, validate, and analyze data from low-cost cosmic-ray muon detector networks, from single-node physics to edge-AI triage and federated learning.",
+  "displayName": "Cosmic-Ray Sensor Network",
+  "longDescription": "# Cosmic-Ray Sensor Network\n\nThis starter kit turns Discovery into an analysis partner for low-cost cosmic-ray muon detector networks (CosmicWatch-class scintillator counters and CREDO-style device federations).\n\nIt covers the full working loop of a small sensor-network research program: data-readiness audits (live time vs calendar time, clock conventions, duplicates), detector-health screening with regime-change detection, single-node muon physics (Poisson timing, Landau/Moyal MIP fits, coincidence efficiency), atmospheric and space-weather correlation protocols with explicit artifact guards (the barometric-coefficient trap), on-detector edge-AI triage benchmarks across Raspberry Pi, Jetson, and microcontroller-class hardware, and federated learning over real, strongly non-IID device partitions with 1-Wasserstein heterogeneity quantification.\n\nReference implementations for every protocol are public at https://github.com/JPL11/CosmicWatch.",
+  "author": {
+    "name": "Jacky Li, California State Polytechnic University, Pomona",
+    "email": "jpli@cpp.edu",
+    "url": "https://github.com/JPL11/CosmicWatch"
+  },
+  "license": "MIT",
+  "keywords": ["cosmic rays", "muon detector", "sensor networks", "citizen science", "edge ai", "federated learning", "physics"],
+  "category": "Physics",
+  "homepage": "https://github.com/JPL11/CosmicWatch",
+  "party": "3p",
+  "lifecycle": "active",
+  "agentRefs": [
+    {
+      "ref": "agents/cosmicwatch-analyst",
+      "role": "primary",
+      "required": true,
+      "description": "Guides detector data auditing, muon physics protocols, edge-AI benchmark interpretation, and federated-learning analysis with measurement-vs-claim hygiene."
+    }
+  ],
+  "samplePrompts": [
+    {
+      "id": "sp-1",
+      "title": "Interpret a hardware benchmark",
+      "prompt": "Here is a pi_benchmark result JSON from my detector gateway board. Explain what the single-event latency, batched throughput, and headroom numbers mean for deployment at a 1.4 Hz event rate, and tell me what is still missing for an energy-per-inference claim.",
+      "difficulty": "beginner",
+      "expectedOutput": "Plain-language interpretation of latency vs throughput, CPU duty fraction at the detector rate, and a statement that measured idle/load watts are required before any energy figure."
+    },
+    {
+      "id": "sp-2",
+      "title": "Audit a detector export",
+      "prompt": "I have a CSV export from a multi-device muon detector archive with columns adc_value, sipm_mv, temperature_c, pressure_pa, coincident, wall_time, device_id. Walk me through a data-readiness audit and produce the Python to run it.",
+      "difficulty": "intermediate",
+      "expectedOutput": "A readiness checklist (live time after gap removal, clock convention, duplicates, per-device coverage, staleness) and numpy-first code implementing it."
+    },
+    {
+      "id": "sp-3",
+      "title": "Barometric coefficient without artifacts",
+      "prompt": "I want to measure the barometric coefficient of my muon counter from two weeks of data that contains one known instrument regime change. Design the analysis so the step change cannot fake the result, and tell me the sensitivity I should expect at my count rate.",
+      "difficulty": "advanced",
+      "expectedOutput": "A protocol that splits at the regime change, adds device temperature as a covariate, corroborates with a first-difference estimator, and derives the Poisson noise floor to state achievable sensitivity honestly."
+    }
+  ],
+  "riskProfile": {
+    "requiresExternalCompute": false,
+    "dataResidency": "user-supplied data only; no external services called"
+  }
+}
