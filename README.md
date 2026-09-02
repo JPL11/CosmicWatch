@@ -55,9 +55,17 @@ Hardware deployment:
 - `fl_hardware_benchmark.py` — benchmark one real FL client's local workload on CPU or CUDA, with power hooks.
 - `EVENT_DRIVEN_HARDWARE.md` — Pi 4 and Jetson Orin Nano deployment and measurement procedure.
 
+Real multi-host federation:
+- `fed_real/` — actual synchronous FedAvg over TCP between physical machines on the LAN
+  (not the single-board simulation): heterogeneous fleet (desktop + Pi 5 + Jetson) and
+  all-Pi network (Pi 5 + Pi 4) configs, with per-round wall/straggler/wire accounting.
+  See `fed_real/FED_REAL_NOTES.md`.
+
 Reporting:
 - `make_report.py` — regenerate the consolidated PDF report from the result JSONs.
 - `make_onepager.py` — one-page summary PDF.
+- `PROJECT_REPORT.md` — the consolidated narrative: data → physics limits → edge ML →
+  hardware fleet → real federation, with pointers to every artifact.
 
 ## Edge deployment & benchmarking (Raspberry Pi 4 / Pi 400 / Pi 5, Jetson Orin Nano)
 

@@ -51,6 +51,12 @@ model, data, and protocol as Config A; two hosts instead of three.
   ~0.12 s (Pi 5 idles ~35% of each round). One round showed a
   transient Pi 4 blip to 0.60 s (scheduling/thermal jitter).
 - Wire: 2.6 MB total for the run; still invisible next to compute.
+- Link: both Pis ran on Wi-Fi (`wlan0`), no Ethernet — at 106 kB per
+  update the radio is nowhere near the bottleneck. A wired rerun
+  would only matter for (a) removing Wi-Fi jitter from
+  publication-grade round timings (the 0.60 s blip is ambiguous
+  between scheduling and retransmits), or (b) much larger models
+  (MB-scale updates, e.g. a federated neural operator).
 
 ## Config A vs Config B
 
