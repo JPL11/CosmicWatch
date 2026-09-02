@@ -43,9 +43,13 @@ pulls = 0
 comp = None
 view = None
 while True:
-    msg, _ = recv_msg(sock)
+    msg, nbytes = recv_msg(sock)
     if msg.get("stop"):
         break
+    link = msg.get("link")
+    if link:
+        down_bps, up_bps, rtt = link
+        time.sleep(nbytes * 8 / down_bps + rtt / 2)
     wire = msg.get("wire", "fp32")
     if wire in ("int8ef", "int8_delta_ef", "int8_delta2_ef") and comp is None:
         comp = Int8EF()
@@ -82,10 +86,12 @@ while True:
         payload = comp.pack(agg)
     else:
         payload = pack_state(agg, wire)
-    send_msg(sock, {"host": args.host, "n": total,
-                    "base_version": msg["version"],
-                    "state": payload,
-                    "timing": {"train_s": round(t_train, 3),
-                               "n_logical_clients": len(cids)}})
+    sent = send_msg(sock, {"host": args.host, "n": total,
+                           "base_version": msg["version"],
+                           "state": payload,
+                           "timing": {"train_s": round(t_train, 3),
+                                      "n_logical_clients": len(cids)}})
+    if link:
+        time.sleep(sent * 8 / up_bps + rtt / 2)
     pulls += 1
 print(f"{args.host} done after {pulls} updates", flush=True)

@@ -166,6 +166,40 @@ fed_common.py, `--wire` flag). Heterogeneous fleet, same 12 s budget:
   limits model quality; only bytes vs. bandwidth remains as a
   deployment trade.
 
+## Strengthening campaign (camp_*.json: 27 runs, seeds + long + links)
+
+Paper-grade rerun of the ladder: 6 wires x 3 seeds x 12 s; 120 s long
+runs for fp32/int8/delta2; and emulated cellular links (application-
+layer shaping of the ARM hosts, `LINK_PROFILES` in fed_common.py:
+LTE 10/5 Mbps 70 ms, LTE-M 1 Mbps/375 kbps 150 ms, NB-IoT 60/30 kbps
+1 s RTT). Three headline corrections/confirmations:
+
+1. **Seeds collapse the fine-grained ladder.** At 12 s, fp32, fp16,
+   int8ef, delta-EF, and delta2-EF are statistically
+   indistinguishable (tail 0.0183-0.0192, seed std ~0.0008-0.0019).
+   Plain int8 is the ONLY degraded wire: 0.0231 +/- 0.0016, ~4 sigma
+   above the pack. The single-run readings that fp16 "beat" fp32 and
+   that the EF variants formed a strict hierarchy were run-to-run
+   noise. Honest claim: naive int8 costs quality; ANY error-feedback
+   variant recovers it; everything else is a bytes decision.
+2. **The long runs make the floor decisive — and worse than it
+   looked.** Over 120 s (≈11k versions), int8's tail MSE degrades to
+   0.0400 vs fp32's 0.0140 (its best point, 0.0173, comes early and
+   it drifts UP as gradients shrink below the quantization noise).
+   delta2-EF tracks fp32 the whole way (0.0145 tail, 0.0138 min).
+   Naive int8 is not just a floor, it is late-run instability;
+   EF-delta compression is quality-equivalent to fp32 at 1/4 bytes.
+3. **Constrained links turn compression into a participation lever.**
+   With ARM hosts on emulated cellular, global MSE stays similar
+   (the unshaped desktop keeps learning, and this task's partitions
+   are homogeneous enough to transfer), but ARM participation
+   changes decisively: delta2 vs fp32 gets 390 vs 238 ARM updates on
+   LTE, 107 vs 36 on LTE-M, and 22 vs 8 on NB-IoT — 1.6-3x more, at
+   ~4x fewer bytes (e.g. 576 MB vs 2.2 GB on the NB-IoT run). In a
+   non-IID deployment, that participation ratio IS the fairness /
+   coverage story: under narrow links, wire compression decides
+   whether cellular-attached sensors are in the federation at all.
+
 ## Files
 
 - `fed_common.py` — model, weighted loss, length-prefixed socket

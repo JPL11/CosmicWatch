@@ -39,6 +39,16 @@ class Int8EF:
         return out
 
 
+# application-layer link emulation profiles: (down_bps, up_bps, rtt_s).
+# Applied CLIENT-side to both directions, so no root/tc is needed and the
+# emulation is identical on every board.
+LINK_PROFILES = {
+    "lte": (10e6, 5e6, 0.07),
+    "ltem": (1e6, 375e3, 0.15),
+    "nbiot": (60e3, 30e3, 1.0),
+}
+
+
 def pack_state(state, wire):
     """Encode a float32 state dict for the wire: fp32 | fp16 | int8."""
     import numpy as np

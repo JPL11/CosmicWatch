@@ -113,13 +113,19 @@ Details: `PI5_BENCHMARK_NOTES.md`, `hardware_benchmark_brief.pdf`.
     MSE, and ~7% more updates/s since smaller payloads serialize
     faster; int8 cuts bytes 71% and matches everyone early, but
     plateaus ~25% above fp32 near convergence — per-mix quantization
-    noise sets a floor extra iterations cannot buy back. Error
-    feedback (int8ef) recovers ~half that floor; uplink
-    delta-transmission with EF recovers ~75%; delta-encoding BOTH
-    directions (int8_delta2_ef, per-connection view tracking) closes
-    the gap completely — tail MSE statistically identical to fp32 at
-    a 73% byte cut. The floor was fully attributed (half uplink, half
-    downlink) and fully recovered by the same mechanism.
+    noise sets a floor extra iterations cannot buy back. A 27-run
+    strengthening campaign (3 seeds per wire, 120 s long runs,
+    emulated LTE/LTE-M/NB-IoT links) sharpened this to three
+    paper-grade claims: (1) with seeds, naive int8 is the ONLY
+    degraded wire (~4 sigma); every error-feedback variant is
+    statistically identical to fp32 at ~1/4 the bytes; (2) over 11k
+    versions, naive int8 is not a floor but late-run instability
+    (tail MSE 0.0400 vs fp32's 0.0140, drifting up once gradients
+    shrink below the quantization noise), while bidirectional
+    delta+EF tracks fp32 throughout; (3) under emulated cellular
+    links, compression becomes a participation lever — 1.6-3x more
+    updates from the shaped ARM hosts (22 vs 8 on NB-IoT), which in
+    a non-IID deployment is the fairness/coverage story.
   - **Findings:** (a) a synchronous round is priced by the slowest
     host, so a fast machine buys idle time, not speed — the
     homogeneous cheap fleet is the efficient shape for sync, and

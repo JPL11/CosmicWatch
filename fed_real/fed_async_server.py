@@ -24,7 +24,7 @@ import numpy as np
 import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
-                        pack_state, unpack_state, Int8EF)
+                        pack_state, unpack_state, Int8EF, LINK_PROFILES)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
@@ -32,6 +32,11 @@ ap.add_argument("--hosts", type=int, default=3)
 ap.add_argument("--seconds", type=float, default=12.0)
 ap.add_argument("--alpha0", type=float, default=0.6)
 ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef", "int8_delta_ef", "int8_delta2_ef"])
+ap.add_argument("--seed", type=int, default=42)
+ap.add_argument("--link", default="none",
+                choices=["none", "lte", "ltem", "nbiot"])
+ap.add_argument("--link-hosts", default="pi5,jetson,pi4",
+                help="hosts the emulated link applies to")
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
 args = ap.parse_args()
@@ -42,7 +47,7 @@ tests = [torch.tensor((z[f"test_{i}"].astype("float32") / 255.0)
                       .reshape(len(z[f"test_{i}"]), -1)) for i in range(8)]
 test_all = torch.cat(tests)
 
-torch.manual_seed(42)
+torch.manual_seed(args.seed)
 net = model()
 lock = threading.Lock()
 version = 0
@@ -72,6 +77,9 @@ def serve(c, hello):
     host = hello["host"]
     comp = (Int8EF() if args.wire in ("int8ef", "int8_delta_ef",
                                       "int8_delta2_ef") else None)
+    link = (LINK_PROFILES[args.link]
+            if args.link != "none" and host in args.link_hosts.split(",")
+            else None)
     sent_f32 = None  # the client's current reconstructed view (delta wires)
     while True:
         with lock:
@@ -93,7 +101,7 @@ def serve(c, hello):
                     # the exact float32 tensors the client reconstructs
                     sent_f32 = unpack_state(state, "int8")
         n = send_msg(c, {"stop": stop, "version": base, "state": state,
-                         "wire": args.wire, "mode": mode})
+                         "wire": args.wire, "mode": mode, "link": link})
         with lock:
             bytes_total[0] += n
         if stop:
@@ -137,7 +145,8 @@ per_host = {}
 for r in updates_log:
     per_host[r["host"]] = per_host.get(r["host"], 0) + 1
 out = {"hosts": [h for _, h in conns], "alpha0": args.alpha0,
-       "wire": args.wire,
+       "wire": args.wire, "seed": args.seed, "link": args.link,
+       "link_hosts": args.link_hosts,
        "budget_s": args.seconds, "updates": updates_log,
        "updates_per_host": per_host, "bytes_total": bytes_total[0],
        "total_wall_s": round(time.time() - t0, 3),

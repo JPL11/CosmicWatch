@@ -1,0 +1,101 @@
+{
+ "seeded_12s": {
+  "fp32": {
+   "tail_mean": 0.01914,
+   "tail_std": 0.00089,
+   "MB_mean": 229.8,
+   "versions_mean": 1073
+  },
+  "fp16": {
+   "tail_mean": 0.01922,
+   "tail_std": 0.0008,
+   "MB_mean": 113.0,
+   "versions_mean": 1050
+  },
+  "int8": {
+   "tail_mean": 0.02309,
+   "tail_std": 0.00156,
+   "MB_mean": 58.1,
+   "versions_mean": 1066
+  },
+  "int8ef": {
+   "tail_mean": 0.01919,
+   "tail_std": 0.00074,
+   "MB_mean": 61.3,
+   "versions_mean": 1123
+  },
+  "int8_delta_ef": {
+   "tail_mean": 0.01834,
+   "tail_std": 0.00073,
+   "MB_mean": 56.7,
+   "versions_mean": 1039
+  },
+  "int8_delta2_ef": {
+   "tail_mean": 0.01917,
+   "tail_std": 0.0019,
+   "MB_mean": 60.2,
+   "versions_mean": 1104
+  }
+ },
+ "long_120s": {
+  "fp32": {
+   "tail_mean": 0.014,
+   "min": 0.01314,
+   "versions": 10910
+  },
+  "int8": {
+   "tail_mean": 0.03999,
+   "min": 0.01725,
+   "versions": 10922
+  },
+  "int8_delta2_ef": {
+   "tail_mean": 0.01451,
+   "min": 0.01381,
+   "versions": 11086
+  }
+ },
+ "links": {
+  "lte_fp32": {
+   "tail_mean": 0.01691,
+   "arm_updates": 238,
+   "desktop_updates": 4802,
+   "MB": 1078.0,
+   "budget_s": 60.0
+  },
+  "lte_int8_delta2_ef": {
+   "tail_mean": 0.01598,
+   "arm_updates": 390,
+   "desktop_updates": 4909,
+   "MB": 288.8,
+   "budget_s": 60.0
+  },
+  "ltem_fp32": {
+   "tail_mean": 0.01853,
+   "arm_updates": 36,
+   "desktop_updates": 5025,
+   "MB": 1082.5,
+   "budget_s": 60.0
+  },
+  "ltem_int8_delta2_ef": {
+   "tail_mean": 0.01868,
+   "arm_updates": 107,
+   "desktop_updates": 4716,
+   "MB": 262.9,
+   "budget_s": 60.0
+  },
+  "nbiot_fp32": {
+   "tail_mean": 0.0186,
+   "arm_updates": 8,
+   "desktop_updates": 10381,
+   "MB": 2221.7,
+   "budget_s": 120.0
+  },
+  "nbiot_int8_delta2_ef": {
+   "tail_mean": 0.01851,
+   "arm_updates": 22,
+   "desktop_updates": 10547,
+   "MB": 575.9,
+   "budget_s": 120.0
+  }
+ }
+}
