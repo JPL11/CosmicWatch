@@ -35,11 +35,33 @@ One local epoch per round, sample-weighted FedAvg, 6 rounds.
   mitigation (async aggregation or client weighting) would matter
   long before compression of the updates would.
 
-## Config B — all-Pi network (pending)
+## Config B — all-Pi network (fed_real_allpi.json)
 
-Planned rerun with Raspberry Pi boards only (Pi 5 + Pi 4 + Pi 400)
-once the Pi 4 is powered: a homogeneous "Pi as a network" topology to
-compare straggler gap and round wall time against Config A.
+"Pi as a network": server + clients 0-3 on the Pi 5, clients 4-7 on a
+Raspberry Pi 4 Model B (4 GB, Python 3.11, torch 2.14 CPU). Same
+model, data, and protocol as Config A; two hosts instead of three.
+
+- Global test weighted MSE: 0.228 -> 0.119 over 6 rounds (same
+  regime as Config A; the different endpoint reflects a different
+  random init on the Pi 5 server plus 4-client hosts, not a
+  protocol difference).
+- Round 1 warm-up: Pi 5 arrives at 1.24 s, Pi 4 at 3.50 s.
+- Steady state: ~0.34 s/round wall, with the Pi 4 training its 4
+  clients in 0.27 s vs the Pi 5's 0.20 s, so the straggler gap is
+  ~0.12 s (Pi 5 idles ~35% of each round). One round showed a
+  transient Pi 4 blip to 0.60 s (scheduling/thermal jitter).
+- Wire: 2.6 MB total for the run; still invisible next to compute.
+
+## Config A vs Config B
+
+The all-Pi network is ~1.8x slower per round than the heterogeneous
+fleet (0.34 vs 0.19 s) but far better balanced: the worst-case idle
+fraction drops from ~90% (desktop waiting on ARM boards) to ~35%
+(Pi 5 waiting on Pi 4). In a synchronous federation, adding a fast
+host does not speed up the round at all — wall time is set by the
+slowest host — it only buys idle time. A homogeneous cheap fleet is
+the efficient shape for this workload; the fast machine is better
+spent as server-plus-evaluator or moved to async aggregation.
 
 ## Files
 

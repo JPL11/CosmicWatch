@@ -1,0 +1,147 @@
+{
+ "hosts": [
+  {
+   "host": "pi5",
+   "clients": [
+    0,
+    1,
+    2,
+    3
+   ]
+  },
+  {
+   "host": "pi4",
+   "clients": [
+    4,
+    5,
+    6,
+    7
+   ]
+  }
+ ],
+ "rounds": [
+  {
+   "round": 1,
+   "wall_s": 3.522,
+   "straggler_gap_s": 2.258,
+   "arrivals_s": {
+    "pi5": 1.243,
+    "pi4": 3.501
+   },
+   "client_timings": {
+    "pi5": {
+     "train_s": 1.233,
+     "n_logical_clients": 4
+    },
+    "pi4": {
+     "train_s": 3.394,
+     "n_logical_clients": 4
+    }
+   },
+   "global_test_weighted_mse": 0.228392
+  },
+  {
+   "round": 2,
+   "wall_s": 0.349,
+   "straggler_gap_s": 0.12,
+   "arrivals_s": {
+    "pi5": 0.209,
+    "pi4": 0.329
+   },
+   "client_timings": {
+    "pi5": {
+     "train_s": 0.203,
+     "n_logical_clients": 4
+    },
+    "pi4": {
+     "train_s": 0.271,
+     "n_logical_clients": 4
+    }
+   },
+   "global_test_weighted_mse": 0.217388
+  },
+  {
+   "round": 3,
+   "wall_s": 0.342,
+   "straggler_gap_s": 0.124,
+   "arrivals_s": {
+    "pi5": 0.198,
+    "pi4": 0.323
+   },
+   "client_timings": {
+    "pi5": {
+     "train_s": 0.193,
+     "n_logical_clients": 4
+    },
+    "pi4": {
+     "train_s": 0.271,
+     "n_logical_clients": 4
+    }
+   },
+   "global_test_weighted_mse": 0.201921
+  },
+  {
+   "round": 4,
+   "wall_s": 0.344,
+   "straggler_gap_s": 0.12,
+   "arrivals_s": {
+    "pi5": 0.205,
+    "pi4": 0.325
+   },
+   "client_timings": {
+    "pi5": {
+     "train_s": 0.199,
+     "n_logical_clients": 4
+    },
+    "pi4": {
+     "train_s": 0.271,
+     "n_logical_clients": 4
+    }
+   },
+   "global_test_weighted_mse": 0.179464
+  },
+  {
+   "round": 5,
+   "wall_s": 0.342,
+   "straggler_gap_s": 0.114,
+   "arrivals_s": {
+    "pi5": 0.208,
+    "pi4": 0.323
+   },
+   "client_timings": {
+    "pi5": {
+     "train_s": 0.203,
+     "n_logical_clients": 4
+    },
+    "pi4": {
+     "train_s": 0.271,
+     "n_logical_clients": 4
+    }
+   },
+   "global_test_weighted_mse": 0.150234
+  },
+  {
+   "round": 6,
+   "wall_s": 0.665,
+   "straggler_gap_s": 0.442,
+   "arrivals_s": {
+    "pi5": 0.203,
+    "pi4": 0.646
+   },
+   "client_timings": {
+    "pi5": {
+     "train_s": 0.197,
+     "n_logical_clients": 4
+    },
+    "pi4": {
+     "train_s": 0.595,
+     "n_logical_clients": 4
+    }
+   },
+   "global_test_weighted_mse": 0.119335
+  }
+ ],
+ "bytes_total": 2611944,
+ "total_wall_s": 5.566,
+ "update_bytes_per_state": 106336
+}
