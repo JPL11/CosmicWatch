@@ -116,6 +116,12 @@ The 49-parameter model doesn't need the GPU — the value of the Orin number is 
 benchmark (Orin-class modules fly on smallsats), and its onboard telemetry gives a clean
 energy-per-inference figure.
 
+### Microcontroller-class (C port)
+
+`mcu_classifier.c` + `make_mcu_port.py` provide a dependency-free C99 port of the deployed
+classifier, verified to 6e-08 against numpy — see `MCU_PORT.md` for Pico/RP2040 feasibility
+estimates (softfloat still clears the detector rate by ~4 orders of magnitude).
+
 ### Recording results
 
 `pi_benchmark.py` writes `pi_benchmark.json` per run. Suggested comparison table:
