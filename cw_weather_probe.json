@@ -1,0 +1,73 @@
+{
+ "n_hours": 324,
+ "site_match": {
+  "MIT/Boston": {
+   "r_surface": -0.309,
+   "r_msl": -0.309,
+   "surface_offset_hPa": -4.1,
+   "n": 324
+  },
+  "Krakow": {
+   "r_surface": -0.279,
+   "r_msl": -0.309,
+   "surface_offset_hPa": -22.0,
+   "n": 324
+  },
+  "Warsaw": {
+   "r_surface": -0.417,
+   "r_msl": -0.424,
+   "surface_offset_hPa": -11.2,
+   "n": 324
+  },
+  "Pomona CA": {
+   "r_surface": 0.99,
+   "r_msl": 0.949,
+   "surface_offset_hPa": -27.7,
+   "n": 324
+  },
+  "Long Beach CA": {
+   "r_surface": 0.992,
+   "r_msl": 0.992,
+   "surface_offset_hPa": -2.3,
+   "n": 324
+  }
+ },
+ "regressions": {
+  "stable_segment": {
+   "n_hours": 199,
+   "mean_counts_per_hour": 7670,
+   "hourly_poisson_noise_pct": 1.14,
+   "coef_pct_per_unit": {
+    "pressure_msl": [
+     -0.206,
+     0.283
+    ],
+    "temperature_2m": [
+     0.163,
+     0.466
+    ],
+    "relative_humidity_2m": [
+     0.024,
+     0.096
+    ],
+    "device_temp_c": [
+     0.497,
+     0.781
+    ]
+   }
+  },
+  "barometric_external_only": {
+   "beta_pct_per_hPa": -0.189,
+   "se": 0.203
+  },
+  "precip_wet_minus_dry_pct": {
+   "delta_pct": -0.59,
+   "n_wet": 4,
+   "n_dry": 195
+  }
+ },
+ "best_site": {
+  "site": "Long Beach CA",
+  "r": 0.992
+ }
+}

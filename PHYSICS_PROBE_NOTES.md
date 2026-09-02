@@ -29,6 +29,28 @@ a sensitivity statement: at 2.4 Hz, daily-binned Poisson sensitivity is
 steps) set the practical floor at ~1-2%; a typical 3-10% FD WOULD have
 been visible had one occurred, a moderate one would not.
 
+## Probe C: external weather regressors (cw_weather_probe.py, 2026-09-02)
+Follow-up using PUBLIC weather (Open-Meteo hourly archive) instead of
+the onboard sensors, which first required locating the detector — the
+CosmicWatch-schema docs carry no geo field.
+- Site located empirically: the device barometer tracks coastal
+  Los Angeles weather at r = 0.992 (Long Beach grid point, offset
+  -2.3 hPa => near-sea-level site), r = 0.99 vs Pomona (same regional
+  weather, -27.7 hPa offset rules out the higher-elevation site), and
+  NEGATIVE correlation vs Krakow/Warsaw — definitively not co-sited
+  with the CREDO Poland detectors. Bonus: the onboard BMP is
+  weather-grade (0.99+ against a reanalysis product).
+- External barometric fit on the stable segment (199 h):
+  beta_p = -0.19 +/- 0.20 %/hPa — central value exactly in the muon
+  literature band (-0.1 to -0.2), tighter than the device-covariate
+  fit (-0.28 +/- 0.30) because reanalysis pressure is smoother than
+  the onboard sensor, but still SNR ~1: consistent, not a detection.
+  Same conclusion as Probe B from an independent instrument.
+- Temperature (+0.16 +/- 0.47 %/C) and humidity (+0.02 +/- 0.10 %/%RH)
+  coefficients are consistent with zero at this live time. Rain: only
+  4 wet hours in the whole stable segment (SoCal dry season) — no
+  power for a precipitation effect.
+
 ## Verdict on "focus on physics more?"
 The frozen archive is instrumentation-limited, not analysis-limited:
 every remaining atmospheric/space-weather measurement needs longer,

@@ -43,6 +43,15 @@ simulation cannot give you.
   change, and Forbush-decrease cross-checks against NMDB neutron
   monitors are inconclusive at this exposure
   (`cw_atmospheric_pull.py`, `PHYSICS_PROBE_NOTES.md`).
+- **Weather probe** (`cw_weather_probe.py`): with no geo field in the
+  detector docs, the site was located *empirically* — the onboard
+  barometer tracks coastal-LA reanalysis weather at r = 0.992
+  (near-sea-level, Long Beach grid; negatively correlated with the
+  CREDO Poland sites). An independent fit against external pressure
+  gives β_p = −0.19 ± 0.20 %/hPa — dead on the literature value but
+  SNR ~1: same instrumentation-limited verdict from a second
+  instrument. Temperature/humidity coefficients consistent with zero;
+  only 4 rainy hours in the stable segment (no precipitation power).
 - **Conclusion:** the archive is instrumentation-limited. This is the
   documented argument for the new-sensor work packages in
   `proposal/` — and it is why the rest of the project is systems.
@@ -92,13 +101,22 @@ Details: `PI5_BENCHMARK_NOTES.md`, `hardware_benchmark_brief.pdf`.
     idles ~90% of every round waiting on the ARM boards.
   - *Config B, all-Pi network* (Pi 5 server + Pi 4): MSE 0.228→0.119;
     0.34 s/round; straggler gap only ~0.12 s (worst-case idle ~35%).
+  - *Config C, asynchronous* (FedAsync-style staleness-discounted
+    mixing, both topologies): on the heterogeneous fleet the desktop
+    goes from ~90% idle to contributing 865 of 988 updates, and at
+    equal wall time async reaches 2.4x lower MSE than sync (0.032 vs
+    0.078 at 3.2 s); on the balanced all-Pi network the gain shrinks
+    to ~2x, because async's win scales with the idle fraction it
+    reclaims. Staleness up to 145 caused no divergence.
   - **Findings:** (a) a synchronous round is priced by the slowest
     host, so a fast machine buys idle time, not speed — the
-    homogeneous cheap fleet is the efficient shape, and the fast box
-    belongs in the server/evaluator role or an async design; (b) at
+    homogeneous cheap fleet is the efficient shape for sync, and
+    async aggregation is what actually monetizes a fast host; (b) at
     106 kB/update the network — even plain Wi-Fi — is invisible next
-    to compute, so update compression is the wrong lever at this
-    scale and straggler mitigation is the right one.
+    to compute under sync (3.9 MB/run), but async converts reclaimed
+    idle into bandwidth (215 MB in 12 s), so update compression,
+    pointless under sync at this scale, becomes the relevant lever
+    exactly when you go async.
 
 ## 6. Outreach and next steps
 

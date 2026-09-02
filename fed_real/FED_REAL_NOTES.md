@@ -69,6 +69,34 @@ slowest host — it only buys idle time. A homogeneous cheap fleet is
 the efficient shape for this workload; the fast machine is better
 spent as server-plus-evaluator or moved to async aggregation.
 
+## Config C — asynchronous aggregation (fed_async_*.json)
+
+FedAsync-style server (`fed_async_server.py`): no rounds, no barriers.
+Each host loops (pull global, train, push) at its own pace; the server
+mixes every incoming update immediately with a staleness-discounted
+weight alpha = 0.6 / (1 + staleness)^0.5 and evaluates after every mix,
+giving an (elapsed, MSE) trajectory. 12 s wall budget per run.
+
+- Heterogeneous fleet: 988 global versions in 12 s. The desktop went
+  from ~90% idle under sync to contributing 865 of 988 updates; the
+  ARM boards contributed 58 (Pi 5) and 65 (Jetson). At the sync run's
+  total wall time (~3.2 s) async had already reached MSE 0.032 vs
+  sync's 0.078 — 2.4x lower at equal wall clock — and async passed
+  sync's final MSE within the first ~1 s. Staleness reached 145 for
+  ARM updates (median 0); the alpha discount absorbed it with no
+  divergence.
+- All-Pi network: 71 versions in 12 s (Pi 5: 47, Pi 4: 24), MSE 0.064
+  at 6 s vs sync's 0.119 at ~5.6 s — still ~2x, but the gain is much
+  smaller than on the heterogeneous fleet, as expected: async's win
+  scales with the idle fraction it reclaims (~90% vs ~35%).
+- The cost is bandwidth: 215 MB on the wire in 12 s for the
+  heterogeneous run (vs 3.9 MB for all of sync) because the fast host
+  converts its former idle time into pull/push cycles. On a LAN (and
+  mostly loopback for the desktop client) this is free; over a real
+  WAN it would not be. Async is therefore exactly the regime where
+  update compression — pointless under sync at this model size —
+  becomes relevant.
+
 ## Files
 
 - `fed_common.py` — model, weighted loss, length-prefixed socket
@@ -78,6 +106,9 @@ spent as server-plus-evaluator or moved to async aggregation.
   gap, bytes moved, and global test weighted MSE.
 - `fed_client.py` — one process per host, trains its logical clients
   sequentially each round.
+- `fed_async_server.py` / `fed_async_client.py` — the asynchronous
+  variant (Config C): per-host server threads, staleness-discounted
+  immediate mixing, fixed wall-time budget.
 
 Run: server first (`fed_server.py --hosts 3 --rounds 6 --out ...`),
 then one `fed_client.py --server <ip> --host <name> --clients i,j,k`
