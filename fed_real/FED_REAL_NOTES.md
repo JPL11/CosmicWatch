@@ -200,6 +200,36 @@ LTE 10/5 Mbps 70 ms, LTE-M 1 Mbps/375 kbps 150 ms, NB-IoT 60/30 kbps
    coverage story: under narrow links, wire compression decides
    whether cellular-attached sensors are in the federation at all.
 
+## Config E — adaptive wire selection (camp2_*.json)
+
+Server-side policy (`--adapt`): per connection, EWMAs of communication
+time vs training time walk the client along fp32 -> fp16 ->
+int8_delta2_ef, escalating when comm > train and relaxing when
+comm < 0.25 x train. No client-side changes and no prior link
+knowledge. Tested on mixed links (desktop unshaped, Pi 5 LTE-M,
+Jetson NB-IoT, 90 s) and a degradation scenario (Pi 5 LTE -> NB-IoT
+at t=45 s).
+
+- **Per-host convergence is correct and fast on responsive links**:
+  the desktop stayed at fp32 for all 7,532 of its updates (its link
+  is free; compressing it would buy nothing), while the Pi 5 walked
+  fp32 -> fp16 -> delta2 within ~9 s on LTE-M (~3 s on LTE) and then
+  sat at delta2 — reaching 76 updates vs 27 under static fp32,
+  within noise of the best static wire (81). The policy discovers
+  per-host what the campaign needed a grid of static runs to find.
+- **Degradation tracking**: when the Pi 5's link dropped LTE ->
+  NB-IoT mid-run, the adaptive connection was already at delta2 and
+  stayed there (6 post-switch updates vs 3 for static fp32; 147 vs
+  90 pre-switch).
+- **Honest caveats**: (a) global MSE differences between arms are
+  within seed noise — the policy's claim is participation and
+  constrained-link bytes, not accuracy; (b) TOTAL bytes under adapt
+  ~= fp32 because the unshaped desktop dominates traffic by design —
+  the right metric is per-constrained-host bytes (~4x lower);
+  (c) on NB-IoT the EWMA converges slowly (escalations at 17 s and
+  54 s) because each observation costs a 30-40 s exchange — seeding
+  escalation from the first measured exchange would fix this.
+
 ## Files
 
 - `fed_common.py` — model, weighted loss, length-prefixed socket

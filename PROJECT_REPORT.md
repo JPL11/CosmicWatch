@@ -126,6 +126,14 @@ Details: `PI5_BENCHMARK_NOTES.md`, `hardware_benchmark_brief.pdf`.
     links, compression becomes a participation lever — 1.6-3x more
     updates from the shaped ARM hosts (22 vs 8 on NB-IoT), which in
     a non-IID deployment is the fairness/coverage story.
+  - *Config E, adaptive wire selection*: a server-side policy (EWMA
+    of comm vs train time per connection) walks each client along
+    fp32 -> fp16 -> delta2+EF with no prior link knowledge — the
+    unshaped desktop correctly never compresses, constrained hosts
+    reach the best static wire's participation within seconds, and
+    the policy holds max compression through a mid-run LTE -> NB-IoT
+    link collapse. This is the closed-loop rate-adaptation pattern
+    from the SemCom line applied to federated updates.
   - **Findings:** (a) a synchronous round is priced by the slowest
     host, so a fast machine buys idle time, not speed — the
     homogeneous cheap fleet is the efficient shape for sync, and

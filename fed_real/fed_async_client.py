@@ -42,6 +42,7 @@ net = model()
 pulls = 0
 comp = None
 view = None
+last_wire = None
 while True:
     msg, nbytes = recv_msg(sock)
     if msg.get("stop"):
@@ -51,8 +52,11 @@ while True:
         down_bps, up_bps, rtt = link
         time.sleep(nbytes * 8 / down_bps + rtt / 2)
     wire = msg.get("wire", "fp32")
-    if wire in ("int8ef", "int8_delta_ef", "int8_delta2_ef") and comp is None:
-        comp = Int8EF()
+    if wire != last_wire:
+        # wire switched (adaptive server): fresh EF residuals
+        comp = Int8EF() if wire in ("int8ef", "int8_delta_ef",
+                                    "int8_delta2_ef") else None
+        last_wire = wire
     if wire == "int8_delta2_ef" and msg.get("mode") == "delta":
         d = unpack_state(msg["state"], "int8")
         view = {k: view[k] + d[k] for k in d}
@@ -82,7 +86,7 @@ while True:
            for k in per_client_states[0]}
     if wire in ("int8_delta_ef", "int8_delta2_ef"):
         payload = comp.pack({k: agg[k] - global_state[k] for k in agg})
-    elif comp:
+    elif wire == "int8ef":
         payload = comp.pack(agg)
     else:
         payload = pack_state(agg, wire)
