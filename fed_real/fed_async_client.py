@@ -46,7 +46,7 @@ while True:
     if msg.get("stop"):
         break
     wire = msg.get("wire", "fp32")
-    if wire == "int8ef" and comp is None:
+    if wire in ("int8ef", "int8_delta_ef") and comp is None:
         comp = Int8EF()
     global_state = unpack_state(msg["state"], wire)
     per_client_states, ns = [], []
@@ -70,9 +70,15 @@ while True:
     agg = {k: sum(s[k].double() * (n / total)
                   for s, n in zip(per_client_states, ns)).to(torch.float32)
            for k in per_client_states[0]}
+    if wire == "int8_delta_ef":
+        payload = comp.pack({k: agg[k] - global_state[k] for k in agg})
+    elif comp:
+        payload = comp.pack(agg)
+    else:
+        payload = pack_state(agg, wire)
     send_msg(sock, {"host": args.host, "n": total,
                     "base_version": msg["version"],
-                    "state": comp.pack(agg) if comp else pack_state(agg, wire),
+                    "state": payload,
                     "timing": {"train_s": round(t_train, 3),
                                "n_logical_clients": len(cids)}})
     pulls += 1

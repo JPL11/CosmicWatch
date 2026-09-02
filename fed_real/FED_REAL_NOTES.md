@@ -132,8 +132,28 @@ fed_common.py, `--wire` flag). Heterogeneous fleet, same 12 s budget:
   guarantee (for compressed *deltas*) does not directly apply, and
   the staleness-weighted mixing attenuates the correction. Full
   recovery would need delta-transmission (send state minus base,
-  quantized, with EF) — the natural next rung if int8-level bytes
-  ever actually matter.
+  quantized, with EF) — done next as `int8_delta_ef`.
+- **int8 delta + EF** (`int8_delta_ef`): the client sends the
+  quantized *change* (trained minus the base it received) with error
+  feedback; the server reconstructs base-plus-delta from the exact
+  dequantized state it sent that connection. Deltas are ~100x smaller
+  than weights, so the int8 scale is correspondingly finer. Result:
+  tail MSE 0.0181 — ~75% of the int8-vs-fp32 gap recovered at the
+  same 71% byte cut, with best-seen MSE (0.0159) inside the fp32
+  run-to-run range. The full compression ladder (tail-window mean
+  MSE, 9-12 s, heterogeneous fleet, 12 s budget):
+
+  | wire          | MB    | tail MSE | vs fp32 gap |
+  |---------------|------:|---------:|------------:|
+  | fp32          | 215.4 |  0.0172  |     —       |
+  | fp16          | 114.0 |  0.0157  | better      |
+  | int8          |  62.3 |  0.0207  | +0.0035     |
+  | int8 + EF     |  56.6 |  0.0191  | +0.0019     |
+  | int8 delta+EF |  62.1 |  0.0181  | +0.0009     |
+
+  The residual gap plausibly sits in the broadcast path, which still
+  ships full states at int8+EF; delta-encoding the downlink too (per
+  connection, same base-tracking trick) is the last available rung.
 
 ## Files
 

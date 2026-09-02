@@ -31,7 +31,7 @@ ap.add_argument("--port", type=int, default=29500)
 ap.add_argument("--hosts", type=int, default=3)
 ap.add_argument("--seconds", type=float, default=12.0)
 ap.add_argument("--alpha0", type=float, default=0.6)
-ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef"])
+ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef", "int8_delta_ef"])
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
 args = ap.parse_args()
@@ -70,13 +70,18 @@ deadline = t0 + args.seconds
 def serve(c, hello):
     global version
     host = hello["host"]
-    comp = Int8EF() if args.wire == "int8ef" else None
+    comp = (Int8EF() if args.wire in ("int8ef", "int8_delta_ef")
+            else None)
+    sent_f32 = None
     while True:
         with lock:
             state = (comp.pack(net.state_dict()) if comp
                      else pack_state(net.state_dict(), args.wire))
             base = version
             stop = time.time() >= deadline
+        if args.wire == "int8_delta_ef":
+            # the exact float32 tensors the client will reconstruct
+            sent_f32 = unpack_state(state, "int8")
         n = send_msg(c, {"stop": stop, "version": base, "state": state,
                          "wire": args.wire})
         with lock:
@@ -88,7 +93,11 @@ def serve(c, hello):
             bytes_total[0] += nbytes
             staleness = version - msg["base_version"]
             alpha = args.alpha0 / (1.0 + staleness) ** 0.5
-            up = unpack_state(msg["state"], args.wire)
+            if args.wire == "int8_delta_ef":
+                d = unpack_state(msg["state"], "int8")
+                up = {k: sent_f32[k] + d[k] for k in d}
+            else:
+                up = unpack_state(msg["state"], args.wire)
             cur = net.state_dict()
             net.load_state_dict({
                 k: (cur[k].double() * (1 - alpha)
