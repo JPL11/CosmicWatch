@@ -41,14 +41,20 @@ send_msg(sock, {"host": args.host, "clients": cids})
 net = model()
 pulls = 0
 comp = None
+view = None
 while True:
     msg, _ = recv_msg(sock)
     if msg.get("stop"):
         break
     wire = msg.get("wire", "fp32")
-    if wire in ("int8ef", "int8_delta_ef") and comp is None:
+    if wire in ("int8ef", "int8_delta_ef", "int8_delta2_ef") and comp is None:
         comp = Int8EF()
-    global_state = unpack_state(msg["state"], wire)
+    if wire == "int8_delta2_ef" and msg.get("mode") == "delta":
+        d = unpack_state(msg["state"], "int8")
+        view = {k: view[k] + d[k] for k in d}
+    else:
+        view = unpack_state(msg["state"], wire)
+    global_state = view
     per_client_states, ns = [], []
     t_train0 = time.time()
     for i in cids:
@@ -70,7 +76,7 @@ while True:
     agg = {k: sum(s[k].double() * (n / total)
                   for s, n in zip(per_client_states, ns)).to(torch.float32)
            for k in per_client_states[0]}
-    if wire == "int8_delta_ef":
+    if wire in ("int8_delta_ef", "int8_delta2_ef"):
         payload = comp.pack({k: agg[k] - global_state[k] for k in agg})
     elif comp:
         payload = comp.pack(agg)

@@ -31,7 +31,7 @@ ap.add_argument("--port", type=int, default=29500)
 ap.add_argument("--hosts", type=int, default=3)
 ap.add_argument("--seconds", type=float, default=12.0)
 ap.add_argument("--alpha0", type=float, default=0.6)
-ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef", "int8_delta_ef"])
+ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef", "int8_delta_ef", "int8_delta2_ef"])
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
 args = ap.parse_args()
@@ -70,20 +70,30 @@ deadline = t0 + args.seconds
 def serve(c, hello):
     global version
     host = hello["host"]
-    comp = (Int8EF() if args.wire in ("int8ef", "int8_delta_ef")
-            else None)
-    sent_f32 = None
+    comp = (Int8EF() if args.wire in ("int8ef", "int8_delta_ef",
+                                      "int8_delta2_ef") else None)
+    sent_f32 = None  # the client's current reconstructed view (delta wires)
     while True:
         with lock:
-            state = (comp.pack(net.state_dict()) if comp
-                     else pack_state(net.state_dict(), args.wire))
             base = version
             stop = time.time() >= deadline
-        if args.wire == "int8_delta_ef":
-            # the exact float32 tensors the client will reconstruct
-            sent_f32 = unpack_state(state, "int8")
+            if args.wire == "int8_delta2_ef" and sent_f32 is not None:
+                cur = net.state_dict()
+                delta = {k: cur[k].detach().cpu().float() - sent_f32[k]
+                         for k in cur}
+                state = comp.pack(delta)
+                mode = "delta"
+                d = unpack_state(state, "int8")
+                sent_f32 = {k: sent_f32[k] + d[k] for k in d}
+            else:
+                state = (comp.pack(net.state_dict()) if comp
+                         else pack_state(net.state_dict(), args.wire))
+                mode = "full"
+                if args.wire in ("int8_delta_ef", "int8_delta2_ef"):
+                    # the exact float32 tensors the client reconstructs
+                    sent_f32 = unpack_state(state, "int8")
         n = send_msg(c, {"stop": stop, "version": base, "state": state,
-                         "wire": args.wire})
+                         "wire": args.wire, "mode": mode})
         with lock:
             bytes_total[0] += n
         if stop:
@@ -93,7 +103,7 @@ def serve(c, hello):
             bytes_total[0] += nbytes
             staleness = version - msg["base_version"]
             alpha = args.alpha0 / (1.0 + staleness) ** 0.5
-            if args.wire == "int8_delta_ef":
+            if args.wire in ("int8_delta_ef", "int8_delta2_ef"):
                 d = unpack_state(msg["state"], "int8")
                 up = {k: sent_f32[k] + d[k] for k in d}
             else:

@@ -143,17 +143,28 @@ fed_common.py, `--wire` flag). Heterogeneous fleet, same 12 s budget:
   run-to-run range. The full compression ladder (tail-window mean
   MSE, 9-12 s, heterogeneous fleet, 12 s budget):
 
-  | wire          | MB    | tail MSE | vs fp32 gap |
-  |---------------|------:|---------:|------------:|
-  | fp32          | 215.4 |  0.0172  |     —       |
-  | fp16          | 114.0 |  0.0157  | better      |
-  | int8          |  62.3 |  0.0207  | +0.0035     |
-  | int8 + EF     |  56.6 |  0.0191  | +0.0019     |
-  | int8 delta+EF |  62.1 |  0.0181  | +0.0009     |
+  | wire                | MB    | tail MSE | vs fp32 gap |
+  |---------------------|------:|---------:|------------:|
+  | fp32                | 215.4 |  0.0172  |     —       |
+  | fp16                | 114.0 |  0.0157  | better      |
+  | int8                |  62.3 |  0.0207  | +0.0035     |
+  | int8 + EF           |  56.6 |  0.0191  | +0.0019     |
+  | int8 delta+EF (up)  |  62.1 |  0.0181  | +0.0009     |
+  | int8 delta+EF (both)|  58.2 |  0.0171  |  +0.0000    |
 
-  The residual gap plausibly sits in the broadcast path, which still
-  ships full states at int8+EF; delta-encoding the downlink too (per
-  connection, same base-tracking trick) is the last available rung.
+- **Bidirectional delta + EF closes the gap completely**
+  (`int8_delta2_ef`): the server also delta-encodes the broadcast —
+  it tracks each connection's reconstructed view (full-state int8
+  bootstrap on the first pull, then quantized global-minus-view with
+  per-connection EF), and both endpoints advance the view with the
+  same dequantized tensors, so they never drift. Uplink deltas then
+  base off that shared view. Result: tail MSE 0.0171 — statistically
+  identical to fp32 — at 58.2 MB (73% byte cut). The quantization
+  floor is now fully attributed AND fully recovered: half was the
+  uplink (fixed by delta+EF), the other half the downlink (fixed the
+  same way). At int8 the wire format is no longer the thing that
+  limits model quality; only bytes vs. bandwidth remains as a
+  deployment trade.
 
 ## Files
 

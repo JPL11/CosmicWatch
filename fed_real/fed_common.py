@@ -62,7 +62,7 @@ def unpack_state(packed, wire):
     import torch as _t
     out = {}
     for k, v in packed.items():
-        if wire in ("int8", "int8ef", "int8_delta_ef"):
+        if wire in ("int8", "int8ef", "int8_delta_ef", "int8_delta2_ef"):
             q, scale = v
             a = q.astype("float32") * scale
         else:

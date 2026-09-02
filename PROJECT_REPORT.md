@@ -114,11 +114,12 @@ Details: `PI5_BENCHMARK_NOTES.md`, `hardware_benchmark_brief.pdf`.
     faster; int8 cuts bytes 71% and matches everyone early, but
     plateaus ~25% above fp32 near convergence — per-mix quantization
     noise sets a floor extra iterations cannot buy back. Error
-    feedback (int8ef) recovers ~half that floor at the same byte
-    cost, and quantized delta-transmission with EF (int8_delta_ef)
-    recovers ~75% — deltas are ~100x smaller than weights, so the
-    int8 scale is finer and EF's guarantee actually applies. The
-    residual gap sits in the still-full-state broadcast path.
+    feedback (int8ef) recovers ~half that floor; uplink
+    delta-transmission with EF recovers ~75%; delta-encoding BOTH
+    directions (int8_delta2_ef, per-connection view tracking) closes
+    the gap completely — tail MSE statistically identical to fp32 at
+    a 73% byte cut. The floor was fully attributed (half uplink, half
+    downlink) and fully recovered by the same mechanism.
   - **Findings:** (a) a synchronous round is priced by the slowest
     host, so a fast machine buys idle time, not speed — the
     homogeneous cheap fleet is the efficient shape for sync, and
