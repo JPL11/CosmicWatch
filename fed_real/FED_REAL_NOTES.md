@@ -97,6 +97,32 @@ giving an (elapsed, MSE) trajectory. 12 s wall budget per run.
   update compression — pointless under sync at this model size —
   becomes relevant.
 
+## Config D — update compression under async (fed_async_heterog_{fp16,int8}.json)
+
+Wire formats for BOTH directions (broadcast and update): fp32 baseline,
+fp16, and per-tensor symmetric int8 (`pack_state`/`unpack_state` in
+fed_common.py, `--wire` flag). Heterogeneous fleet, same 12 s budget:
+
+| wire | versions | MB on wire | MSE@3.2s | MSE@12s | best MSE |
+|------|---------:|-----------:|---------:|--------:|---------:|
+| fp32 |      988 |      215.4 |    0.032 |  0.0159 |   0.0148 |
+| fp16 |     1060 |      114.0 |    0.033 |  0.0149 |   0.0140 |
+| int8 |     1142 |       62.3 |    0.032 |  0.0196 |   0.0186 |
+
+- **fp16 is free**: 47% fewer bytes, ~7% more versions (smaller
+  payloads also serialize/copy faster, so the loop speeds up even on
+  a LAN), and final quality slightly better than fp32.
+- **int8 hits a noise floor**: 71% fewer bytes and the most versions,
+  identical early trajectory (all three arms ~0.032 at 3.2 s), but
+  convergence plateaus ~25% above fp32 (0.0196 vs 0.0159) — the
+  per-mix quantization noise on a 26.6k-param model sets a floor the
+  extra iterations cannot buy back.
+- Reading: compression is harmless while gradients are large and
+  binds only near convergence — the same "safe until the precision
+  floor engages" shape as the PTQ results in the quantization work.
+  At this scale fp16 is strictly the right wire format; int8 would
+  only win where bytes are the actual constraint (WAN/cellular).
+
 ## Files
 
 - `fed_common.py` — model, weighted loss, length-prefixed socket

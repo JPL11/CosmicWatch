@@ -108,6 +108,12 @@ Details: `PI5_BENCHMARK_NOTES.md`, `hardware_benchmark_brief.pdf`.
     0.078 at 3.2 s); on the balanced all-Pi network the gain shrinks
     to ~2x, because async's win scales with the idle fraction it
     reclaims. Staleness up to 145 caused no divergence.
+  - *Config D, wire compression under async* (fp32/fp16/int8 on both
+    directions): fp16 is free — 47% fewer bytes, slightly better final
+    MSE, and ~7% more updates/s since smaller payloads serialize
+    faster; int8 cuts bytes 71% and matches everyone early, but
+    plateaus ~25% above fp32 near convergence — per-mix quantization
+    noise sets a floor extra iterations cannot buy back.
   - **Findings:** (a) a synchronous round is priced by the slowest
     host, so a fast machine buys idle time, not speed — the
     homogeneous cheap fleet is the efficient shape for sync, and

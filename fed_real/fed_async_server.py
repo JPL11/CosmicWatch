@@ -23,13 +23,15 @@ import time
 import numpy as np
 import torch
 
-from fed_common import model, weighted_loss, send_msg, recv_msg
+from fed_common import (model, weighted_loss, send_msg, recv_msg,
+                        pack_state, unpack_state)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
 ap.add_argument("--hosts", type=int, default=3)
 ap.add_argument("--seconds", type=float, default=12.0)
 ap.add_argument("--alpha0", type=float, default=0.6)
+ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8"])
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
 args = ap.parse_args()
@@ -70,10 +72,11 @@ def serve(c, hello):
     host = hello["host"]
     while True:
         with lock:
-            state = {k: v.cpu() for k, v in net.state_dict().items()}
+            state = pack_state(net.state_dict(), args.wire)
             base = version
             stop = time.time() >= deadline
-        n = send_msg(c, {"stop": stop, "version": base, "state": state})
+        n = send_msg(c, {"stop": stop, "version": base, "state": state,
+                         "wire": args.wire})
         with lock:
             bytes_total[0] += n
         if stop:
@@ -83,10 +86,11 @@ def serve(c, hello):
             bytes_total[0] += nbytes
             staleness = version - msg["base_version"]
             alpha = args.alpha0 / (1.0 + staleness) ** 0.5
+            up = unpack_state(msg["state"], args.wire)
             cur = net.state_dict()
             net.load_state_dict({
                 k: (cur[k].double() * (1 - alpha)
-                    + msg["state"][k].double() * alpha).to(cur[k].dtype)
+                    + up[k].double() * alpha).to(cur[k].dtype)
                 for k in cur})
             version += 1
             with torch.no_grad():
@@ -112,6 +116,7 @@ per_host = {}
 for r in updates_log:
     per_host[r["host"]] = per_host.get(r["host"], 0) + 1
 out = {"hosts": [h for _, h in conns], "alpha0": args.alpha0,
+       "wire": args.wire,
        "budget_s": args.seconds, "updates": updates_log,
        "updates_per_host": per_host, "bytes_total": bytes_total[0],
        "total_wall_s": round(time.time() - t0, 3),

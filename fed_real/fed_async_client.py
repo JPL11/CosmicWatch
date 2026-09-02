@@ -10,7 +10,8 @@ import time
 import numpy as np
 import torch
 
-from fed_common import model, weighted_loss, send_msg, recv_msg
+from fed_common import (model, weighted_loss, send_msg, recv_msg,
+                        pack_state, unpack_state)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--server", required=True)
@@ -43,10 +44,12 @@ while True:
     msg, _ = recv_msg(sock)
     if msg.get("stop"):
         break
+    wire = msg.get("wire", "fp32")
+    global_state = unpack_state(msg["state"], wire)
     per_client_states, ns = [], []
     t_train0 = time.time()
     for i in cids:
-        net.load_state_dict(msg["state"])
+        net.load_state_dict(global_state)
         opt = torch.optim.Adam(net.parameters(), lr=args.lr)
         X = trains[i]
         perm = torch.randperm(len(X))
@@ -65,7 +68,8 @@ while True:
                   for s, n in zip(per_client_states, ns)).to(torch.float32)
            for k in per_client_states[0]}
     send_msg(sock, {"host": args.host, "n": total,
-                    "base_version": msg["version"], "state": agg,
+                    "base_version": msg["version"],
+                    "state": pack_state(agg, wire),
                     "timing": {"train_s": round(t_train, 3),
                                "n_logical_clients": len(cids)}})
     pulls += 1
