@@ -39,6 +39,43 @@ class Int8EF:
         return out
 
 
+class TopKEF:
+    """Uplink top-k sparsification with error feedback (Aji & Heafield
+    2017; Stich et al. 2018): keep only the k largest-magnitude entries
+    of the residual-corrected tensor (values as fp16 + int32 indices),
+    accumulate everything else into the residual."""
+
+    def __init__(self, frac=0.10):
+        self.frac = frac
+        self.e = {}
+
+    def pack(self, state):
+        import numpy as np
+        out = {}
+        for k, v in state.items():
+            a = (v.detach().cpu().numpy().astype("float32").ravel()
+                 + self.e.get(k, 0.0))
+            kk = max(1, int(round(len(a) * self.frac)))
+            idx = np.argpartition(np.abs(a), -kk)[-kk:].astype("int32")
+            vals = a[idx].astype("float16")
+            e = a.copy()
+            e[idx] -= vals.astype("float32")
+            self.e[k] = e
+            out[k] = (idx, vals, tuple(v.shape))
+        return out
+
+
+def unpack_topk(packed):
+    import numpy as np
+    import torch as _t
+    out = {}
+    for k, (idx, vals, shape) in packed.items():
+        a = np.zeros(int(np.prod(shape)), dtype="float32")
+        a[idx] = vals.astype("float32")
+        out[k] = _t.from_numpy(a.reshape(shape))
+    return out
+
+
 # application-layer link emulation profiles: (down_bps, up_bps, rtt_s).
 # Applied CLIENT-side to both directions, so no root/tc is needed and the
 # emulation is identical on every board.
@@ -72,7 +109,8 @@ def unpack_state(packed, wire):
     import torch as _t
     out = {}
     for k, v in packed.items():
-        if wire in ("int8", "int8ef", "int8_delta_ef", "int8_delta2_ef"):
+        if wire in ("int8", "int8ef", "int8_delta_ef", "int8_delta2_ef",
+                    "topk_ef"):
             q, scale = v
             a = q.astype("float32") * scale
         else:

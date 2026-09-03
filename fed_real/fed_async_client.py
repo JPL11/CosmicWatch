@@ -11,7 +11,7 @@ import numpy as np
 import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
-                        pack_state, unpack_state, Int8EF)
+                        pack_state, unpack_state, Int8EF, TopKEF)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--server", required=True)
@@ -54,8 +54,12 @@ while True:
     wire = msg.get("wire", "fp32")
     if wire != last_wire:
         # wire switched (adaptive server): fresh EF residuals
-        comp = Int8EF() if wire in ("int8ef", "int8_delta_ef",
-                                    "int8_delta2_ef") else None
+        if wire == "topk_ef":
+            comp = TopKEF()
+        elif wire in ("int8ef", "int8_delta_ef", "int8_delta2_ef"):
+            comp = Int8EF()
+        else:
+            comp = None
         last_wire = wire
     if wire == "int8_delta2_ef" and msg.get("mode") == "delta":
         d = unpack_state(msg["state"], "int8")
@@ -84,7 +88,7 @@ while True:
     agg = {k: sum(s[k].double() * (n / total)
                   for s, n in zip(per_client_states, ns)).to(torch.float32)
            for k in per_client_states[0]}
-    if wire in ("int8_delta_ef", "int8_delta2_ef"):
+    if wire in ("int8_delta_ef", "int8_delta2_ef", "topk_ef"):
         payload = comp.pack({k: agg[k] - global_state[k] for k in agg})
     elif wire == "int8ef":
         payload = comp.pack(agg)

@@ -36,14 +36,15 @@ import numpy as np
 import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
-                        pack_state, unpack_state, Int8EF, LINK_PROFILES)
+                        pack_state, unpack_state, Int8EF, LINK_PROFILES,
+                        unpack_topk)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
 ap.add_argument("--hosts", type=int, default=3)
 ap.add_argument("--seconds", type=float, default=12.0)
 ap.add_argument("--alpha0", type=float, default=0.6)
-ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef", "int8_delta_ef", "int8_delta2_ef"])
+ap.add_argument("--wire", default="fp32", choices=["fp32", "fp16", "int8", "int8ef", "int8_delta_ef", "int8_delta2_ef", "topk_ef"])
 ap.add_argument("--adapt", action="store_true",
                 help="adaptive per-connection wire selection (overrides --wire)")
 ap.add_argument("--adapt-low", type=float, default=0.25)
@@ -128,8 +129,8 @@ def serve(c, hello):
         with lock:
             base = version
             stop = time.time() >= deadline
-            if wire in ("int8ef", "int8_delta_ef", "int8_delta2_ef") \
-                    and comp is None:
+            if wire in ("int8ef", "int8_delta_ef", "int8_delta2_ef",
+                        "topk_ef") and comp is None:
                 comp = Int8EF()
             if wire == "int8_delta2_ef" and sent_f32 is not None:
                 cur = net.state_dict()
@@ -142,10 +143,10 @@ def serve(c, hello):
             else:
                 state = (comp.pack(net.state_dict())
                          if wire in ("int8ef", "int8_delta_ef",
-                                     "int8_delta2_ef")
+                                     "int8_delta2_ef", "topk_ef")
                          else pack_state(net.state_dict(), wire))
                 mode = "full"
-                if wire in ("int8_delta_ef", "int8_delta2_ef"):
+                if wire in ("int8_delta_ef", "int8_delta2_ef", "topk_ef"):
                     sent_f32 = unpack_state(state, "int8")
         t_send = time.time()
         n = send_msg(c, {"stop": stop, "version": base, "state": state,
@@ -161,7 +162,10 @@ def serve(c, hello):
             bytes_total[0] += nbytes
             staleness = version - msg["base_version"]
             alpha = args.alpha0 / (1.0 + staleness) ** 0.5
-            if wire in ("int8_delta_ef", "int8_delta2_ef"):
+            if wire == "topk_ef":
+                d = unpack_topk(msg["state"])
+                up = {k: sent_f32[k] + d[k] for k in d}
+            elif wire in ("int8_delta_ef", "int8_delta2_ef"):
                 d = unpack_state(msg["state"], "int8")
                 up = {k: sent_f32[k] + d[k] for k in d}
             else:

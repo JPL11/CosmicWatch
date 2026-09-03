@@ -35,6 +35,12 @@
    "tail_std": 0.0019,
    "MB_mean": 60.2,
    "versions_mean": 1104
+  },
+  "topk_ef": {
+   "tail_mean": 0.01923,
+   "tail_std": 0.00078,
+   "MB_mean": 44.2,
+   "versions_mean": 1000
   }
  },
  "long_120s": {
@@ -52,6 +58,11 @@
    "tail_mean": 0.01451,
    "min": 0.01381,
    "versions": 11086
+  },
+  "topk_ef": {
+   "tail_mean": 0.01238,
+   "min": 0.01124,
+   "versions": 10985
   }
  },
  "links": {
@@ -96,6 +107,46 @@
    "desktop_updates": 10547,
    "MB": 575.9,
    "budget_s": 120.0
+  }
+ },
+ "four_host": {
+  "fp32": {
+   "tail_mean": 0.01945,
+   "tail_std": 0.00064,
+   "MB_mean": 241.6,
+   "pi4_updates_mean": 31
+  },
+  "int8_delta2_ef": {
+   "tail_mean": 0.01937,
+   "tail_std": 0.00095,
+   "MB_mean": 62.5,
+   "pi4_updates_mean": 32
+  },
+  "adapt": {
+   "tail_mean": 0.01982,
+   "tail_std": 0.00088,
+   "MB_mean": 242.9,
+   "pi4_updates_mean": 29
+  },
+  "mixed_fp32": {
+   "tail": 0.0185,
+   "per_host": {
+    "desktop": 7383,
+    "pi5": 27,
+    "pi4": 148,
+    "jetson": 3
+   },
+   "MB": 1617.1
+  },
+  "mixed_adapt": {
+   "tail": 0.01879,
+   "per_host": {
+    "desktop": 6953,
+    "pi5": 80,
+    "pi4": 219,
+    "jetson": 5
+   },
+   "MB": 1505.2
   }
  }
 }

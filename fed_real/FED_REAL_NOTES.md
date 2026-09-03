@@ -230,6 +230,28 @@ at t=45 s).
   54 s) because each observation costs a 30-40 s exchange — seeding
   escalation from the first measured exchange would fix this.
 
+## Top-k baseline + 4-host federation (campaign 3)
+
+- **top-k + EF** (`topk_ef`, uplink 10% largest-magnitude delta
+  entries as fp16 values + int32 indices, EF residual; downlink
+  full-state int8+EF): 3-seed tail 0.0192 +/- 0.0008 — statistically
+  tied with fp32 and every EF variant — at 44.2 MB, the best byte
+  total in the ladder (81% below fp32). 120 s run tracks fp32
+  (0.0124 tail, within run variation). The literature baseline
+  confirms rather than beats the delta+EF wires; both families are
+  quality-equivalent, differing only in bytes.
+- **Pi 4 as fourth host**: registered but silently contributed ZERO
+  updates in the first campaign-3 pass — its numpy was 1.24 and the
+  async wire ships numpy arrays pickled by numpy 2.x (`numpy._core`
+  paths don't exist in 1.x), so the client died after registration
+  and the server thread saw "peer closed". The morning's sync
+  Config B worked because that harness pickled torch tensors.
+  Lesson recorded: PIN NUMPY MAJOR VERSION ACROSS THE FLEET (or
+  ship torch tensors); a dead client in async FL is silent because
+  the federation keeps converging without it — check
+  updates_per_host, not just the loss curve. Fixed (numpy 2.4.6)
+  and phase B rerun; see camp4_*.json for the 4-host results.
+
 ## Files
 
 - `fed_common.py` — model, weighted loss, length-prefixed socket
