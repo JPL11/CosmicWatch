@@ -151,8 +151,8 @@ sub(s3x + s3w / 2, FLOW - 0.15 - 0.030, "1 local epoch / exchange\nAdam, weighte
 
 # ---- S4: wire packer ladder (real measured kB) ------------------------
 s4x, s4w = 0.412, 0.104
-wires = [("fp32", 106, GREY), ("fp16", 53, GREY),
-         ("int8 delta+EF", 27, ORANGE), ("top-k+EF", 21, ORANGE)]
+wires = [("fp32", 104, GREY), ("fp16", 52, GREY),
+         ("int8 delta+EF", 27, ORANGE), ("top-k+EF", 16, ORANGE)]
 h4 = 0.30
 ax4 = fig.add_axes([s4x, FLOW - h4 / 2, s4w, h4])
 yy = np.arange(len(wires))[::-1]
