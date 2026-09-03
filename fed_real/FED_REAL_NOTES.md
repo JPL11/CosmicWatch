@@ -269,3 +269,25 @@ Run: server first (`fed_server.py --hosts 3 --rounds 6 --out ...`),
 then one `fed_client.py --server <ip> --host <name> --clients i,j,k`
 per machine. Data file `fl_device_crops.npz` must be present beside
 the scripts on every host.
+
+## Revision campaign (2026-09-03, camp_long_*_s*, camp_recover_*)
+
+External-review-driven strengthening for the ICAIIC paper:
+- **5-seed 120 s long runs**: int8 tail worse than fp32 on EVERY seed
+  (paired +0.007..+0.046; across-seed dispersion 0.020-0.059 is itself
+  the instability evidence); delta2+EF paired difference vs fp32
+  -0.0006 +/- 0.0011 (95% CI) — a tight null, reported as "no
+  measurable degradation", not "equivalence".
+- **Collapse-and-recovery** (pi5: LAN 0-30 s -> LTE-M 30-60 s -> LAN
+  60-90 s, --link-sched): adaptive policy stays fp32 on the free link
+  (155 updates), completes escalation to delta wire 5.9 s after the
+  collapse (25 constrained-segment updates vs static fp32's 10),
+  relaxes back to fp32 2.3 s after restoration. Replaces the earlier
+  "held through collapse" figure, which showed survival, not
+  adaptation.
+- Fixed in the paper besides: byte-accounting time bases (rate
+  framing, exemplar-vs-mean labeling), QAFeL/Ortega/BiCompFL/NEBULA
+  citations + novelty rescope, per-direction wire table columns
+  (measured message sizes: fp32 104 / fp16 52 / int8-family 27 /
+  top-k 16 kB), equivalence-language softening, fairness claim
+  narrowed to participation opportunity, repo tag pointer.

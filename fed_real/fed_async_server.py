@@ -58,6 +58,9 @@ ap.add_argument("--link-map", default="",
                 help='per-host profiles, e.g. "pi5=ltem,jetson=nbiot"')
 ap.add_argument("--link-switch", default="",
                 help='mid-run change: "host:from:to:t_s"')
+ap.add_argument("--link-sched", default="",
+                help='piecewise schedule: "host:prof@t0,prof@t1,..." '
+                     '(prof "none" = unshaped); overrides --link-switch')
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
 args = ap.parse_args()
@@ -85,6 +88,14 @@ if args.link_map:
 elif args.link != "none":
     for h in args.link_hosts.split(","):
         link_map[h] = args.link
+link_sched = {}
+if args.link_sched:
+    h, segs = args.link_sched.split(":", 1)
+    link_sched[h] = []
+    for seg in segs.split(","):
+        prof, ts = seg.split("@")
+        link_sched[h].append((float(ts), prof))
+    link_sched[h].sort()
 link_switch = None
 if args.link_switch:
     h, pfrom, pto, ts = args.link_switch.split(":")
@@ -111,6 +122,11 @@ deadline = t0 + args.seconds
 
 def current_link(host):
     prof = link_map.get(host)
+    if host in link_sched:
+        el = time.time() - t0
+        for ts, pr in link_sched[host]:
+            if el >= ts:
+                prof = None if pr == "none" else pr
     if link_switch and host == link_switch[0]:
         prof = link_switch[2] if time.time() - t0 >= link_switch[3] \
             else link_switch[1]
@@ -224,7 +240,8 @@ for r in updates_log:
 out = {"hosts": [h for _, h in conns], "alpha0": args.alpha0,
        "wire": ("adapt" if args.adapt else args.wire), "seed": args.seed,
        "link": args.link, "link_map": link_map,
-       "link_switch": args.link_switch, "link_hosts": args.link_hosts,
+       "link_switch": args.link_switch, "link_sched": args.link_sched,
+       "link_hosts": args.link_hosts,
        "budget_s": args.seconds, "updates": updates_log,
        "updates_per_host": per_host, "bytes_total": bytes_total[0],
        "total_wall_s": round(time.time() - t0, 3),

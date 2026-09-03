@@ -346,30 +346,36 @@ plt.close(fig)
 print("fig_participation written")
 
 # ======================================================================
-# Fig 4: adaptive timeline (restyled)
+# Fig 4: adaptive collapse-and-recovery timeline
 # ======================================================================
-d, ups = load("camp2_switch_adapt.json")
+d, ups = load("camp_recover_adapt.json")
 lv = {"fp32": 0, "fp16": 1, "int8_delta2_ef": 2}
-fig, axes = plt.subplots(2, 1, figsize=(3.4, 2.2), sharex=True,
+fig, axes = plt.subplots(2, 1, figsize=(3.4, 2.3), sharex=True,
                          gridspec_kw={"height_ratios": [1.15, 1]})
 ax = axes[0]
 pi5 = [(u["t_s"], lv[u["wire"]]) for u in ups if u["host"] == "pi5"]
 ax.step([t for t, _ in pi5], [l for _, l in pi5], where="post",
         color=RED, lw=1.2)
-ax.axvline(45, color=GREY, ls="--", lw=0.8)
-ax.text(46.5, 0.35, "link collapse\nLTE $\\to$ NB-IoT", fontsize=5.8,
-        color="0.35")
+for t_, lbl in ((30, "collapse\nLAN $\\to$ LTE-M"),
+                (60, "restore\nLTE-M $\\to$ LAN")):
+    ax.axvline(t_, color=GREY, ls="--", lw=0.8)
+    ax.text(t_ + 1.2, 1.55, lbl, fontsize=5.4, color="0.35")
+esc = [t for t, l in pi5 if t >= 30 and l == 2]
+rel = [t for t, l in pi5 if t >= 60 and l == 0]
+print("escalated to delta+EF at t=%.1f; relaxed to fp32 at t=%.1f"
+      % (min(esc), min(rel)))
 ax.set_yticks([0, 1, 2])
 ax.set_yticklabels(["fp32", "fp16", "delta+EF"], fontsize=6)
-ax.set_ylim(-0.25, 2.35)
+ax.set_ylim(-0.25, 2.45)
 ax.set_title("Pi 5 wire selected by the policy", fontsize=7.2)
 ax = axes[1]
-_, fpu = load("camp2_switch_fp32.json")
+_, fpu = load("camp_recover_fp32.json")
 t_ad = [u["t_s"] for u in ups if u["host"] == "pi5"]
 t_fp = [u["t_s"] for u in fpu if u["host"] == "pi5"]
 ax.eventplot([t_fp, t_ad], lineoffsets=[0, 1], linelengths=0.7,
              colors=[GREY, RED], linewidths=0.6)
-ax.axvline(45, color=GREY, ls="--", lw=0.8)
+for t_ in (30, 60):
+    ax.axvline(t_, color=GREY, ls="--", lw=0.8)
 ax.set_yticks([0, 1]); ax.set_yticklabels(["static fp32", "adaptive"],
                                           fontsize=6)
 ax.set_xlabel("wall-clock seconds", fontsize=7)
@@ -380,4 +386,4 @@ for ax_ in axes:
 fig.tight_layout(h_pad=0.5)
 fig.savefig(FIGDIR + "fig_adapt_timeline.pdf", bbox_inches="tight")
 plt.close(fig)
-print("fig_adapt_timeline written")
+print("fig_adapt_timeline (recovery) written")
