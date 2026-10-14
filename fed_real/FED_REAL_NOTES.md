@@ -260,10 +260,19 @@ at t=45 s).
   time, per-host arrival times, client-reported train times, straggler
   gap, bytes moved, and global test weighted MSE.
 - `fed_client.py` — one process per host, trains its logical clients
-  sequentially each round.
+  sequentially each round. Since 2026-09-16 both clients also report
+  `train_loss` (sample-weighted mean over the local epoch) and
+  `train_loss_per_client` inside `timing`, so train-vs-test curves can
+  be drawn from the same JSON.
 - `fed_async_server.py` / `fed_async_client.py` — the asynchronous
   variant (Config C): per-host server threads, staleness-discounted
   immediate mixing, fixed wall-time budget.
+- `cell_bringup.py` — real-cellular host (Waveshare SIM7080G HAT +
+  Hologram SIM): `setup` configures Cat-M/NB-IoT and waits for
+  registration, `status` snapshots signal/cell to JSON (take one
+  before and after each run), `ppp` writes the pppd peer so the
+  unmodified async client runs over ppp0. Name the host outside
+  `--link-hosts` so the real link is not also emulated.
 
 Run: server first (`fed_server.py --hosts 3 --rounds 6 --out ...`),
 then one `fed_client.py --server <ip> --host <name> --clients i,j,k`
