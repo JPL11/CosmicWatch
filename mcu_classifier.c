@@ -2,12 +2,10 @@
  * Standardize -> 4x8 ReLU -> 8x1 sigmoid, matching pi_benchmark.py's
  * forward_np exactly. Builds anywhere (host, Pico SDK, Arduino core):
  *   host verify+bench:  cc -O2 -o mcu_classifier mcu_classifier.c -lm
- * On an MCU, call mlp49_score(raw_features) per event. */
+ * On an MCU, call mlp49_score(raw_features) per event; build with
+ * -DMLP49_NO_MAIN to drop the host main() (pico/ does this). */
 #include <math.h>
-#include <stdio.h>
-#include <time.h>
 #include "mlp49_weights.h"
-#include "mlp49_test_vectors.h"
 
 float mlp49_score(const float *raw) {
     float x[N_IN], h;
@@ -23,6 +21,11 @@ float mlp49_score(const float *raw) {
     }
     return 1.0f / (1.0f + expf(-o));
 }
+
+#ifndef MLP49_NO_MAIN
+#include <stdio.h>
+#include <time.h>
+#include "mlp49_test_vectors.h"
 
 int main(void) {
     float maxdiff = 0.0f;
@@ -44,3 +47,4 @@ int main(void) {
            s / iters * 1e9, iters, (double)sink);
     return maxdiff < 1e-5f ? 0 : 1;
 }
+#endif

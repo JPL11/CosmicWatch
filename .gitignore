@@ -30,3 +30,4 @@ credo_useful*.csv
 
 # Local hardware smoke result (platform-specific target results may be committed)
 fl_hardware_benchmark_local.json
+pico/build/
