@@ -273,6 +273,13 @@ at t=45 s).
   before and after each run), `ppp` writes the pppd peer so the
   unmodified async client runs over ppp0. Name the host outside
   `--link-hosts` so the real link is not also emulated.
+- `azure_setup.sh` — Azure VM as the server, reachable only through
+  WireGuard (10.8.0.1; NSG opens SSH + UDP 51820, never 29500, because
+  the wire is pickle). `create` / `keys <hosts>` / `install` / `client`
+  / `start` / `stop`; keys live in gitignored `wg/`. VM numpy pinned to
+  the fleet's 2.4.6. Runs through it are real-WAN for EVERY host, so
+  label them separately from the LAN campaigns and leave `--link-map`
+  empty; record `ping 10.8.0.1` per host before each run.
 
 Run: server first (`fed_server.py --hosts 3 --rounds 6 --out ...`),
 then one `fed_client.py --server <ip> --host <name> --clients i,j,k`

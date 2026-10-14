@@ -22,9 +22,11 @@ Usage:
 
 Only the route to the federation server goes over ppp0; Wi-Fi keeps
 the default route, so SSH and everything else are unaffected and only
-federation traffic is billed. The server must be reachable from the
-internet (router port-forward of --port 29500 to the server box), since
-the Hologram client sits behind carrier NAT and can only dial out.
+federation traffic is billed. With the Azure server (azure_setup.sh),
+<server public ip> is the VM's: the WireGuard tunnel then rides ppp0
+and the client dials --server 10.8.0.1. The Hologram side sits behind
+carrier NAT and can only dial out, which the tunnel's keepalive covers;
+never port-forward 29500 itself (the wire format is pickle).
 
 On the server, give this host a name that is NOT in --link-hosts /
 --link-map (e.g. --host zero2w_cell): its link is real, so it must not
