@@ -198,6 +198,7 @@ def serve(c, hello):
                    "host": host, "staleness": staleness,
                    "alpha": round(alpha, 4), "wire": wire,
                    "train_s": msg["timing"]["train_s"],
+                   "train_loss": msg["timing"].get("train_loss"),
                    "global_test_weighted_mse": round(mse, 6)}
             updates_log.append(rec)
         print(json.dumps(rec), flush=True)

@@ -67,24 +67,30 @@ while True:
     else:
         view = unpack_state(msg["state"], wire)
     global_state = view
-    per_client_states, ns = [], []
+    per_client_states, ns, losses = [], [], {}
     t_train0 = time.time()
     for i in cids:
         net.load_state_dict(global_state)
         opt = torch.optim.Adam(net.parameters(), lr=args.lr)
         X = trains[i]
         perm = torch.randperm(len(X))
+        loss_sum = 0.0
         for b in range(0, len(X), args.batch):
             xb = X[perm[b:b + args.batch]]
             opt.zero_grad()
             loss = weighted_loss(net(xb), xb)
             loss.backward()
             opt.step()
+            loss_sum += loss.item() * len(xb)
         per_client_states.append({k: v.detach().cpu()
                                   for k, v in net.state_dict().items()})
         ns.append(len(X))
+        # sample-weighted mean training loss over this local epoch (the
+        # same weighted MSE the server reports on the held-out test set)
+        losses[i] = loss_sum / len(X)
     t_train = time.time() - t_train0
     total = sum(ns)
+    train_loss = sum(losses[i] * n for i, n in zip(cids, ns)) / total
     agg = {k: sum(s[k].double() * (n / total)
                   for s, n in zip(per_client_states, ns)).to(torch.float32)
            for k in per_client_states[0]}
@@ -98,6 +104,10 @@ while True:
                            "base_version": msg["version"],
                            "state": payload,
                            "timing": {"train_s": round(t_train, 3),
+                                      "train_loss": round(train_loss, 6),
+                                      "train_loss_per_client": {
+                                          int(i): round(v, 6)
+                                          for i, v in losses.items()},
                                       "n_logical_clients": len(cids)}})
     if link:
         time.sleep(sent * 8 / up_bps + rtt / 2)
