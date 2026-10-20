@@ -9,7 +9,7 @@ import time
 import numpy as np
 import torch
 
-from fed_common import model, weighted_loss, send_msg, recv_msg
+from fed_common import model, weighted_loss, send_msg, recv_msg, set_cc
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--server", required=True)
@@ -20,6 +20,8 @@ ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--batch", type=int, default=256)
 ap.add_argument("--lr", type=float, default=0.002)
 ap.add_argument("--threads", type=int, default=4)
+ap.add_argument("--cc", default="", help="TCP congestion control for the "
+                "uplink socket, e.g. bbr ('' = system default)")
 args = ap.parse_args()
 torch.set_num_threads(args.threads)
 
@@ -34,7 +36,8 @@ print(f"{args.host}: clients {cids}, sizes {[len(trains[i]) for i in cids]}",
       flush=True)
 
 sock = socket.create_connection((args.server, args.port))
-send_msg(sock, {"host": args.host, "clients": cids})
+cc = set_cc(sock, args.cc)
+send_msg(sock, {"host": args.host, "clients": cids, "cc": cc})
 
 net = model()
 while True:

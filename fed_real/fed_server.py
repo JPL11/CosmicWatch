@@ -17,7 +17,7 @@ import numpy as np
 import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
-                        eval_sets, tcp_path_stats)
+                        eval_sets, tcp_path_stats, set_cc)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
@@ -26,6 +26,11 @@ ap.add_argument("--rounds", type=int, default=6)
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_real_results.json")
 ap.add_argument("--seed", type=int, default=42)
+ap.add_argument("--seconds", type=float, default=0.0,
+                help="wall-clock budget: stop after the round that crosses it "
+                     "(0 = run exactly --rounds)")
+ap.add_argument("--cc", default="", help="TCP congestion control for the "
+                "server (downlink) sockets ('' = system default)")
 ap.add_argument("--dead-after", type=float, default=120.0,
                 help="a host silent this long aborts the run (results so far "
                      "are written with 'aborted')")
@@ -48,15 +53,21 @@ while len(conns) < args.hosts:
     c, addr = srv.accept()
     c.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
     hello, _ = recv_msg(c)
+    hello["cc_server"] = set_cc(c, args.cc)
     c.settimeout(args.dead_after)
     conns.append((c, hello))
     print(f"registered {hello['host']} clients={hello['clients']} from {addr[0]}",
           flush=True)
 
 log = {"hosts": [h for _, h in conns], "rounds": [], "bytes_total": 0,
-       "data": args.data, "n_clients": n_clients, "seed": args.seed, "has_val": val_all is not None}
+       "data": args.data, "n_clients": n_clients, "seed": args.seed,
+       "budget_s": args.seconds,
+       "cc": {h["host"]: {"client": h.get("cc"), "server": h["cc_server"]}
+              for _, h in conns}, "has_val": val_all is not None}
 t_exp = time.time()
 for rnd in range(1, args.rounds + 1):
+    if args.seconds and time.time() - t_exp >= args.seconds:
+        break
     state = {k: v.cpu() for k, v in net.state_dict().items()}
     t0 = time.time()
     updates, arrivals = [], {}

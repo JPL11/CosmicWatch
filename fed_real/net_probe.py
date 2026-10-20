@@ -65,10 +65,18 @@ def serve(bind):
         threading.Thread(target=handle, args=(conn,), daemon=True).start()
 
 
-def run(server, host, mb):
+def set_cc(sock, name):
+    if name:
+        sock.setsockopt(socket.IPPROTO_TCP, socket.TCP_CONGESTION, name.encode())
+    raw = sock.getsockopt(socket.IPPROTO_TCP, socket.TCP_CONGESTION, 16)
+    return raw.split(b"\x00", 1)[0].decode()
+
+
+def run(server, host, mb, cc=""):
     n = int(mb * 1e6)
     blob = b"\x00" * CHUNK
     s = socket.create_connection((server, PORT), timeout=300)
+    cc_used = set_cc(s, cc)
     s.sendall(struct.pack(">Q", n))
     t0 = time.time()
     left = n
@@ -82,7 +90,8 @@ def run(server, host, mb):
     drain(s, n)
     t_down = time.time() - t1
     s.close()
-    print(json.dumps({"host": host, "mb": mb, "start_unix": round(t0, 3),
+    print(json.dumps({"host": host, "mb": mb, "cc": cc_used,
+                      "start_unix": round(t0, 3),
                       "up_mbps": round(n * 8 / t_up / 1e6, 2),
                       "down_mbps": round(n * 8 / t_down / 1e6, 2),
                       "up_s": round(t_up, 2), "down_s": round(t_down, 2)}),
@@ -98,10 +107,11 @@ if __name__ == "__main__":
     b.add_argument("--server", default="10.8.0.1")
     b.add_argument("--host", required=True)
     b.add_argument("--mb", type=float, default=20)
+    b.add_argument("--cc", default="", help="e.g. bbr ('' = system default)")
     args = ap.parse_args()
     if args.cmd == "serve":
         serve(args.bind)
     elif args.cmd == "run":
-        run(args.server, args.host, args.mb)
+        run(args.server, args.host, args.mb, args.cc)
     else:
         ap.print_help()

@@ -198,3 +198,26 @@ def tcp_path_stats(sock):
     return {"tcp_rtt_ms": round(rtt / 1000, 2),
             "tcp_rttvar_ms": round(rttvar / 1000, 2),
             "tcp_total_retrans": retrans}
+
+
+def set_cc(sock, name):
+    """Per-socket TCP congestion control (Linux TCP_CONGESTION), e.g. "bbr".
+    If the kernel refuses (module not loaded, or not in
+    net.ipv4.tcp_allowed_congestion_control) the socket keeps the system
+    default. Returns the algorithm actually in force, which every run
+    records per connection, so a fallback is visible, never silent."""
+    import socket as _s
+    if name:
+        try:
+            sock.setsockopt(_s.IPPROTO_TCP, _s.TCP_CONGESTION, name.encode())
+        except OSError:
+            pass
+    return current_cc(sock)
+
+
+def current_cc(sock):
+    import socket as _s
+    if not hasattr(_s, "TCP_CONGESTION"):
+        return None
+    raw = sock.getsockopt(_s.IPPROTO_TCP, _s.TCP_CONGESTION, 16)
+    return raw.split(b"\x00", 1)[0].decode()

@@ -5,6 +5,13 @@
 #   ./run_campaign.sh --tag wan_fp32_s1 --mode async --wire fp32 --seed 1 --seconds 120
 #   ./run_campaign.sh --tag wan_sync_s1 --mode sync --rounds 20 --seed 1
 #   ./run_campaign.sh --tag wan_adapt_s1 --mode async --adapt --seed 1
+#   ./run_campaign.sh --tag A_sync_s1 --mode sync --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w
+#   ./run_campaign.sh --tag bbr_s1 --cc bbr     # clients that cannot use bbr keep cubic
+#
+# --hosts restricts to a subset by --host name (detector assignment unchanged).
+# --cc sets per-socket congestion control on clients and server; hosts whose
+# kernel lacks it (orin, nano) or that cannot load it fall back to the default,
+# and the actually-used algorithm is recorded per connection in "cc".
 #
 # Writes results/<tag>.json (server output + run metadata: per-host ping RTT,
 # VM CPU credits before/after, detector assignment) and results/<tag>/ logs.
@@ -12,7 +19,8 @@
 set -uo pipefail
 cd "$(dirname "$0")"
 
-TAG=""; MODE=async; WIRE=fp32; ADAPT=""; SEED=1; SECONDS_RUN=120; ROUNDS=20
+TAG=""; MODE=async; WIRE=fp32; ADAPT=""; SEED=1; SECONDS_RUN=120; ROUNDS=100000
+ONLY=""; CC=""
 DATA=legacy_fl_hardware_10.npz
 while [[ $# -gt 0 ]]; do
   case $1 in
@@ -24,6 +32,8 @@ while [[ $# -gt 0 ]]; do
     --seconds) SECONDS_RUN=$2; shift 2 ;;
     --rounds) ROUNDS=$2; shift 2 ;;
     --data) DATA=$2; shift 2 ;;
+    --hosts) ONLY=$2; shift 2 ;;
+    --cc) CC=$2; shift 2 ;;
     *) echo "unknown option $1" >&2; exit 2 ;;
   esac
 done
@@ -48,6 +58,16 @@ HOSTS=(
   "pi02w       ~/fed                    ~/fl/bin/python                pi02w   7"
   "eclipse     ~/fed                    python3                        nano    4"
 )
+if [[ -n $ONLY ]]; then
+  keep=()
+  for h in "${HOSTS[@]}"; do
+    read -r _ _ _ host _ <<<"$h"
+    [[ ",$ONLY," == *",$host,"* ]] && keep+=("$h")
+  done
+  HOSTS=("${keep[@]}")
+fi
+# hosts whose kernels have no BBR: never ask them for it
+NO_BBR=",jetson,nano,"
 SSH=(ssh -o BatchMode=yes -o ConnectTimeout=10 -o ServerAliveInterval=15 -o ServerAliveCountMax=4)
 OUT=results/$TAG; mkdir -p "$OUT"
 META=$OUT/meta.txt; : >"$META"
@@ -61,7 +81,7 @@ throttle_flags() {
     [[ -n $t ]] && echo "throttled_$1[$host]=$t" | tee -a "$META"
   done
 }
-echo "tag=$TAG mode=$MODE wire=$WIRE adapt=${ADAPT:-no} seed=$SEED data=$DATA" | tee -a "$META"
+echo "tag=$TAG mode=$MODE wire=$WIRE adapt=${ADAPT:-no} seed=$SEED data=$DATA cc=${CC:-default} hosts=${#HOSTS[@]}" | tee -a "$META"
 echo "credits_before=$(credits)" | tee -a "$META"
 throttle_flags before
 for h in "${HOSTS[@]}"; do
@@ -74,9 +94,12 @@ if [[ $MODE == async ]]; then
   SRV_CMD="fed_async_server.py --hosts ${#HOSTS[@]} --seconds $SECONDS_RUN --seed $SEED --data $DATA --out run.json"
   [[ -n $ADAPT ]] && SRV_CMD+=" --adapt" || SRV_CMD+=" --wire $WIRE"
   CLIENT=fed_async_client.py
+  [[ -n $CC ]] && SRV_CMD+=" --cc $CC"
 else
-  SRV_CMD="fed_server.py --hosts ${#HOSTS[@]} --rounds $ROUNDS --seed $SEED --data $DATA --out run.json"
+  :
+  SRV_CMD="fed_server.py --hosts ${#HOSTS[@]} --rounds $ROUNDS --seconds $SECONDS_RUN --seed $SEED --data $DATA --out run.json"
   CLIENT=fed_client.py
+  [[ -n $CC ]] && SRV_CMD+=" --cc $CC"
 fi
 # separate pkill call with a [f] pattern: it must not match its own shell
 "${SSH[@]}" -n "$SERVER" 'pkill -f "[f]ed_async_server|[f]ed_server.py"; true'
@@ -88,8 +111,10 @@ done
 
 for h in "${HOSTS[@]}"; do
   read -r alias dir py host det <<<"$h"
+  ccarg=""
+  [[ -n $CC && $NO_BBR != *",$host,"* ]] && ccarg="--cc $CC"
   "${SSH[@]}" -n "${alias}" "cd $dir && timeout $((SECONDS_RUN + 600)) $py $CLIENT \
-    --server $SERVER_VPN --host $host --clients $det --data $DATA" >"$OUT/$host.log" 2>&1 &
+    --server $SERVER_VPN --host $host --clients $det --data $DATA $ccarg" >"$OUT/$host.log" 2>&1 &
 done
 wait
 
@@ -112,6 +137,8 @@ else:
     rs = r["rounds"]
     print(f"{len(rs)} sync rounds, test MSE {rs[0]['global_test_weighted_mse']:.4f} -> "
           f"{rs[-1]['global_test_weighted_mse']:.4f}, wall {r['total_wall_s']} s")
+if r.get("cc"):
+    print("cc per host (client/server):", {h: "%s/%s" % (v["client"], v["server"]) for h, v in r["cc"].items()})
 for d in r.get("dropped", []):
     print(f"WARNING: host {d['host']} dropped at {d['t_s']} s ({d['error']})")
 if "aborted" in r:

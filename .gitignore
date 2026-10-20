@@ -33,3 +33,4 @@ fl_hardware_benchmark_local.json
 pico/build/
 fed_real/wg/
 fed_real/results/*/
+fed_real/results/*.out

@@ -37,7 +37,7 @@ import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
                         pack_state, unpack_state, Int8EF, LINK_PROFILES,
-                        unpack_topk, eval_sets, tcp_path_stats)
+                        unpack_topk, eval_sets, tcp_path_stats, set_cc)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
@@ -63,6 +63,8 @@ ap.add_argument("--link-sched", default="",
                      '(prof "none" = unshaped); overrides --link-switch')
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
+ap.add_argument("--cc", default="", help="TCP congestion control for the "
+                "server (downlink) sockets ('' = system default)")
 ap.add_argument("--dead-after", type=float, default=120.0,
                 help="seconds of silence after which a host is logged as "
                      "dropped and the run continues without it")
@@ -115,6 +117,7 @@ while len(conns) < args.hosts:
     c, addr = srv.accept()
     c.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
     hello, _ = recv_msg(c)
+    hello["cc_server"] = set_cc(c, args.cc)
     c.settimeout(args.dead_after)
     conns.append((c, hello))
     print(f"registered {hello['host']} clients={hello['clients']} "
@@ -282,6 +285,8 @@ path_summary = {
     for h, p in path.items()}
 out = {"hosts": [h for _, h in conns], "alpha0": args.alpha0,
        "data": args.data, "n_clients": n_clients,
+       "cc": {h["host"]: {"client": h.get("cc"), "server": h["cc_server"]}
+              for _, h in conns},
        "has_val": val_all is not None, "path_per_host": path_summary,
        "wire": ("adapt" if args.adapt else args.wire), "seed": args.seed,
        "link": args.link, "link_map": link_map,
