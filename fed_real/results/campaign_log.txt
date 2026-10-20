@@ -1,0 +1,187 @@
+2026-10-20 03:08:52 start A_async_s1 (--mode async --wire fp32 --seed 1 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    updates per host: {'desktop': 1649, 'nano': 234, 'pi5': 1151, 'jetson': 618, 'pi02w': 544}
+    test MSE 0.2275 -> 0.0169 over 4196 mixes, 898.0 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:11:53 start A_sync_s1 (--mode sync --seed 1 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    227 sync rounds, test MSE 0.2238 -> 0.0160, wall 120.149 s
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:14:54 start A_async_s2 (--mode async --wire fp32 --seed 2 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    updates per host: {'nano': 252, 'desktop': 1523, 'pi5': 1185, 'jetson': 599, 'pi02w': 537}
+    test MSE 0.2311 -> 0.0162 over 4096 mixes, 876.6 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:17:56 start A_sync_s2 (--mode sync --seed 2 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    236 sync rounds, test MSE 0.2223 -> 0.0152, wall 120.092 s
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:21:01 start A_async_s3 (--mode async --wire fp32 --seed 3 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    updates per host: {'desktop': 1627, 'nano': 252, 'pi5': 1168, 'jetson': 624, 'pi02w': 540}
+    test MSE 0.2236 -> 0.0163 over 4211 mixes, 901.2 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:24:07 start A_sync_s3 (--mode sync --seed 3 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    236 sync rounds, test MSE 0.2199 -> 0.0163, wall 120.404 s
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:27:09 start A_async_s4 (--mode async --wire fp32 --seed 4 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    updates per host: {'nano': 247, 'desktop': 1672, 'pi5': 1130, 'jetson': 639, 'pi02w': 534}
+    test MSE 0.2234 -> 0.0168 over 4222 mixes, 903.5 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 03:30:11 start A_sync_s4 (--mode sync --seed 4 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    223 sync rounds, test MSE 0.2116 -> 0.0149, wall 120.131 s
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: could not read VM CPU credits
+2026-10-20 05:32:30 start A_async_s5 (--mode async --wire fp32 --seed 5 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    updates per host: {'nano': 254, 'desktop': 1636, 'pi5': 1211, 'jetson': 621, 'pi02w': 533}
+    test MSE 0.2307 -> 0.0161 over 4255 mixes, 910.6 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 05:35:33 start A_sync_s5 (--mode sync --seed 5 --seconds 120 --hosts desktop,pi5,jetson,nano,pi02w)
+    239 sync rounds, test MSE 0.2223 -> 0.0154, wall 120.404 s
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+2026-10-20 05:38:36 start B_fp32_s1 (--mode async --wire fp32 --seed 1 --seconds 120)
+    updates per host: {'nano': 212, 'desktop': 1132, 'pi5': 819, 'pi5b': 681, 'jetson': 530, 'pi4b': 290, 'pi4': 511, 'pi3': 211, 'pi400': 364, 'pi02w': 393}
+    test MSE 0.2322 -> 0.0136 over 5143 mixes, 1101.0 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 05:42:03 start B_int8_s1 (--mode async --wire int8 --seed 1 --seconds 120)
+    updates per host: {'nano': 256, 'desktop': 1725, 'pi5': 1319, 'pi5b': 1125, 'jetson': 695, 'pi4b': 353, 'pi4': 700, 'pi400': 514, 'pi3': 286, 'pi02w': 618}
+    test MSE 0.2322 -> 0.0156 over 7591 mixes, 414.2 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 05:45:33 start B_int8_delta2_ef_s1 (--mode async --wire int8_delta2_ef --seed 1 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1530, 'pi5': 1300, 'pi5b': 1127, 'jetson': 684, 'pi4b': 347, 'pi4': 698, 'pi400': 522, 'pi3': 285, 'pi02w': 601}
+    test MSE 0.2322 -> 0.0142 over 7353 mixes, 401.3 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 05:49:01 start B_topk_ef_s1 (--mode async --wire topk_ef --seed 1 --seconds 120)
+    updates per host: {'nano': 261, 'desktop': 1720, 'pi5': 1276, 'pi5b': 1130, 'jetson': 699, 'pi4b': 371, 'pi4': 688, 'pi400': 518, 'pi3': 296, 'pi02w': 602}
+    test MSE 0.2366 -> 0.0142 over 7561 mixes, 334.0 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 05:52:32 start B_fp32_s2 (--mode async --wire fp32 --seed 2 --seconds 120)
+    updates per host: {'nano': 213, 'desktop': 1120, 'pi5': 895, 'pi5b': 692, 'jetson': 514, 'pi4b': 304, 'pi400': 359, 'pi4': 484, 'pi3': 230, 'pi02w': 420}
+    test MSE 0.2311 -> 0.0132 over 5231 mixes, 1119.9 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 05:56:03 start B_int8_s2 (--mode async --wire int8 --seed 2 --seconds 120)
+    updates per host: {'nano': 260, 'desktop': 1721, 'pi5': 1313, 'pi5b': 1133, 'jetson': 680, 'pi4b': 352, 'pi4': 682, 'pi400': 521, 'pi3': 292, 'pi02w': 616}
+    test MSE 0.2311 -> 0.0150 over 7570 mixes, 413.1 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 05:59:35 start B_int8_delta2_ef_s2 (--mode async --wire int8_delta2_ef --seed 2 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1669, 'pi5b': 1108, 'pi5': 1262, 'jetson': 687, 'pi4': 692, 'pi4b': 377, 'pi400': 518, 'pi3': 316, 'pi02w': 575}
+    test MSE 0.2311 -> 0.0151 over 7463 mixes, 407.3 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:03:07 start B_topk_ef_s2 (--mode async --wire topk_ef --seed 2 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1698, 'pi5': 1291, 'pi5b': 1120, 'jetson': 691, 'pi4b': 364, 'pi4': 688, 'pi400': 518, 'pi3': 284, 'pi02w': 608}
+    test MSE 0.2358 -> 0.0140 over 7521 mixes, 332.2 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:06:37 start B_fp32_s3 (--mode async --wire fp32 --seed 3 --seconds 120)
+    updates per host: {'nano': 219, 'desktop': 1271, 'pi5': 946, 'pi5b': 616, 'jetson': 552, 'pi4b': 305, 'pi4': 519, 'pi400': 389, 'pi3': 160, 'pi02w': 256}
+    test MSE 0.2288 -> 0.0149 over 5233 mixes, 1120.3 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:10:20 start B_int8_s3 (--mode async --wire int8 --seed 3 --seconds 120)
+    updates per host: {'nano': 263, 'desktop': 1706, 'pi5': 1295, 'pi5b': 1142, 'jetson': 700, 'pi4b': 345, 'pi4': 701, 'pi400': 533, 'pi3': 295, 'pi02w': 619}
+    test MSE 0.2288 -> 0.0146 over 7599 mixes, 414.6 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:13:55 start B_int8_delta2_ef_s3 (--mode async --wire int8_delta2_ef --seed 3 --seconds 120)
+    updates per host: {'nano': 257, 'desktop': 1692, 'pi5': 1281, 'pi5b': 1139, 'jetson': 689, 'pi4b': 350, 'pi4': 685, 'pi400': 508, 'pi3': 300, 'pi02w': 599}
+    test MSE 0.2288 -> 0.0142 over 7500 mixes, 409.3 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:17:29 start B_topk_ef_s3 (--mode async --wire topk_ef --seed 3 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1717, 'pi5': 1296, 'pi5b': 1131, 'jetson': 684, 'pi4b': 373, 'pi4': 680, 'pi400': 522, 'pi3': 288, 'pi02w': 603}
+    test MSE 0.2341 -> 0.0139 over 7553 mixes, 333.7 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:20:58 start B_fp32_s4 (--mode async --wire fp32 --seed 4 --seconds 120)
+    updates per host: {'nano': 204, 'desktop': 1189, 'pi5b': 656, 'pi5': 869, 'jetson': 525, 'pi4b': 278, 'pi400': 356, 'pi4': 512, 'pi3': 219, 'pi02w': 371}
+    test MSE 0.2234 -> 0.0137 over 5179 mixes, 1108.7 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:24:28 start B_int8_s4 (--mode async --wire int8 --seed 4 --seconds 120)
+    updates per host: {'nano': 262, 'desktop': 1744, 'pi5': 1316, 'pi5b': 1138, 'jetson': 703, 'pi4b': 350, 'pi4': 702, 'pi400': 518, 'pi3': 296, 'pi02w': 622}
+    test MSE 0.2234 -> 0.0156 over 7651 mixes, 417.5 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:27:58 start B_int8_delta2_ef_s4 (--mode async --wire int8_delta2_ef --seed 4 --seconds 120)
+    updates per host: {'nano': 255, 'desktop': 1681, 'pi5': 1292, 'pi5b': 1102, 'jetson': 689, 'pi4b': 349, 'pi4': 691, 'pi400': 512, 'pi3': 294, 'pi02w': 595}
+    test MSE 0.2234 -> 0.0145 over 7460 mixes, 407.2 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:31:27 start B_topk_ef_s4 (--mode async --wire topk_ef --seed 4 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1730, 'pi5': 1309, 'pi5b': 1132, 'jetson': 686, 'pi4b': 380, 'pi4': 685, 'pi400': 528, 'pi3': 289, 'pi02w': 602}
+    test MSE 0.2300 -> 0.0146 over 7600 mixes, 335.7 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:34:59 start B_fp32_s5 (--mode async --wire fp32 --seed 5 --seconds 120)
+    updates per host: {'nano': 223, 'desktop': 1178, 'pi5': 891, 'pi5b': 633, 'jetson': 517, 'pi4b': 284, 'pi4': 529, 'pi400': 363, 'pi3': 213, 'pi02w': 393}
+    test MSE 0.2307 -> 0.0139 over 5224 mixes, 1118.4 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:38:34 start B_int8_s5 (--mode async --wire int8 --seed 5 --seconds 120)
+    updates per host: {'nano': 257, 'desktop': 1711, 'pi5': 1319, 'pi5b': 1139, 'jetson': 695, 'pi4b': 379, 'pi4': 685, 'pi3': 294, 'pi400': 486, 'pi02w': 610}
+    test MSE 0.2307 -> 0.0147 over 7575 mixes, 413.3 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:42:05 start B_int8_delta2_ef_s5 (--mode async --wire int8_delta2_ef --seed 5 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1668, 'pi5': 1291, 'pi5b': 1124, 'jetson': 685, 'pi4b': 350, 'pi400': 495, 'pi4': 663, 'pi3': 293, 'pi02w': 596}
+    test MSE 0.2307 -> 0.0148 over 7424 mixes, 405.2 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:45:36 start B_topk_ef_s5 (--mode async --wire topk_ef --seed 5 --seconds 120)
+    updates per host: {'nano': 259, 'desktop': 1708, 'pi5': 1277, 'pi5b': 1125, 'jetson': 691, 'pi4b': 370, 'pi4': 694, 'pi400': 513, 'pi3': 299, 'pi02w': 612}
+    test MSE 0.2353 -> 0.0145 over 7548 mixes, 333.4 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:49:08 start BBR_cubic_s1 (--mode async --wire fp32 --seed 1 --seconds 120)
+    updates per host: {'nano': 218, 'desktop': 1182, 'pi5': 879, 'pi5b': 675, 'jetson': 471, 'pi4b': 282, 'pi400': 357, 'pi4': 518, 'pi3': 222, 'pi02w': 409}
+    test MSE 0.2322 -> 0.0147 over 5213 mixes, 1116.0 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:52:37 start BBR_bbr_s1 (--mode async --wire fp32 --seed 1 --seconds 120 --cc bbr)
+    updates per host: {'nano': 220, 'desktop': 1087, 'pi5': 842, 'pi5b': 668, 'jetson': 464, 'pi4b': 320, 'pi4': 487, 'pi400': 430, 'pi3': 252, 'pi02w': 442}
+    test MSE 0.2322 -> 0.0134 over 5212 mixes, 1115.8 MB
+    cc per host (client/server): {'desktop': 'bbr/bbr', 'pi5': 'bbr/bbr', 'pi5b': 'bbr/bbr', 'jetson': 'cubic/bbr', 'pi4b': 'bbr/bbr', 'nano': 'cubic/bbr', 'pi400': 'bbr/bbr', 'pi4': 'bbr/bbr', 'pi3': 'bbr/bbr', 'pi02w': 'bbr/bbr'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:56:08 start BBR_cubic_s2 (--mode async --wire fp32 --seed 2 --seconds 120)
+    updates per host: {'nano': 213, 'desktop': 1138, 'pi5': 861, 'pi5b': 700, 'jetson': 505, 'pi4b': 286, 'pi4': 525, 'pi400': 380, 'pi3': 215, 'pi02w': 402}
+    test MSE 0.2311 -> 0.0143 over 5225 mixes, 1118.6 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 06:59:39 start BBR_bbr_s2 (--mode async --wire fp32 --seed 2 --seconds 120 --cc bbr)
+    updates per host: {'nano': 262, 'desktop': 1328, 'pi5': 978, 'pi5b': 182, 'pi4b': 380, 'jetson': 597, 'pi4': 588, 'pi400': 453, 'pi3': 199, 'pi02w': 218}
+    test MSE 0.2311 -> 0.0135 over 5185 mixes, 1110.0 MB
+    cc per host (client/server): {'desktop': 'bbr/bbr', 'pi5': 'bbr/bbr', 'pi5b': 'bbr/bbr', 'jetson': 'cubic/bbr', 'nano': 'cubic/bbr', 'pi4b': 'bbr/bbr', 'pi4': 'bbr/bbr', 'pi400': 'bbr/bbr', 'pi3': 'bbr/bbr', 'pi02w': 'bbr/bbr'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:03:13 start BBR_cubic_s3 (--mode async --wire fp32 --seed 3 --seconds 120)
+    updates per host: {'nano': 213, 'desktop': 1175, 'pi5': 896, 'pi5b': 671, 'jetson': 485, 'pi4b': 268, 'pi4': 517, 'pi3': 223, 'pi400': 355, 'pi02w': 417}
+    test MSE 0.2288 -> 0.0140 over 5220 mixes, 1117.5 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:06:44 start BBR_bbr_s3 (--mode async --wire fp32 --seed 3 --seconds 120 --cc bbr)
+    updates per host: {'nano': 219, 'desktop': 1084, 'pi5': 844, 'pi5b': 666, 'jetson': 438, 'pi4b': 343, 'pi4': 530, 'pi400': 419, 'pi3': 246, 'pi02w': 425}
+    test MSE 0.2288 -> 0.0135 over 5214 mixes, 1116.2 MB
+    cc per host (client/server): {'desktop': 'bbr/bbr', 'pi5b': 'bbr/bbr', 'pi5': 'bbr/bbr', 'jetson': 'cubic/bbr', 'nano': 'cubic/bbr', 'pi4b': 'bbr/bbr', 'pi4': 'bbr/bbr', 'pi400': 'bbr/bbr', 'pi3': 'bbr/bbr', 'pi02w': 'bbr/bbr'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:10:15 start BBR_cubic_s4 (--mode async --wire fp32 --seed 4 --seconds 120)
+    updates per host: {'nano': 216, 'desktop': 1159, 'pi5': 884, 'pi5b': 689, 'jetson': 502, 'pi4b': 269, 'pi4': 512, 'pi400': 379, 'pi3': 212, 'pi02w': 404}
+    test MSE 0.2234 -> 0.0146 over 5226 mixes, 1118.8 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:13:46 start BBR_bbr_s4 (--mode async --wire fp32 --seed 4 --seconds 120 --cc bbr)
+    updates per host: {'nano': 230, 'desktop': 1081, 'pi5': 828, 'pi5b': 654, 'jetson': 487, 'pi4b': 329, 'pi4': 523, 'pi400': 416, 'pi3': 254, 'pi02w': 424}
+    test MSE 0.2234 -> 0.0136 over 5226 mixes, 1118.8 MB
+    cc per host (client/server): {'desktop': 'bbr/bbr', 'pi5': 'bbr/bbr', 'pi5b': 'bbr/bbr', 'jetson': 'cubic/bbr', 'nano': 'cubic/bbr', 'pi4b': 'bbr/bbr', 'pi400': 'bbr/bbr', 'pi4': 'bbr/bbr', 'pi3': 'bbr/bbr', 'pi02w': 'bbr/bbr'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:17:18 start BBR_cubic_s5 (--mode async --wire fp32 --seed 5 --seconds 120)
+    updates per host: {'nano': 211, 'desktop': 1175, 'pi5': 853, 'pi5b': 663, 'jetson': 526, 'pi4b': 294, 'pi4': 529, 'pi400': 366, 'pi3': 212, 'pi02w': 408}
+    test MSE 0.2307 -> 0.0144 over 5237 mixes, 1121.1 MB
+    cc per host (client/server): {'desktop': 'cubic/cubic', 'pi5b': 'cubic/cubic', 'pi5': 'cubic/cubic', 'jetson': 'cubic/cubic', 'nano': 'cubic/cubic', 'pi4b': 'cubic/cubic', 'pi4': 'cubic/cubic', 'pi400': 'cubic/cubic', 'pi3': 'cubic/cubic', 'pi02w': 'cubic/cubic'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:20:48 start BBR_bbr_s5 (--mode async --wire fp32 --seed 5 --seconds 120 --cc bbr)
+    updates per host: {'nano': 229, 'desktop': 1117, 'pi5': 858, 'pi5b': 633, 'jetson': 481, 'pi4b': 356, 'pi4': 495, 'pi400': 410, 'pi3': 236, 'pi02w': 422}
+    test MSE 0.2307 -> 0.0138 over 5237 mixes, 1121.1 MB
+    cc per host (client/server): {'desktop': 'bbr/bbr', 'pi5': 'bbr/bbr', 'pi5b': 'bbr/bbr', 'jetson': 'cubic/bbr', 'nano': 'cubic/bbr', 'pi4b': 'bbr/bbr', 'pi4': 'bbr/bbr', 'pi400': 'bbr/bbr', 'pi3': 'bbr/bbr', 'pi02w': 'bbr/bbr'}
+    WARNING: under-voltage flagged (since boot) on: throttled_after[pi4], throttled_after[pi4b], throttled_after[pi400], throttled_after[pi3]
+2026-10-20 07:24:18 campaigns done:  A B BBR 

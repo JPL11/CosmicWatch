@@ -34,3 +34,6 @@ pico/build/
 fed_real/wg/
 fed_real/results/*/
 fed_real/results/*.out
+fed_real/results/[AB]*_s[0-9].json
+fed_real/results/check_*.json
+fed_real/results/campaign_driver.out

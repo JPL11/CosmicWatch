@@ -1,0 +1,618 @@
+{
+ "A": {
+  "tail_async": [
+   0.01705707728557964,
+   0.015985642857142858,
+   0.017080102304147464,
+   0.017218418853255587,
+   0.016626821527138916
+  ],
+  "tail_sync": [
+   0.022443017621145374,
+   0.021656898305084746,
+   0.021423843220338985,
+   0.021392085201793722,
+   0.02293046861924686
+  ]
+ },
+ "B": {
+  "fp32": {
+   "tail": [
+    0.013513941085271318,
+    0.013765176964149504,
+    0.01512467,
+    0.014210817129629629,
+    0.013939678082191782
+   ],
+   "mb": [
+    1101.035568,
+    1119.856557,
+    1120.284646,
+    1108.735191,
+    1118.359547
+   ],
+   "updates": [
+    5143,
+    5231,
+    5233,
+    5179,
+    5224
+   ]
+  },
+  "int8": {
+   "tail": [
+    0.01569269783057851,
+    0.015191306301652892,
+    0.015001483263598327,
+    0.015481807216494845,
+    0.014441910369984367
+   ],
+   "mb": [
+    414.213313,
+    413.068173,
+    414.649526,
+    417.485169,
+    413.340759
+   ],
+   "updates": [
+    7591,
+    7570,
+    7599,
+    7651,
+    7575
+   ]
+  },
+  "int8_delta2_ef": {
+   "tail": [
+    0.014282362286970864,
+    0.014982476365546218,
+    0.01411448328912467,
+    0.0144217312335958,
+    0.015018894989339018
+   ],
+   "mb": [
+    401.315568,
+    407.315483,
+    409.333589,
+    407.151909,
+    405.188398
+   ],
+   "updates": [
+    7353,
+    7463,
+    7500,
+    7460,
+    7424
+   ]
+  },
+  "topk_ef": {
+   "tail": [
+    0.014053831595411887,
+    0.013647547329455315,
+    0.013747874023945861,
+    0.014637533161953728,
+    0.014465316883116882
+   ],
+   "mb": [
+    334.003548,
+    332.237959,
+    333.650421,
+    335.724934,
+    333.429709
+   ],
+   "updates": [
+    7561,
+    7521,
+    7553,
+    7600,
+    7548
+   ]
+  }
+ },
+ "BBR": {
+  "cubic": [
+   {
+    "tail": 0.014601221028396009,
+    "updates": 5213,
+    "upd_bbr_capable": 4524,
+    "upd_cubic_only": 689,
+    "comm_med": 0.1077,
+    "mb": 1116.006904,
+    "cc": {
+     "desktop": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi400": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi3": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi02w": {
+      "client": "cubic",
+      "server": "cubic"
+     }
+    }
+   },
+   {
+    "tail": 0.014408040800615859,
+    "updates": 5225,
+    "upd_bbr_capable": 4507,
+    "upd_cubic_only": 718,
+    "comm_med": 0.1062,
+    "mb": 1118.573357,
+    "cc": {
+     "desktop": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi400": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi3": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi02w": {
+      "client": "cubic",
+      "server": "cubic"
+     }
+    }
+   },
+   {
+    "tail": 0.014584449541284404,
+    "updates": 5220,
+    "upd_bbr_capable": 4522,
+    "upd_cubic_only": 698,
+    "comm_med": 0.1036,
+    "mb": 1117.504023,
+    "cc": {
+     "desktop": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi400": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi3": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi02w": {
+      "client": "cubic",
+      "server": "cubic"
+     }
+    }
+   },
+   {
+    "tail": 0.015068747328244274,
+    "updates": 5226,
+    "upd_bbr_capable": 4508,
+    "upd_cubic_only": 718,
+    "comm_med": 0.1054,
+    "mb": 1118.787286,
+    "cc": {
+     "desktop": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi3": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi400": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi02w": {
+      "client": "cubic",
+      "server": "cubic"
+     }
+    }
+   },
+   {
+    "tail": 0.01458521439509954,
+    "updates": 5237,
+    "upd_bbr_capable": 4500,
+    "upd_cubic_only": 737,
+    "comm_med": 0.1059,
+    "mb": 1121.140004,
+    "cc": {
+     "desktop": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi5": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4b": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi4": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi400": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi3": {
+      "client": "cubic",
+      "server": "cubic"
+     },
+     "pi02w": {
+      "client": "cubic",
+      "server": "cubic"
+     }
+    }
+   }
+  ],
+  "bbr": [
+   {
+    "tail": 0.013217500383141763,
+    "updates": 5212,
+    "upd_bbr_capable": 4528,
+    "upd_cubic_only": 684,
+    "comm_med": 0.1001,
+    "mb": 1115.792882,
+    "cc": {
+     "desktop": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "pi4b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "pi400": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi4": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi3": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi02w": {
+      "client": "bbr",
+      "server": "bbr"
+     }
+    }
+   },
+   {
+    "tail": 0.01431637529319781,
+    "updates": 5185,
+    "upd_bbr_capable": 4326,
+    "upd_cubic_only": 859,
+    "comm_med": 0.0703,
+    "mb": 1110.018657,
+    "cc": {
+     "desktop": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "pi4b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi4": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi400": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi3": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi02w": {
+      "client": "bbr",
+      "server": "bbr"
+     }
+    }
+   },
+   {
+    "tail": 0.013627822988505747,
+    "updates": 5214,
+    "upd_bbr_capable": 4557,
+    "upd_cubic_only": 657,
+    "comm_med": 0.0989,
+    "mb": 1116.220529,
+    "cc": {
+     "desktop": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "pi4b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi4": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi400": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi3": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi02w": {
+      "client": "bbr",
+      "server": "bbr"
+     }
+    }
+   },
+   {
+    "tail": 0.013661257668711657,
+    "updates": 5226,
+    "upd_bbr_capable": 4509,
+    "upd_cubic_only": 717,
+    "comm_med": 0.0982,
+    "mb": 1118.787083,
+    "cc": {
+     "desktop": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "pi4b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi400": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi4": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi3": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi02w": {
+      "client": "bbr",
+      "server": "bbr"
+     }
+    }
+   },
+   {
+    "tail": 0.01371455632183908,
+    "updates": 5237,
+    "upd_bbr_capable": 4527,
+    "upd_cubic_only": 710,
+    "comm_med": 0.0982,
+    "mb": 1121.139828,
+    "cc": {
+     "desktop": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi5b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "jetson": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "nano": {
+      "client": "cubic",
+      "server": "bbr"
+     },
+     "pi4b": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi4": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi400": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi3": {
+      "client": "bbr",
+      "server": "bbr"
+     },
+     "pi02w": {
+      "client": "bbr",
+      "server": "bbr"
+     }
+    }
+   }
+  ]
+ }
+}

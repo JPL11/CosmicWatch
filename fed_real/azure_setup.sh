@@ -40,6 +40,9 @@ NET=10.8.0
 PORT=51820
 
 die() { echo "error: $*" >&2; exit 1; }
+# Azure CLI calls can hang indefinitely on an API stall (one did for 1.5 h
+# mid-campaign on 2026-10-20); macOS has no timeout(1), so use perl alarm.
+az_t() { perl -e 'alarm shift; exec @ARGV' "${AZ_TIMEOUT:-60}" az "$@"; }
 need() { command -v "$1" >/dev/null || die "$1 not found ($2)"; }
 
 server_ip() {
@@ -180,14 +183,14 @@ cmd_stop() {
 }
 
 cmd_status() {
-    az vm get-instance-view -g "$RG" -n "$VM" \
+    az_t vm get-instance-view -g "$RG" -n "$VM" \
         --query "instanceView.statuses[?starts_with(code,'PowerState')].displayStatus" -o tsv
     # B-series: a run is only clean if credits never hit zero during it
-    az monitor metrics list --resource "$(az vm show -g "$RG" -n "$VM" --query id -o tsv)" \
+    az_t monitor metrics list --resource "$(az_t vm show -g "$RG" -n "$VM" --query id -o tsv)" \
         --metric "CPU Credits Remaining" --interval PT5M --offset 1h \
         --query "value[0].timeseries[0].data[-1].{time:timeStamp,credits_remaining:average}" \
         -o tsv 2>/dev/null | sed 's/^/  cpu credits: /'
-    ssh -o ConnectTimeout=5 "$ADMIN@$(server_ip)" \
+    ssh -o ConnectTimeout=5 -o ServerAliveInterval=10 -o ServerAliveCountMax=3 "$ADMIN@$(server_ip)" \
         "sudo wg show wg0 latest-handshakes" 2>/dev/null \
         | while read -r pub ts; do
             h=$(grep -lF -- "$pub" "$WG"/*.pub | xargs -n1 basename | sed 's/.pub$//')
