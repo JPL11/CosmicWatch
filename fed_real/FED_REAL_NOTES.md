@@ -284,6 +284,16 @@ at t=45 s).
   the fleet's 2.4.6. Runs through it are real-WAN for EVERY host, so
   label them separately from the LAN campaigns and leave `--link-map`
   empty; record `ping 10.8.0.1` per host before each run.
+  As built 2026-10-20 (Azure for Students): only ARM64 burstable Bpsv2
+  sizes were creatable, so the VM is B4ps_v2 in westus; `status` prints
+  CPU credits, to show no run was throttled. First 8-host smoke run:
+  RTT 27-36 ms, MSE 0.228 -> 0.0117 in 30 s, credits 151 -> 154.
+- `wg_nano/` — WireGuard for the JetPack 4 Nano (kernel 4.9, no module):
+  wg-quick with a daemonized wireguard-go hangs at `wg setconf`, so a
+  dedicated unit runs wireguard-go in the foreground and applies wg0.conf
+  with a current `wg` (built on the board). Install:
+  `sudo bash wg-nano-install.sh`. The Orin's kernel also lacks
+  CONFIG_WIREGUARD but Ubuntu 24.04's wireguard-go works under wg-quick.
 
 Run: server first (`fed_server.py --hosts 3 --rounds 6 --out ...`),
 then one `fed_client.py --server <ip> --host <name> --clients i,j,k`

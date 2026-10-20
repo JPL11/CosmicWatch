@@ -1,0 +1,16 @@
+[Unit]
+Description=WireGuard wg0 via foreground wireguard-go (Jetson Nano, kernel 4.9: no WireGuard module)
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# wireguard-go only answers wg setconf reliably here when it is NOT daemonized
+ExecStartPre=-/sbin/ip link del wg0
+ExecStart=/usr/local/bin/wireguard-go -f wg0
+ExecStartPost=/usr/local/sbin/wg-nano-config
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=multi-user.target

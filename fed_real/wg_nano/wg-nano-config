@@ -1,0 +1,9 @@
+#!/bin/bash
+# Apply /etc/wireguard/wg0.conf to the userspace wg0 (what wg-quick would do).
+set -e
+CONF=/etc/wireguard/wg0.conf
+for _ in $(seq 20); do [ -S /var/run/wireguard/wg0.sock ] && break; sleep 0.5; done
+/usr/local/bin/wg setconf wg0 <(/usr/bin/wg-quick strip "$CONF")
+ADDR=$(awk -F' *= *' '/^Address/{print $2}' "$CONF")
+/sbin/ip address replace "$ADDR" dev wg0
+/sbin/ip link set mtu 1420 up dev wg0

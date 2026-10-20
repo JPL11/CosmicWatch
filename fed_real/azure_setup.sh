@@ -23,9 +23,14 @@ set -euo pipefail
 
 RG=${AZ_RG:-cosmicwatch}
 VM=${AZ_VM:-fedsrv}
-LOC=${AZ_LOC:-westus2}
-SIZE=${AZ_SIZE:-Standard_D2as_v5}     # not B-series: CPU credits skew timing
+LOC=${AZ_LOC:-westus}            # student policy: westus, centralus, canadacentral, mexicocentral, francecentral
+# Azure for Students (2026-10-20): D v3-v6 are quota 0 or capacity-restricted
+# in every allowed region; Bpsv2 (ARM64, burstable) is the only usable family.
+# Record CPU credits around each run (status) so no result is from a throttled VM.
+SIZE=${AZ_SIZE:-Standard_B4ps_v2}
+IMAGE=${AZ_IMAGE:-Canonical:ubuntu-24_04-lts:server-arm64:latest}
 ADMIN=${AZ_USER:-$USER}
+SSH_PUB=${AZ_SSH_PUB:-$HOME/.ssh/id_ed25519.pub}  # reuse the fleet key
 SHUTDOWN_UTC=${AZ_SHUTDOWN_UTC:-0700} # 00:00 PDT / 23:00 PST
 NUMPY=2.4.6                           # fleet-wide pin (see FED_REAL_NOTES)
 
@@ -85,9 +90,10 @@ write_client_conf() {  # write_client_conf <name> <octet> <server ip>
 
 cmd_create() {
     need az "brew install azure-cli; az login"
+    [[ -s "$SSH_PUB" ]] || die "no public key at $SSH_PUB (set AZ_SSH_PUB)"
     az group create -n "$RG" -l "$LOC" -o none
-    az vm create -g "$RG" -n "$VM" --image Ubuntu2404 --size "$SIZE" \
-        --admin-username "$ADMIN" --generate-ssh-keys \
+    az vm create -g "$RG" -n "$VM" --image "$IMAGE" --size "$SIZE" \
+        --admin-username "$ADMIN" --ssh-key-values "$SSH_PUB" \
         --public-ip-sku Standard -o none   # Standard SKU IP is static
     az vm open-port -g "$RG" -n "$VM" --port "$PORT" --priority 900 -o none
     # NSG rule above is TCP+UDP "*" protocol by default; 29500 stays closed
@@ -152,6 +158,11 @@ cmd_client() {  # client <host> <ssh target>
     scp -q "$WG/$1.conf" "$2:/tmp/wg0.conf"
     ssh -t "$2" "set -e
         command -v wg-quick >/dev/null || sudo apt-get install -y wireguard-tools
+        # Jetson kernels ship without CONFIG_WIREGUARD: wg-quick then falls
+        # back to the userspace wireguard-go, which must be installed
+        if ! modinfo wireguard >/dev/null 2>&1 && [ ! -e /sys/module/wireguard ]; then
+            command -v wireguard-go >/dev/null || sudo apt-get install -y wireguard-go
+        fi
         sudo install -m 600 /tmp/wg0.conf /etc/wireguard/wg0.conf && rm /tmp/wg0.conf
         sudo systemctl enable --now wg-quick@wg0
         sudo systemctl restart wg-quick@wg0
@@ -171,6 +182,11 @@ cmd_stop() {
 cmd_status() {
     az vm get-instance-view -g "$RG" -n "$VM" \
         --query "instanceView.statuses[?starts_with(code,'PowerState')].displayStatus" -o tsv
+    # B-series: a run is only clean if credits never hit zero during it
+    az monitor metrics list --resource "$(az vm show -g "$RG" -n "$VM" --query id -o tsv)" \
+        --metric "CPU Credits Remaining" --interval PT5M --offset 1h \
+        --query "value[0].timeseries[0].data[-1].{time:timeStamp,credits_remaining:average}" \
+        -o tsv 2>/dev/null | sed 's/^/  cpu credits: /'
     ssh -o ConnectTimeout=5 "$ADMIN@$(server_ip)" \
         "sudo wg show wg0 latest-handshakes" 2>/dev/null \
         | while read -r pub ts; do
