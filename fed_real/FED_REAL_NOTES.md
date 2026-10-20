@@ -255,7 +255,11 @@ at t=45 s).
 ## Files
 
 - `fed_common.py` — model, weighted loss, length-prefixed socket
-  send/recv helpers.
+  send/recv helpers. Since 2026-10-19 it aliases `numpy._core` to
+  `numpy.core` on numpy < 1.26, so hosts that cannot upgrade (the
+  JetPack 4 Nano: Python 3.6, numpy 1.19, NVIDIA torch 1.10) decode
+  numpy-2 pickles. Verified bit-exact for all five wires on numpy 1.21
+  and on the Nano itself; numpy 2 already loads 1.x pickles.
 - `fed_server.py` — synchronous FedAvg server; records per-round wall
   time, per-host arrival times, client-reported train times, straggler
   gap, bytes moved, and global test weighted MSE.

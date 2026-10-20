@@ -5,6 +5,28 @@ import struct
 import torch
 
 
+def _numpy2_pickle_compat():
+    """Let a numpy < 1.26 host unpickle what numpy 2.x hosts send.
+
+    numpy 2 pickles reference numpy._core.*, which older numpy lacks
+    (the 2026-09 Pi 4 dropout); 1.26 ships its own alias, older needs
+    this one. The reverse direction already works: numpy 2 still loads
+    numpy.core.* pickles. Lets the JetPack 4 Nano (Python 3.6, numpy
+    1.19, NVIDIA torch 1.10) join without leaving its CUDA stack."""
+    import sys
+    import numpy
+    if tuple(int(x) for x in numpy.__version__.split(".")[:2]) >= (1, 26):
+        return
+    import numpy.core.multiarray
+    import numpy.core.numeric
+    sys.modules.setdefault("numpy._core", numpy.core)
+    sys.modules.setdefault("numpy._core.multiarray", numpy.core.multiarray)
+    sys.modules.setdefault("numpy._core.numeric", numpy.core.numeric)
+
+
+_numpy2_pickle_compat()
+
+
 def model():
     return torch.nn.Sequential(
         torch.nn.Linear(400, 32), torch.nn.ReLU(),
