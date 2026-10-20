@@ -37,7 +37,7 @@ import torch
 
 from fed_common import (model, weighted_loss, send_msg, recv_msg,
                         pack_state, unpack_state, Int8EF, LINK_PROFILES,
-                        unpack_topk)
+                        unpack_topk, eval_sets, tcp_path_stats)
 
 ap = argparse.ArgumentParser()
 ap.add_argument("--port", type=int, default=29500)
@@ -63,15 +63,16 @@ ap.add_argument("--link-sched", default="",
                      '(prof "none" = unshaped); overrides --link-switch')
 ap.add_argument("--data", default="legacy_fl_hardware.npz")
 ap.add_argument("--out", default="fed_async_results.json")
+ap.add_argument("--dead-after", type=float, default=120.0,
+                help="seconds of silence after which a host is logged as "
+                     "dropped and the run continues without it")
 args = ap.parse_args()
 torch.set_num_threads(2)
 
 ADAPT_LADDER = ["fp32", "fp16", "int8_delta2_ef"]
 
 z = np.load(args.data, allow_pickle=True)
-tests = [torch.tensor((z[f"test_{i}"].astype("float32") / 255.0)
-                      .reshape(len(z[f"test_{i}"]), -1)) for i in range(8)]
-test_all = torch.cat(tests)
+n_clients, test_all, val_all = eval_sets(z)
 
 torch.manual_seed(args.seed)
 net = model()
@@ -79,6 +80,7 @@ lock = threading.Lock()
 version = 0
 updates_log = []
 bytes_total = [0]
+dropped = []                        # hosts that died mid-run (never silent)
 
 link_map = {}
 if args.link_map:
@@ -105,13 +107,15 @@ if args.link_switch:
 srv = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 srv.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 srv.bind(("0.0.0.0", args.port))
-srv.listen(8)
+srv.listen(max(8, args.hosts))
 print(f"listening :{args.port}, waiting for {args.hosts} hosts", flush=True)
 
 conns = []
 while len(conns) < args.hosts:
     c, addr = srv.accept()
+    c.setsockopt(socket.SOL_SOCKET, socket.SO_KEEPALIVE, 1)
     hello, _ = recv_msg(c)
+    c.settimeout(args.dead_after)
     conns.append((c, hello))
     print(f"registered {hello['host']} clients={hello['clients']} "
           f"from {addr[0]}", flush=True)
@@ -134,6 +138,20 @@ def current_link(host):
 
 
 def serve(c, hello):
+    try:
+        _serve(c, hello)
+    except (OSError, ConnectionError, EOFError) as e:
+        # a host rebooting or losing its link must not hang the run or
+        # vanish silently (cf. the Sept. Pi 4 zero-update pass)
+        with lock:
+            dropped.append({"host": hello["host"],
+                            "t_s": round(time.time() - t0, 3),
+                            "error": f"{type(e).__name__}: {e}"})
+        print(json.dumps({"dropped": hello["host"], "error": str(e)}),
+              flush=True)
+
+
+def _serve(c, hello):
     global version
     host = hello["host"]
     level = 0                       # adaptive ladder position
@@ -168,6 +186,7 @@ def serve(c, hello):
         n = send_msg(c, {"stop": stop, "version": base, "state": state,
                          "wire": wire, "mode": mode,
                          "link": current_link(host)})
+        t_sent = time.time()
         with lock:
             bytes_total[0] += n
         if stop:
@@ -194,12 +213,23 @@ def serve(c, hello):
             version += 1
             with torch.no_grad():
                 mse = float(weighted_loss(net(test_all), test_all))
+                vmse = (None if val_all is None
+                        else float(weighted_loss(net(val_all), val_all)))
+            train_s = msg["timing"]["train_s"]
+            # per-exchange wire accounting: comm = pull+push wall time
+            # minus client compute; bytes are framed message sizes
             rec = {"t_s": round(time.time() - t0, 3), "version": version,
                    "host": host, "staleness": staleness,
                    "alpha": round(alpha, 4), "wire": wire,
-                   "train_s": msg["timing"]["train_s"],
+                   "train_s": train_s,
                    "train_loss": msg["timing"].get("train_loss"),
-                   "global_test_weighted_mse": round(mse, 6)}
+                   "global_test_weighted_mse": round(mse, 6),
+                   "bytes_down": n, "bytes_up": nbytes,
+                   "send_s": round(t_sent - t_send, 4),
+                   "comm_s": round(max((t_recv - t_send) - train_s, 0.0), 4),
+                   **tcp_path_stats(c)}
+            if vmse is not None:
+                rec["global_val_weighted_mse"] = round(vmse, 6)
             updates_log.append(rec)
         print(json.dumps(rec), flush=True)
         if args.adapt:
@@ -238,13 +268,28 @@ for c, _ in conns:
 per_host = {}
 for r in updates_log:
     per_host[r["host"]] = per_host.get(r["host"], 0) + 1
+path = {}
+for r in updates_log:
+    p = path.setdefault(r["host"], {"rtt": [], "comm": [], "bytes": 0})
+    if "tcp_rtt_ms" in r:
+        p["rtt"].append(r["tcp_rtt_ms"])
+    p["comm"].append(r["comm_s"])
+    p["bytes"] += r["bytes_down"] + r["bytes_up"]
+path_summary = {
+    h: {"tcp_rtt_ms_median": (float(np.median(p["rtt"])) if p["rtt"] else None),
+        "comm_s_median": float(np.median(p["comm"])),
+        "goodput_mbps": round(p["bytes"] * 8 / max(sum(p["comm"]), 1e-9) / 1e6, 3)}
+    for h, p in path.items()}
 out = {"hosts": [h for _, h in conns], "alpha0": args.alpha0,
+       "data": args.data, "n_clients": n_clients,
+       "has_val": val_all is not None, "path_per_host": path_summary,
        "wire": ("adapt" if args.adapt else args.wire), "seed": args.seed,
        "link": args.link, "link_map": link_map,
        "link_switch": args.link_switch, "link_sched": args.link_sched,
        "link_hosts": args.link_hosts,
        "budget_s": args.seconds, "updates": updates_log,
        "updates_per_host": per_host, "bytes_total": bytes_total[0],
+       "dropped": dropped,
        "total_wall_s": round(time.time() - t0, 3),
        "update_bytes_per_state": sum(v.numel() * 4
                                      for v in net.state_dict().values())}

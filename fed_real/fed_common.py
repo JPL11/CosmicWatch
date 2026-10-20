@@ -162,3 +162,39 @@ def recv_msg(sock):
             raise ConnectionError("peer closed mid-message")
         buf += chunk
     return pickle.loads(buf), n + 8
+
+
+def eval_sets(z):
+    """Pooled held-out sets from a partition file of any size: returns
+    (n_clients, test_all, val_all); val_all is None for files built
+    without --val-frac (all pre-2026-10 campaigns)."""
+    import torch as _t
+    n = sum(1 for k in z.files if k.startswith("test_"))
+
+    def pooled(prefix):
+        parts = []
+        for i in range(n):
+            a = z[f"{prefix}_{i}"].astype("float32") / 255.0
+            parts.append(_t.tensor(a.reshape(len(a), -1)))
+        return _t.cat(parts)
+    val = pooled("val") if f"val_0" in z.files else None
+    return n, pooled("test"), val
+
+
+def tcp_path_stats(sock):
+    """Kernel-measured smoothed RTT, RTT variance and total retransmits of
+    a connection (Linux TCP_INFO; tcpi_rtt/rttvar in us at offsets 68/72,
+    tcpi_total_retrans at 100). Under WireGuard this is the full tunnelled
+    WAN path. Empty dict where TCP_INFO is unavailable."""
+    import socket as _s
+    if not hasattr(_s, "TCP_INFO"):
+        return {}
+    try:
+        raw = sock.getsockopt(_s.IPPROTO_TCP, _s.TCP_INFO, 104)
+    except OSError:
+        return {}
+    rtt, rttvar = struct.unpack_from("<II", raw, 68)
+    retrans = struct.unpack_from("<I", raw, 100)[0]
+    return {"tcp_rtt_ms": round(rtt / 1000, 2),
+            "tcp_rttvar_ms": round(rttvar / 1000, 2),
+            "tcp_total_retrans": retrans}

@@ -32,3 +32,4 @@ credo_useful*.csv
 fl_hardware_benchmark_local.json
 pico/build/
 fed_real/wg/
+fed_real/results/*/
